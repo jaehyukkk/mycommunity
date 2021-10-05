@@ -19,14 +19,15 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    // $category = DB::table('subcategories')
-    //         ->leftJoin('maincategories', 'subcategories.maincategory_id', '=', 'maincategories.id')
-    //         ->get();
+
     $maincategory = Maincategory::all();
     $subcategory = Subcategory::all();
 
     return view('welcome', compact('maincategory','subcategory'));
 });
+
+Route::get('/mailSend',[MailSendController::class,'mailSend'])->name('mailSend');
+Route::get('/mailSendSubmit',[MailSendController::class,'mailSend'])->name('mailSendSubmit');
 
 Route::get('board',[PostController::class,'index']);
 Route::get('imageupload',[PostController::class,'imageupload']);
