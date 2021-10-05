@@ -4,7 +4,6 @@ use App\Http\Controllers\PostController;
 use App\Models\Maincategory;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 /*
