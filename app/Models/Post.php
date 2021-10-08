@@ -10,6 +10,14 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'description'
+        'description',
+        'title',
+        'user_id',
+        'hit',
+        'maincategory_id',
+        'subcategory_id',
+        'comment',
+        'notice',
+        'mainimg',
     ];
 }

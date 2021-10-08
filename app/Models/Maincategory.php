@@ -11,5 +11,6 @@ class Maincategory extends Model
 
     protected $fillable = [
         'maincategoryname',  
+        'photocode',  
     ];
 }

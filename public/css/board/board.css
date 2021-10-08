@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+.table{
+    width: 1000px;
+    font-size: 15px;
+    margin-top:35px;
+    border-top: black solid 3px;
+    margin-right: 30px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.table td, .table th{
+    padding:0;
+    padding-top:10px;
+    padding-bottom: 10px;
+
+    text-align: center;
+    vertical-align:middle; 
+}
+
+table .Title, table .bno, table .noticeText{
+    text-align: left;
+}
+table .bno{
+    padding-left: 10px;
+    width: 110px;
+}
+
+table .Title{
+    width: 500px;
+}
+#subcategoryname{
+    color:#979797;
+}
+
+.container{
+    width: 1000px;
+    margin-top: 100px;
+}
+
+#create-title input{
+    width: 850px;
+    height: 40px;
+    border: 0;
+    font-size: 25px;
+    color:#010101;
+
+}
+
+input::placeholder {
+    color: #dadada;
+  }
+
+.box {
+    display: block;
+    width: 100%;
+    height: 60px;
+    border: solid 1px #dadada;
+    padding: 10px 14px 10px 14px;
+    box-sizing: border-box;
+    background: #fff;
+    position: relative;
+    border-radius:5px;
+    margin:15px 0px 15px 0px;
+}
+#container-title{
+    border-bottom: solid 1px #dadada;
+    padding: 6px;
+    font-weight: 600;
+    color:#464646;
+    font-size: 20px;
+}
+#create-main{
+    display: flex;
+}
+
+#create-option{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: #464646;
+    margin-bottom: 30px;
+}
+#create-option select{
+    border: solid 1px #dadada;
+    height: 36px;
+    border-radius: 2px;
+    color: #464646;
+    margin-left: 5px;
+    
+}
+#create-option input{
+    width: 80px;
+    height: 36px;
+    color: #464646;
+    border: solid 1px #dadada;
+}
+
+.notice{
+    
+   background-color: #D7E9F7;
+}
+table .noticeText div{
+    background-color: red;
+    
+    width: 40px;
+    margin-left: 10px;
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+#board-foot{
+    display: flex;
+    justify-content: space-between;
+}
+#board-foot .createbtn{
+    margin-right: 35px;
+    border: solid 1px #dadada;
+    height: 30px;
+    width: 60px;
+    font-size: small;
+    text-align: center;
+    padding-top: 5px;
+
+}
+
+
+.pagination a{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #888;
+}
+#pageint{
+    margin-top: 3px;
+}
+.paginateBtn{
+    display: flex;
+    justify-content: center;
+}
+.board-top{
+    display: flex; 
+    margin-top: 75px;
+    border-bottom: 1px solid black;
+    width: 70%;
+    font-family: 'Noto Sans KR', sans-serif;
+    
+}
+.subboard{
+    margin-top: 14px;
+    margin-left: 15px;
+    
+}
+.subboard span{
+    padding: 5px;
+}
+
+
+.subboard span a{
+    position: relative;
+}
+
+.subboard span a:before{
+    content : '';
+    position: absolute;  
+    background-color: black;
+    height: 2px;
+    width : 0;
+    bottom: -8px;          
+    transition: 0.5s;   
+ 
+    left : 50%;        
+    transform: translateX(-50%);
+    
+}
+
+.subboard span a:hover:before{ 
+    width : 100%;  
+}
+.subboard span a:hover{
+    font-weight: 600;
+}
+
+.current{
+    font-weight:600;
+}

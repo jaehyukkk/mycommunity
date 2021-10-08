@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('imageupload',[PostController::class,'imageuploadProcess']);
+
+//회원가입 아이디중복확인
+Route::post('/checkid',[UserController::class,'checkId']);
+//글작성시 카테고리 이름 받아오기
+Route::get('/getcategorytitle',[PostController::class,'getCategoryTitle']);
+Route::get('/getnotice',[PostController::class,'getNotice']);

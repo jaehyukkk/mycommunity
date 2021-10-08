@@ -55,6 +55,8 @@ function uploadSummernoteImageFile(photo, el) {
         processData:false,
         success : function(data) {
             $(el).summernote('editor.insertImage', data);
+
+            
             
         }
     });
@@ -65,3 +67,4 @@ $("#summernote").on("summernote.enter", function(we, e) {
     $(this).summernote("pasteHTML", "<br><br>");
     e.preventDefault();
 });
+

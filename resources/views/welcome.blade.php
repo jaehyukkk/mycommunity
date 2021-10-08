@@ -11,19 +11,28 @@
     <title>Hello, world!</title>
   </head>
   <body>
+
+    <script>
+      var msg = '{{Session::get('alert')}}';
+      var exist = '{{Session::has('alert')}}';
+      if(exist){
+          alert(msg);
+      }
+    </script>
     
     <script src="https://kit.fontawesome.com/db98d81eec.js" 
     crossorigin="anonymous">
     </script>
 
+<div id="main-logo">
   <div id ="mainTop">
-    <h1>LoveBeat TalkLounge</h1>
+    <h1>LOVEBEAT</br>TALK</br>LOUNGE</h1>
   </div>
-
+</div>
 <nav role="navigation">
   <ul id="main-menu" class="main-menu-board">
     @foreach ($maincategory as $maincategorys )  
-    <li><a href="#">{{ $maincategorys->maincategoryname }}</a>
+    <li><a href="/board/{{ $maincategorys->id }}">{{ $maincategorys->maincategoryname }}</a>
       <ul id="sub-menu">
         @foreach ($subcategory as $subcategorys)
           @if($maincategorys->id === $subcategorys->maincategory_id)
@@ -41,7 +50,7 @@
       <div class="main-free-board">
         <div class="main-free-board-top">
           <div>자유게시판</div>
-          <span>more</span>
+          <span>더보기</span>
         </div>
         <div class="main-free-board-title">
           <div>제목입니다</div>
@@ -64,7 +73,7 @@
       <div class="main-free-board">
         <div class="main-free-board-top">
           <div>자유게시판</div>
-          <span>more</span>
+          <span>더보기</span>
         </div>
         <div class="main-free-board-title">
           <div>제목입니다</div>
@@ -86,14 +95,18 @@
     </div>
 
   <div id="loginBox">
+    @if(Auth::guest())
     <div id="loginForm">
       <div id="loginForm-input">
-        <input type="text">
+        <form action="/login" method="post">
+          @csrf     
+        <input type="text" name="userid">
          </br>
-        <input type="password">
+        <input type="password" name="password">
       </div>
       <div id="loginForm-submit">
-        <button>로그인</button>
+        <button type="submit">로그인</button>
+      </form>
       </div>
     </div>
     <div id="loginSubMenu">
@@ -104,7 +117,31 @@
     <div id="socialLogin">
       <button><i class="fab fa-google-plus-g"></i>GoogleLogin</button>
     </div>
+    @else
+    <div id="username">
+      <div><img src="{{URL::asset('/img/img.JPG')}}" alt=""></div>
+      <div><b>{{ Auth::user()->name }}</b></div>
+    </div>
+    <div id="usermenu">
+      <div>
+      <div class="usermenu-item">
+        <button>내가 쓴 글</button>
+        <button>내가 쓴 댓글</button>
+      </div>
+      <div class="usermenu-item">
+        <button>내 활동 알림</button>
+        <button>쪽지함</button>
+      </div>
+      <div id="logout">
+        <a href="/logout"><button>로그아웃</button></a>
+      </div>
+      </div>
+    </div>
+  
+     @endif
+     
   </div>
+ 
     
 </article>
 

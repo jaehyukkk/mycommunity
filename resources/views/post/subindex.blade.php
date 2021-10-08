@@ -24,6 +24,13 @@
     <script src="https://kit.fontawesome.com/db98d81eec.js" 
     crossorigin="anonymous">
     </script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    {{-- <script  src="http://code.jquery.com/jquery-latest.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
+    
+<script type="text/javascript" src="{{ URL::asset('/js/post.js') }}" defer></script>
 
 <div id="main-logo">
   <div id ="mainTop">
@@ -48,7 +55,7 @@
 </nav>
 
 <article id="main">
-<div class="table-div">
+<div>
   <div class="board-top">
     <div>
       @foreach ($maincategory as $maincategorys )
@@ -71,12 +78,12 @@
       <th scope="col" class="bno"></th>
       <th scope="col">제목</th>
       <th scope="col">작성일</th>
-      <th scope="col">글쓴이</th>
+      <th scope="col">작성자</th>
       <th scope="col">조회수</th>
     </tr>
-  </thead>
   <tbody>
     @foreach ($notice as $notices )
+      @if($notices->notice === 1)
       <tr class="notice">
         <td scope="row" class="noticeText">
           <div>공지</div>
@@ -86,20 +93,50 @@
         <td>{{ $notices->name }}</td>
         <td>{{ $notices->hit }}</td>  
       </tr>
+      @endif
+    @endforeach
+    @foreach ($notice as $notices )
+      @if($notices->notice === 2)
+      <tr class="notice">
+        <td scope="row" class="noticeText">
+          <div>공지</div>
+        </td>
+        <td class="Title">{{ $notices->title }}</td>
+        <td>{{ $notices->time }}</td>
+        <td>{{ $notices->name }}</td>
+        <td>{{ $notices->hit }}</td>  
+      </tr>
+      @endif
     @endforeach
   </tbody>
-  <tfoot>
+  </thead>
+  <tfoot id="board-content">
     @foreach ($board as $boards )
     <tr>
-      <td scope="row" class="bno" id="subcategoryname">{{ $boards->subcategoryname }}</td>
+      <td scope="row" class="bno">{{ $boards->idx }}</td>
       <td class="Title">{{ $boards->title }}</td>
       <td>{{ $boards->time }}</td>
       <td>{{ $boards->name }}</td>
       <td>{{ $boards->hit }}</td>  
     </tr>
+    
     @endforeach
+
   </tfoot>
 </table>
+<input type="hidden" value="{{ $id }}" id="maincategoryId">
+<input type="hidden" value="{{ $subid }}" id="subcategoryId">
+
+<div id="board-foot">
+  <div>
+  </div>
+  <div class="paginateBtn"> 
+    {{ $board->links('pagination::custom')}}
+  </div>
+  <div class="createbtn">
+    <a href="/board/create/{{ $id }}/{{ $subid }}">글쓰기</a>
+  </div>
+</div>
 
 </div>
 
@@ -165,8 +202,6 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   
   </body>
 </html>
