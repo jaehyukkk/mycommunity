@@ -64,7 +64,7 @@
 <article id="create-main">
     <form action="/board/store" method="post">
     @csrf
-        <div class="container">
+        <div class="container" id="create-container">
             <div id="container-title" data-id ={{ $subid }}></div>
             <span class="box title" id="create-title">
                 <input type="text" placeholder="제목을 입력하세요." name="title"class="create-title"><br>
@@ -73,7 +73,6 @@
             
             <input type="hidden" name="caid" value="{{ $id }}">
             <input type="hidden" name="subid" value="{{ $subid }}">
-            <input type="hidden" name="useridx" value="{{ Auth::user()->id }}">
             <div id="create-option">
                 <div>
                     <span>공지설정</span>

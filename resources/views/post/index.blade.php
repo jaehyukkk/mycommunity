@@ -47,7 +47,12 @@
   </ul>
 </nav>
 
+
+
+
+
 <article id="main">
+
 <div class="table-div">
   <div class="board-top">
     <div>
@@ -65,6 +70,8 @@
       @endforeach
     </div>
   </div>
+
+
 <table class="table">
   <thead>
     <tr>
@@ -88,11 +95,12 @@
       </tr>
     @endforeach
   </tbody>
+  @if($photocode != 1)
   <tfoot>
     @foreach ($board as $boards )
     <tr>
       <td scope="row" class="bno" id="subcategoryname">{{ $boards->subcategoryname }}</td>
-      <td class="Title">{{ $boards->title }}</td>
+      <td class="Title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></td>
       <td>{{ $boards->time }}</td>
       <td>{{ $boards->name }}</td>
       <td>{{ $boards->hit }}</td>  
@@ -100,6 +108,30 @@
     @endforeach
   </tfoot>
 </table>
+@else
+</table>
+<div id="imgboard">
+<div class="container"> 
+  <div class="row" >
+    @foreach ($board as $boards )   
+    <div class="col-md-3" id="imgboard-img">
+      <a href="#">
+      <img class="img" src="{{$boards->mainimg}}">
+    </a>
+      <div id="imgboard-text">
+        <div class="imgBoardsubcategory">{{ $boards->subcategoryname }}</div>
+        <div class="mainimgBoardTitle"><a href="#">{{ $boards->title }}</a></div>
+        <div class="imgBoardName">{{ $boards->name }}</div>
+        <div class="imgBoardTime">{{ $boards->time }}</div>
+      </div>
+    </div>  
+    @endforeach
+  </div>
+</div>
+</div>
+@endif
+
+
 
 </div>
 

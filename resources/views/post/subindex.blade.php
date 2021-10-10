@@ -81,6 +81,7 @@
       <th scope="col">작성자</th>
       <th scope="col">조회수</th>
     </tr>
+  </thead>
   <tbody>
     @foreach ($notice as $notices )
       @if($notices->notice === 1)
@@ -109,7 +110,7 @@
       @endif
     @endforeach
   </tbody>
-  </thead>
+  @if($photocode != 1)
   <tfoot id="board-content">
     @foreach ($board as $boards )
     <tr>
@@ -119,11 +120,29 @@
       <td>{{ $boards->name }}</td>
       <td>{{ $boards->hit }}</td>  
     </tr>
-    
     @endforeach
-
   </tfoot>
 </table>
+@else
+</table>
+<div id="imgboard">
+<div class="container"> 
+  <div class="row">
+    @foreach ($board as $boards )   
+    <div class="col-md-3">
+      <a href="#">
+      <img class="img" src="{{$boards->mainimg}}">
+    </a>
+        <div class="imgBoardTitle"><a href="#">{{ $boards->title }}</a></div>
+        <div class="imgBoardName">{{ $boards->name }}</div>
+        <div class="imgBoardTime">{{ $boards->time }}</div>
+    </div>  
+    @endforeach
+  </div>
+</div>
+</div>
+@endif
+
 <input type="hidden" value="{{ $id }}" id="maincategoryId">
 <input type="hidden" value="{{ $subid }}" id="subcategoryId">
 

@@ -20,4 +20,8 @@ class Post extends Model
         'notice',
         'mainimg',
     ];
+
+    public function getComment(){
+        return $this->hasMany(Comment::class)->orderBy('created_at','DESC');
+    }
 }

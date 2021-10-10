@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@700&display=swap');
@@ -13,7 +14,8 @@ body {
   justify-content: center;
   align-items: center;
   overflow-x: hidden;  
-  font-family: 'Source Sans Pro', sans-serif;  
+
+  font-family: 'Source Sans Pro', sans-serif; 
 }
 
 #mainTop h1 {
@@ -29,7 +31,7 @@ body {
 #main-logo{
   display: flex;
   justify-content: center;
-  background-color: #333333;
+  background-color: #316B83;
   width: 100%;
 }
 
@@ -41,7 +43,7 @@ nav {
   display: flex;
   justify-content: center;
   position: relative;
-  background: #333333;
+  background: #316B83;
   padding-bottom: 10px;
 }
 
@@ -81,7 +83,7 @@ input:focus {
   /* border-left: 1px solid rgba(0,0,0,0.15); */
 }
 #main-menu > li:not(:last-child) > a{
-  border-right: 1px solid gray;
+  border-right: 1px solid #6D8299;
 }
 
 #sub-menu {
@@ -91,11 +93,11 @@ input:focus {
   visibility: hidden;
   transition: all 0.15s ease-in;
   width: 150px;
-  border: 1px solid gray;
+  border: 1px solid #1c3b49;
   
   margin-top: 10px;
   z-index: 9999;
-  background-color: #333333;
+  background-color: #316B83;
 }
 
 #sub-menu > li {
@@ -280,7 +282,7 @@ section {
 
 
 a:active {text-decoration: none;}
-a:hover{color:black; text-decoration: none;}
+a:hover{color:rgb(119, 119, 119); text-decoration: none;}
 a{
   color: #212121;
 }

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
 
 .table{
     width: 1000px;
@@ -6,7 +7,7 @@
     margin-top:35px;
     border-top: black solid 3px;
     margin-right: 30px;
-    border-bottom: 1px solid #e2e2e2;
+    border-bottom: 1px solid #316B83;
 }
 
 .table td, .table th{
@@ -33,8 +34,8 @@ table .Title{
     color:#979797;
 }
 
-.container{
-    width: 1000px;
+#create-container{
+    width: 1100px;
     margin-top: 100px;
 }
 
@@ -185,3 +186,193 @@ table .noticeText div{
 .current{
     font-weight:600;
 }
+
+#imgboard img{
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: 186px;
+    height: 186px;
+    object-fit: cover;
+    border-radius: 2px;
+
+  
+    /* image-rendering: -webkit-optimize-contrast; */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+#imgboard{
+    margin-top: 50px;  
+    width: 1000px;
+}
+
+.imgBoardTitle{
+    font-size: 14px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: rgb(32, 32, 32);
+}
+.mainimgBoardTitle{
+    font-size: 14px;
+    color: rgb(32, 32, 32);
+}
+
+.imgBoardName{
+    font-size: 13px;
+    color: rgb(105, 105, 105);
+}
+.imgBoardTime{
+    font-size: 13px;
+    padding-bottom: 20px;
+    color:#979797;
+}
+.imgBoardsubcategory{
+    font-size: 13px;
+    color:#979797;
+    padding-top: 5px;
+}
+
+
+/*게시판-show*/
+.read-baord-box{
+    
+    width: 1100px;
+}
+
+.title-profil{
+    display: flex;
+    justify-content: space-between;
+}
+.read-board{
+    /* font-size: 15px;
+    padding-bottom: 5px;
+    font-weight: 600;
+    color: #424242;
+    border-bottom: solid 1px #e9e9e9;
+    margin-bottom: 15px; */
+
+    font-size: 25px;
+    padding-bottom: 5px;
+    font-weight: 600;
+    color:#316B83;
+    border-bottom: 1px solid #316B83;
+    margin-bottom: 15px;
+    
+}
+.read-title{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    
+}
+.read-data-1{
+    display: flex;
+}
+.read-profil{
+    padding-right: 10px;
+    display: flex;
+    font-weight: 400;
+    
+}
+.read-profil img{
+    border-radius: 70%;
+    width: 30px;
+    height: 30px;
+    margin-top: 13px;
+}
+.read-time{
+    margin-top: 4px;
+    color: #979797;
+}
+.read-profil-name{
+    margin-top: 18px;
+    margin-left: 5px;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+.read-data{
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: solid 1px #e7e7e7;
+   
+     
+}
+.read-baord-box{
+    color:#353535;
+    padding: 40px;
+    /* border: solid 1px #e7e7e7; */
+}
+.read-data-2{
+    margin-top: 9px;
+    font-size: 14px;
+}
+
+.read-num{
+    margin-left: 2px;
+}
+.board-content{
+    margin-top: 35px;
+    margin-bottom: 90px;
+}
+
+.read-main{
+    border-radius: 3px;
+    margin-top: 70px;
+   
+}
+#read-foot-1{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+#read-updataDeleteBtn{
+    display: flex;
+}
+#read-updataDeleteBtn-update, #read-return {
+    text-align: center;
+    line-height: 28px;
+    
+}
+#read-updataDeleteBtn-update{
+    margin-right: 5px;
+}
+
+#read-updataDeleteBtn-update, #read-updataDeleteBtn-delete button, #read-return{
+    
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    border: 0;
+    width: 53px;
+    font-size: 12px;
+    height: 28px;
+    font-weight: 600;
+}
+/* #read-updataDeleteBtn-delete button{
+    border-radius: 4px;
+    border:0;
+    background-color: #e7e7e7;
+} */
+
+
+
+
+
+
+/* 코멘트관련 */
+.imgs_wrap img {
+
+    max-width: 80px;
+    max-height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    opacity: 0.9;
+    border-radius: 3px;
+}
+
+
+
+

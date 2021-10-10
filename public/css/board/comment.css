@@ -1,0 +1,243 @@
+.reviewBtn{
+    display: inline-block; 
+    color:rgb(255, 255, 255);
+    padding: .4em .75em; 
+    font-size: 13px; 
+    line-height: normal; 
+    vertical-align: middle; 
+    background-color: rgb(65, 77, 255); 
+    cursor: pointer; 
+    border: 1px solid white;
+    border-radius: 4px; 
+    height: 35px;
+  
+    width: 60px; 
+}
+
+.replyPhotoBox img{
+    max-width: 130px;
+    max-height: 130px;
+    margin-right: 10px;
+}
+.replyPhotoBox{
+    display: flex;
+}
+
+.reviews-box{
+    border-bottom: 2px solid #e2e2e2;
+    padding-bottom: 15px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  
+    
+}
+
+
+.reviews-border{
+    margin-top: 100px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.replyContent{
+    font-size: 14px;
+    color: black;
+    margin-top: 15px;
+    
+}
+
+tfoot .orderTfoot{
+    text-align: right;
+    margin-right: 10px;
+}
+
+
+.reviewUpdate{
+    margin-top: 30px; 
+    display: none;
+}
+
+.commentreply_hidden{
+    margin-top: 30px; 
+    display: none;
+}
+
+.replyUpdateBtn{
+    color: rgb(160, 160, 160);
+}
+
+.reviewImgsWrap img, .replyUpdateImgsWrap img{
+    max-width: 80px;
+    max-height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    opacity: 0.9;
+    border-radius: 3px;
+}
+
+.reviewupdelBtn{
+    text-align: right;
+    
+}
+
+.reviewUpdateBtn, .reviewDelBtn{
+    color: #999;
+}
+.reviewUpdateBtn{
+    margin-right: 5px;
+}
+#cancelIcon{
+    margin-right: 5px;
+}
+.reviewUpdateCancel, .reviewUpdateResult, .replyBtn, .replyCancel, .replyUpdateCancel, .replyUpdateResult{
+    background-color: rgb(65, 77, 255); 
+    cursor: pointer; 
+    border: 1px solid white;
+    border-radius: 4px; 
+    height: 35px;
+    width: 60px; 
+    
+    font-size: 13px;
+}
+.reviewUpdateCancel, .replyCancel, .replyUpdateCancel{
+    background-color: rgb(255, 64, 64);
+    color: white
+}
+.reviewUpdateResult, .replyBtn, .replyUpdateResult{
+    color: white;
+}
+
+
+
+#editor1{
+    height: 50px;
+}
+
+.input_img{
+    display: none;
+}
+.reviewcontent{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 20px;
+ }
+
+ .review{
+   
+    margin-bottom: 20px;
+    margin:0 auto;
+}
+.reviewTitle{
+    font-size: 18px;
+}
+
+.filebox label{ 
+    display: inline-block; 
+    padding: .5em .75em; 
+    color: #999; font-size: inherit; 
+    line-height: normal; 
+    vertical-align: middle; 
+    background-color: white; 
+    cursor: pointer; 
+    border: 1px solid #C8C6C6; 
+    border-bottom-color: #e2e2e2; 
+    width: 150px;
+    text-align: center;
+     
+} 
+
+.filebox input[type="file"] 
+{   position: absolute; 
+    width: 1px; 
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0; 
+}
+
+.my_button{
+    color: rgb(87, 87, 87);
+}
+
+.replyWriter img{
+    width: 35px;
+    height: 35px;
+    margin-right: 3px;
+    border-radius: 70%;
+}
+.replyWriter span:not(:last-child){
+    font-size: 17px;
+    font-weight: 600;
+    /* color:rgb(63, 63, 63) */
+
+}
+.comment-time{
+    font-size: 13px;
+    color: gray;
+}
+#showmain{
+    display: flex;
+}
+
+.comment-title{
+    margin-bottom: 10px;
+    font-weight: 600;
+    /* border-bottom: 1px solid #e2e2e2; */
+    padding-bottom: 10px;
+}
+.comment-title-title{
+    font-size: 16px;
+}
+.comment-title-count{
+    font-size: 17px;
+    color:rgb(80, 80, 255)
+}
+.comment-box{
+    background-color: rgb(248, 248, 248);
+    padding:30px;
+    /* border: 1px solid #dadada; */
+}
+
+
+#reply-box{
+    margin-left: 70px;
+   
+}
+
+.replyUpdate_hidden{
+    display: none;
+    margin-top:20px;
+}
+.comment-name{
+    display: flex;
+    justify-content: space-between;
+}
+.commentReplyBtn{
+    color:rgb(151, 151, 151);
+}
+#replyBtns a:not(:last-child){
+    margin-right: 5px;
+}
+
+#commentBtns a, #replyBtns a{
+    /* border: 1px solid rgb(211, 211, 211); */
+    padding:5px 8px 5px 8px;
+    font-size: 13px;
+    border-radius: 3px;
+}
+.reviewUpdateBtn, .replyUpdateBtn{
+    background-color: rgb(228, 228, 228);
+}
+.commentDelBtn, .replyDelBtn{
+    background-color: rgb(255, 147, 147);
+    color: white;
+}
+.comment, .reply{
+    margin-bottom: 20px;
+   
+}
+
+

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -27,3 +28,9 @@ Route::post('/checkid',[UserController::class,'checkId']);
 //글작성시 카테고리 이름 받아오기
 Route::get('/getcategorytitle',[PostController::class,'getCategoryTitle']);
 Route::get('/getnotice',[PostController::class,'getNotice']);
+
+//댓글관련 라우트
+// Route::group(['middleware' => 'auth'], function () {
+// Route::post('/commentcreate',[CommentController::class,'create']);
+// });
+
