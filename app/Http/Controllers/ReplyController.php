@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reply;
+use App\Models\Noti;
+use App\Models\Comment;
+use App\Models\Post;
 use Exception;
 use Faker\Extension\Extension;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class ReplyController extends Controller
 {
     public function create(Request $request){
-       
+
         try{
         $file = [];
 
@@ -34,7 +37,11 @@ class ReplyController extends Controller
               
             }
         }
-        
+
+        $post_id = $request->input('post_id');
+        $noti_content = Comment::where('id',$comment_id)->get('comment_content');
+        $user_id = Post::where('id',$post_id)->get('user_id');
+
 
         Reply::create([
             'reply_content' => $comment_content,
@@ -43,6 +50,15 @@ class ReplyController extends Controller
             'user_id'         => Auth::user()->id,
             'reply_photo'   => json_encode($file),
         ]);
+        
+        if(Auth::user()->id != $user_id[0]->user_id){
+        Noti::create([
+            'noti_content' => $noti_content[0]->comment_content,
+            'post_id' => $post_id,
+            'user_id' => $user_id[0]->user_id,
+            'noti_code' => 2,
+        ]);
+        }
 
         return 1;
         }
@@ -50,6 +66,8 @@ class ReplyController extends Controller
         else{
             return 2;
         }
+
+        return 3;
     }
     catch(Exception $e){
         return $e->getMessage();

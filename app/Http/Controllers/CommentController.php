@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\Post;
+use App\Models\Noti;
 use Exception;
 use Faker\Extension\Extension;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +22,7 @@ class CommentController extends Controller
     // }
 
     public function create(Request $request){
-     
+   
         try{
         $file = [];
 
@@ -43,7 +45,11 @@ class CommentController extends Controller
               
             }
         }
-    
+
+       
+        $notiPostTitle = Post::where('id',$post_id)->get('title');
+        $notiPostid = Post::where('id',$post_id)->get('user_id');
+        
         Comment::create([
             'comment_content' => $comment_content,
             'comment_writer'  => Auth::user()->name,
@@ -51,6 +57,13 @@ class CommentController extends Controller
             'user_id'         => Auth::user()->id,
             'comment_photo'   => json_encode($file),
             'replycode'       => $replycode
+        ]);
+
+        Noti::create([
+            'noti_content' => $notiPostTitle[0]->title,
+            'user_id' => $notiPostid[0]->user_id,
+            'post_id' => $post_id,
+            'noti_code' => 1 
         ]);
 
         return 1;

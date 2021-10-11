@@ -287,12 +287,12 @@ $('.replyBtn').on('click',function(e){
                     alert('로그인을 해주세요.');
                 }
                 else{
-                    alert('내용을 입력해주세요');
+                    alert('내용을 입력해주세요.');
                 }
-               
+             
             },
-            error: function(){
-                alert('내용을 입력해주세요.');
+            error: function(e){
+                console.log(e);
             }, 
              
         cache: false,

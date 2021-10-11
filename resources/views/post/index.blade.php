@@ -115,12 +115,12 @@
   <div class="row" >
     @foreach ($board as $boards )   
     <div class="col-md-3" id="imgboard-img">
-      <a href="#">
+      <a href="/read/{{ $boards->idx }}">
       <img class="img" src="{{$boards->mainimg}}">
     </a>
       <div id="imgboard-text">
         <div class="imgBoardsubcategory">{{ $boards->subcategoryname }}</div>
-        <div class="mainimgBoardTitle"><a href="#">{{ $boards->title }}</a></div>
+        <div class="mainimgBoardTitle"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
         <div class="imgBoardName">{{ $boards->name }}</div>
         <div class="imgBoardTime">{{ $boards->time }}</div>
       </div>

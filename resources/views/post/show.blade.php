@@ -154,9 +154,11 @@
                                 $(document).ready(function() {
                                   $( 'textarea#replyEditor$comments->id' ).ckeditor();
         
-                                  $('.replyBtn').hover(function(){
+                                  $('.replyBtn').click(function(){
                                     var ContentFromEditor = CKEDITOR.instances.replyEditor$comments->id.getData();
                                     $('.replyEditorVal$comments->id').val(ContentFromEditor);
+
+                                    
                                   });
                                  
                                 } ); 
@@ -165,6 +167,7 @@
                               ?>
         
                             <input type="hidden" class="replyEditorVal{{ $comments->id }}" name="reply_content">
+                            <input type="hidden" name="post_id" value="{{ $read[0]->idx }}">
                             <div class="reviewcontent">
                               <div class="filebox"> 
                                 <a href="javascript:" onclick="
