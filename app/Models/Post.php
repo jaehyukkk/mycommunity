@@ -19,6 +19,9 @@ class Post extends Model
         'comment',
         'notice',
         'mainimg',
+        'commentnum',
+        'code',
+        'writer',
     ];
 
     public function getComment(){

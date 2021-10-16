@@ -10,6 +10,7 @@ use App\Models\Post;
 use Exception;
 use Faker\Extension\Extension;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReplyController extends Controller
 {
@@ -40,7 +41,8 @@ class ReplyController extends Controller
 
         $post_id = $request->input('post_id');
         $noti_content = Comment::where('id',$comment_id)->get('comment_content');
-        $user_id = Post::where('id',$post_id)->get('user_id');
+        $postUserId = Post::where('id',$post_id)->get('user_id');
+        $commentUserId = Comment::where('id',$comment_id)->get('user_id');
 
 
         Reply::create([
@@ -51,14 +53,18 @@ class ReplyController extends Controller
             'reply_photo'   => json_encode($file),
         ]);
         
-        if(Auth::user()->id != $user_id[0]->user_id){
+        if(Auth::user()->id != $commentUserId[0]->user_id){
         Noti::create([
             'noti_content' => $noti_content[0]->comment_content,
             'post_id' => $post_id,
-            'user_id' => $user_id[0]->user_id,
+            'user_id' => $commentUserId[0]->user_id,
             'noti_code' => 2,
         ]);
         }
+
+        Post::where('id',$post_id)->update([
+            'commentnum' => DB::raw('commentnum+1')
+        ]);
 
         return 1;
         }
@@ -81,6 +87,7 @@ class ReplyController extends Controller
 
     public function updataReply(Request $request){
 
+        try{
         $file = [];
 
         $reply_content = $request->input('reply_content');
@@ -102,12 +109,15 @@ class ReplyController extends Controller
             'reply_photo'   => json_encode($file)
         ]);
         return 'success';
-    }
+        }
         else{
             Reply::find($idx)->update([
                 'reply_content' => $reply_content,
             ]);
             return 'success';
+        }
+        }catch(Exception $e){
+            return $e->getMessage();
         }
        
 
@@ -116,7 +126,13 @@ class ReplyController extends Controller
     public function delReply(Request $request){
         // return 'sadasd';
         $id = $request->input('id');
-        Reply::where('id',$id)->delete();        
+        $postid = $request->input('postid');
+        $getCount = Reply::where('id',$id)->count();
+        Reply::where('id',$id)->delete();   
+        
+        Post::where('id',$postid)->update([
+            'commentnum' => DB::raw('commentnum-'.$getCount)
+        ]);
         return 'success';
     }
 }

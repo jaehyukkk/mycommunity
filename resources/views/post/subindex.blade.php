@@ -157,6 +157,22 @@
   </div>
 </div>
 
+<div>{{ $id }}</div>
+<div>{{ $subid }}</div>
+<form action="/search">
+  <input type="hidden" name="id" value="{{ $id }}">
+  <input type="hidden" name="subid" value="{{ $subid }}">
+  <select name="category" id="">
+  <option value="1">제목+내용</option>  
+  <option value="2">제목</option>  
+  <option value="3">내용</option>  
+  <option value="4">작성자</option>  
+  <option value="5">댓글</option>  
+  </select>
+  <input type="text" name="search">
+  <input type="submit">
+</form>
+
 </div>
 
     <div id="loginBox">

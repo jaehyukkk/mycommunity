@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/summernote/css.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/css.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/board/board.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/mobilesummernote/summernote-lite.css') }}" >
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('/mobilesummernote/css.css') }}" >
     
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> --}}
 </head>
@@ -27,6 +29,8 @@
     <script type="text/javascript" src="{{ URL::asset('/summernote/js.js') }}" defer></script>
     <script type="text/javascript" src="{{ URL::asset('/summernote/lang/summernote-ko-KR.js') }}" defer></script>
     <script type="text/javascript" src="{{ URL::asset('/js/post.js') }}" defer></script>
+    <script type="text/javascript" src="{{ URL::asset('/mobilesummernote/summernote-lite.js') }}" defer></script>
+    <script type="text/javascript" src="{{ URL::asset('/mobilesummernote/js.js') }}" defer></script>
 
     <script src="https://kit.fontawesome.com/db98d81eec.js" 
     crossorigin="anonymous">
@@ -61,11 +65,12 @@
         @endforeach
     </ul>
     </nav>
+
 <article id="create-main">
     <form action="/board/store" method="post">
     @csrf
         <div class="container" id="create-container">
-            <div id="container-title" data-id ={{ $subid }}></div>
+            <div id="container-title"  data-id ={{ $subid }}></div>
             <span class="box title" id="create-title">
                 <input type="text" placeholder="제목을 입력하세요." name="title"class="create-title"><br>
              </span>
@@ -141,6 +146,32 @@
       </div>
     </article>
 
+
+    <div id="mobile">
+      <form action="/board/store" method="post">
+        @csrf
+          <input type="hidden" name="caid" value="{{ $id }}">
+          <input type="hidden" name="subid" value="{{ $subid }}">
+          <input type="hidden" name="notice" value="0">
+      <div id="mobile-create-nav">
+        <div id="mobile-create-nav-item">
+          <div><i class="fas fa-chevron-left"></i></div>
+          <div>글쓰기</div>
+          <button type="submit">등록</button>
+        </div>
+      </div>
+      <div id="mobile-container">
+      <div id="mobile-container-title"  data-id ={{ $subid }}></div>
+     </div>
+      <center><input type="text" placeholder="제목을 입력하세요." class="mobile-create-title" name="title"></center>
+      <textarea id="mobile-summernote" name="description"></textarea>  
+      </form>
+    </div>
+
+    <script>
+      
+
+    </script>
 
 </body>
 </html>

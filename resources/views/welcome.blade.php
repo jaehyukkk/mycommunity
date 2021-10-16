@@ -19,6 +19,9 @@
           alert(msg);
       }
     </script>
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="{{ URL::asset('js/time.js') }}" defer></script>
     
     <script src="https://kit.fontawesome.com/db98d81eec.js" 
     crossorigin="anonymous">
@@ -45,29 +48,26 @@
   </ul>
 </nav>
 
+<article>
 <article id="main">
     <div class="board">
       <div class="main-free-board">
         <div class="main-free-board-top">
-          <div>자유게시판</div>
+          <div>최신글보기</div>
           <span>더보기</span>
         </div>
+        <?php $cnt = 0 ;?>
+        @foreach ($board as $boards )
+        <?php $cnt++ ?>
+          @if($cnt == 11)
+          <?php break; ?>
+          @endif
         <div class="main-free-board-title">
-          <div>제목입니다</div>
-          <div>작성자</div>
+          <div><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
+          <div>{{ $boards->name }}</div>
         </div>
-        <div class="main-free-board-title">
-          <div>제목입니다</div>
-          <div>작성자</div>
-        </div>
-        <div class="main-free-board-title">
-          <div>제목입니다</div>
-          <div>작성자</div>
-        </div>
-        <div class="main-free-board-title">
-          <div>제목입니다</div>
-          <div>작성자</div>
-        </div> 
+        @endforeach
+       
       </div>
 
       <div class="main-free-board">
@@ -75,22 +75,20 @@
           <div>자유게시판</div>
           <span>더보기</span>
         </div>
-        <div class="main-free-board-title">
-          <div>제목입니다</div>
-          <div>작성자</div>
-        </div>
-        <div class="main-free-board-title">
-          <div>제목입니다</div>
-          <div>작성자</div>
-        </div>
-        <div class="main-free-board-title">
-          <div>제목입니다</div>
-          <div>작성자</div>
-        </div>
-        <div class="main-free-board-title">
-          <div>제목입니다</div>
-          <div>작성자</div>
-        </div> 
+        
+          <?php $cnt1 = 0?>
+          @foreach ($board as $boards )
+          <?php $cnt1++?>
+          @if($boards->maincategory_id == 1 && $boards->subcategory_id == 1)
+          @if($cnt1== 11)
+          <?php break;?>
+          @endif
+          <div class="main-free-board-title">
+          <div>{{ $boards->title }}</div>
+          <div>{{ $boards->name }}</div> 
+          </div>       
+          @endif
+          @endforeach    
       </div>
     </div>
 
@@ -146,11 +144,45 @@
 </article>
 
 
+<div id="mobile">
+<div id="mobile-nav">
+  <div><i class="fas fa-chevron-left"></i></div>
+  <div>LBL</div>
+  <div><i class="fas fa-sign-in-alt"></i></div>
+</div>
+<div class="mobile-board-box">
+
+@foreach ($board as $boards )
+
+  <div class="mobile-board">
+    <div class="mobile-board-item">
+      <div><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
+      <div><span>{{ $boards->name }}</span><span class="time">{{ $boards->time }}</span><span>조회{{ $boards->hit }}</span></div>
+      <div>자유게시판</div>
+    </div>
+    <div>
+     <div class="mobile-board-commnet">{{ $boards->commentnum }}</div>  
+    </div>
+  </div> 
+
+  @endforeach
+
+</div>
+
+
+<div id="footer">
+  <div class="mobile-footer-item">
+    <span><i class="far fa-address-card"></i></span>
+    <span><i class="fas fa-search"></i></span>
+    <span><a href="/mobile/board"><i class="fas fa-bars"></i></a></span>
+  </div>
+</div>
+
+</div>
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>

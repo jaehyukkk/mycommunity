@@ -13,6 +13,9 @@
   </head>
   <body>
 
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/time.js') }}" defer></script>
+
     <script>
       var msg = '{{Session::get('alert')}}';
       var exist = '{{Session::has('alert')}}';
@@ -46,7 +49,6 @@
     @endforeach
   </ul>
 </nav>
-
 
 
 
@@ -89,7 +91,7 @@
           <div>공지</div>
         </td>
         <td class="Title">{{ $notices->title }}</td>
-        <td>{{ $notices->time }}</td>
+        <td class="time">{{ $notices->time }}</td>
         <td>{{ $notices->name }}</td>
         <td>{{ $notices->hit }}</td>  
       </tr>
@@ -98,10 +100,19 @@
   @if($photocode != 1)
   <tfoot>
     @foreach ($board as $boards )
+ 
     <tr>
       <td scope="row" class="bno" id="subcategoryname">{{ $boards->subcategoryname }}</td>
-      <td class="Title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></td>
-      <td>{{ $boards->time }}</td>
+      <td class="Title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }} 
+        @if($boards->code > 0)
+        <span class="imgicon"><i class="far fa-image"></i></span>
+        @endif
+
+        @if($boards->commentnum > 0)
+        <span class="commentnum">[{{ $boards->commentnum }}]</span>
+        @endif
+      </a></td>
+      <td class="time">{{ $boards->time }}</td>
       <td>{{ $boards->name }}</td>
       <td>{{ $boards->hit }}</td>  
     </tr>
@@ -122,7 +133,7 @@
         <div class="imgBoardsubcategory">{{ $boards->subcategoryname }}</div>
         <div class="mainimgBoardTitle"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
         <div class="imgBoardName">{{ $boards->name }}</div>
-        <div class="imgBoardTime">{{ $boards->time }}</div>
+        <div class="time" id="imgBoardTime">{{ $boards->time }}</div>
       </div>
     </div>  
     @endforeach
@@ -131,7 +142,19 @@
 </div>
 @endif
 
-
+<form action="/search">
+  <input type="hidden" name="id" value="{{ $board[0]->maincategory_id }}">
+  <input type="hidden" name="subid" value="0">
+  <select name="category" id="">
+  <option value="1">제목+내용</option>  
+  <option value="2">제목</option>  
+  <option value="3">내용</option>  
+  <option value="4">작성자</option>  
+  <option value="5">댓글</option>  
+  </select>
+  <input type="text" name="search">
+  <input type="submit">
+</form>
 
 </div>
 
@@ -170,7 +193,7 @@
           <button>내가 쓴 댓글</button>
         </div>
         <div class="usermenu-item">
-          <button>내 활동 알림</button>
+          <button><a href="/noti/{{ Auth::user()->id }}">내 활동 알림</a></button>
           <button>쪽지함</button>
         </div>
         <div id="logout">
@@ -197,7 +220,6 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>

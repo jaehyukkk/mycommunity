@@ -11,11 +11,15 @@
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/css.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/board/board.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/board/comment.css') }}" >
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('/summernote/summernote-lite.css') }}" >
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('/summernote/css.css') }}" >
+        
     <title>Hello, world!</title>
   </head>
   <body>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/reviewUpdate.js') }}" defer></script>
+    <script type="text/javascript" src="{{ URL::asset('/summernote/summernote-lite.js') }}" defer></script>
+    <script type="text/javascript" src="{{ URL::asset('/summernote/js.js') }}" defer></script>
     <script type="text/javascript" src="{{ URL::asset('js/comment.js') }}" defer></script>
     <script type="text/javascript" src="{{ URL::asset('/ckeditor_review/ckeditor/ckeditor.js') }}" defer></script>
     <script type="text/javascript" src="{{ URL::asset('/ckeditor_review/ckeditor/adapters/jquery.js') }}" defer></script>
@@ -73,15 +77,15 @@
           <span class="read-profil-name">{{ $reads->name }}</span>
         </div>
       </div>
-
+      <?php $commentCount = count($comment) + count($reply) ?>
             <div class="read-data">
                 <div class="read-data-1">
                     
                     <span class="read-time">{{ $reads->time }}</span>
                 </div>
                 <div class="read-data-2">
-                    <span>조회수<span class="read-num">13</span></span>
-                    <span>댓글<span class="read-num">3</span></span>
+                    <span>조회수<span class="read-num">{{ $reads->hit }}</span></span>
+                    <span>댓글<span class="read-num">{{ $commentCount }}</span></span>
                 </div>       
             </div>
 
@@ -90,7 +94,6 @@
             </div>
             @endforeach
 
-            <?php $commentCount = count($comment) + count($reply) ?>
             <div class="comment-title">
               <i class="far fa-comment-dots"></i> 
               <span class="comment-title-title">댓글</span>
@@ -131,7 +134,7 @@
                     @if(Auth::user())
                       @if(Auth::user()->id === $comments->user_id)
                     <div class="reviewupdelBtn" id="commentBtns">             
-                        <a href="#"class="reviewUpdateBtn" data-update="{{ $comments->id }}">수정</a>
+                        <a href="#"class="commentUpdateBtn" data-update="{{ $comments->id }}">수정</a>
                         <a href="#" class="commentDelBtn" data-commentdel="{{ $comments->id }}" data-toggle="modal" data-target="#commentDelModal">
                           삭제
                         </a>   
@@ -142,98 +145,19 @@
                 </article>
 
                     {{-- 답글 폼 --}}
-                    <div class="commentreply_hidden" data-reply="{{ $comments->id }}">  
-                      <form action="/replycreate" method="post" id="replyForm{{ $comments->id }}">
-                        @csrf            
-                              <textarea class="form-control" id="replyEditor{{ $comments->id }}" name="reply_content" data-reply="{{ $comments->id }}"
-                                contenteditable="true" placeholder="답글을 작성해주세요."
-                                ></textarea>            
-        
-                              <?php
-                              echo("<script type='text/javascript'>
-                                $(document).ready(function() {
-                                  $( 'textarea#replyEditor$comments->id' ).ckeditor();
-        
-                                  $('.replyBtn').click(function(){
-                                    var ContentFromEditor = CKEDITOR.instances.replyEditor$comments->id.getData();
-                                    $('.replyEditorVal$comments->id').val(ContentFromEditor);
-
-                                    
-                                  });
-                                 
-                                } ); 
-                                </script>         
-                                ")
-                              ?>
-        
-                            <input type="hidden" class="replyEditorVal{{ $comments->id }}" name="reply_content">
-                            <input type="hidden" name="post_id" value="{{ $read[0]->idx }}">
-                            <div class="reviewcontent">
-                              <div class="filebox"> 
-                                <a href="javascript:" onclick="
-                                  replyFileUploadAction();"
-                                   class="my_button"><i class="fas fa-camera"></i> 사진첨부</a>
-                              <input type="file" id="reply_input_img" name="reply_photo[]"multiple/>
-                              </div>
-                              <div>
-                              <input type="hidden" value="{{ $comments->id }}" name="commentid" class="commentid">
-                              <button class="replyCancel"type="button" data-reply="{{ $comments->id }}"><i class="fas fa-times" id="cancelIcon"></i> 취소</button>
-                              <button class="replyBtn" type="submit" data-reply="{{ $comments->id }}">등록</button>                
-                            </form>
-                              </div>
-                           </div>
-                           <div class="reviewImgsWrap">                 
-                          </div>                
-                      </div>
-                   
+                  
+                    <div data-reply ="{{ $comments->id }}" class="updatediv">
+                      <input type="hidden" value="{{ $read[0]->idx }}" id="hidden-postid">
+                    </div>
                       {{-- 답글 폼 끝 --}}
-
-
 
                     
                     {{-- 댓글 수정 폼 --}}
-                    <form action="/updatecomment" method="post" id="updateForm{{ $comments->id }}" enctype="multipart/form-data">
-                      @csrf
                     
-                        <div class="reviewUpdate" data-update="{{ $comments->id }}">               
-                              <textarea class="form-control" id="updateEditor{{ $comments->id }}" name="reply_content" data-update="{{ $comments->id }}"></textarea>            
-        
-                              <?php
-                              echo("<script type='text/javascript'>
-                                $(document).ready(function() {
-                                  $( 'textarea#updateEditor$comments->id' ).ckeditor();
-        
-                                  $('.reviewUpdateResult').hover(function(){
-                                    var ContentFromEditor = CKEDITOR.instances.updateEditor$comments->id.getData();
-                                    $('.updateEditorVal$comments->id').val(ContentFromEditor);
-                                  });
-                                 
-                                } ); 
-                                </script>         
-                                ")
-                              ?>
-        
-                            <input type="hidden" class="updateEditorVal{{ $comments->id }}" name="comment_content">
-                            <div class="reviewcontent">
-                              <div class="filebox"> 
-                                <a href="javascript:" onclick="
-                                  updataFileUploadAction();"
-                                   class="my_button"><i class="fas fa-camera"></i> 사진첨부</a>
-                              <input type="file" id="input_img" name="comment_photo[]"multiple/>
-                              </div>
-                              <div>
-                                {{-- <a href="javascript:" class="my_button" onclick="submitAction();">업로드</a> --}}
-                              <input type="hidden" value="{{ $comments->id }}" name="commentid" class="commentid">
-                              <button class="reviewUpdateCancel"type="button" data-update="{{ $comments->id }}"><i class="fas fa-times" id="cancelIcon"></i> 취소</button>
-                              <button class="reviewUpdateResult" type="submit" data-update="{{ $comments->id }}">수정</button>                
-                            </form>
-                              </div>
-                           </div>
-                           <div class="reviewImgsWrap">                 
-                          </div>
-                      </div>  
-                      {{-- 댓글 수정 폼 끝 --}}
-
+                    <div data-updateform ="{{ $comments->id }}" class="updatediv">
+                    </div>
+                    
+                    {{-- 댓글 수정 폼 끝 --}}
 
 
                       <div id="reply-box">
@@ -271,45 +195,9 @@
 
 
                             {{-- 답글 수정 폼 --}}
-                            <div class="replyUpdate_hidden" data-replyupdate="{{ $replys->id }}">  
-                              <form action="/updatereply" method="post" id="replyupdateForm{{ $replys->id }}">
-                                @csrf            
-                                      <textarea class="form-control" id="replyUpdateEditor{{ $replys->id }}" name="reply_content" data-replyupdate="{{ $replys->id }}"
-                                        >{{ $replys->reply_content }}</textarea>            
-                
-                                      <?php
-                                      echo("<script type='text/javascript'>
-                                        $(document).ready(function() {
-                                          $( 'textarea#replyUpdateEditor$replys->id' ).ckeditor();
-                
-                                          $('.replyUpdateResult').hover(function(){
-                                            var ContentFromEditor = CKEDITOR.instances.replyUpdateEditor$replys->id.getData();
-                                            $('.replyUpdateEditorVal$replys->id').val(ContentFromEditor);
-                                          });
-                                         
-                                        } ); 
-                                        </script>         
-                                        ")
-                                      ?>
-                
-                                    <input type="hidden" class="replyUpdateEditorVal{{ $replys->id }}" name="reply_content">
-                                    <div class="reviewcontent">
-                                      <div class="filebox"> 
-                                        <a href="javascript:" onclick="
-                                          replyUpdateFileUploadAction();"
-                                           class="my_button"><i class="fas fa-camera"></i> 사진첨부</a>
-                                      <input type="file" id="replyUpdate_input_img" name="replyupdate_photo[]"multiple/>
-                                      </div>
-                                      <div>
-                                      <input type="hidden" value="{{ $replys->id }}" name="replyid" class="replyid">
-                                      <button class="replyUpdateCancel"type="button" data-replyupdate="{{ $replys->id }}"><i class="fas fa-times" id="cancelIcon"></i> 취소</button>
-                                      <button class="replyUpdateResult" type="submit" data-replyupdate="{{ $replys->id }}">수정</button>                
-                                    </form>
-                                      </div>
-                                   </div>
-                                   <div class="replyUpdateImgsWrap">                 
-                                  </div>                
-                              </div>
+
+                            <div data-replyupdateform ="{{ $replys->id }}" class="updatediv">
+                            </div>
 
                             {{-- 답글 수정 폼 끝 --}}
 
@@ -341,7 +229,7 @@
                         
                           <input type="hidden" class="ckeditorval" name="comment_content">
                           <input type="hidden" name="replycode" value="0">
-                          <div class="reviewcontent">
+                          <div class="commentitem">
                             <div class="filebox"> 
               
                               <a href="javascript:" onclick="fileUploadAction();" class="my_button"><i class="fas fa-camera"></i> 사진첨부</a>
@@ -448,7 +336,7 @@
         댓글을 정말 삭제하시겠습니까?
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="commentDelModalBtn">삭제하기</button>
+          <button type="button" class="btn btn-danger" id="commentDelModalBtn" data-postid="{{ $read[0]->idx }}">삭제하기</button>
            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
       </div>
     </div>
@@ -469,7 +357,7 @@
         답글을 정말 삭제하시겠습니까?
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="replyDelModalBtn">삭제하기</button>
+          <button type="button" class="btn btn-danger" id="replyDelModalBtn" data-postid="{{ $read[0]->idx }}">삭제하기</button>
            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
       </div>
     </div>
@@ -478,8 +366,204 @@
 
 
   
-
+<div id="mobile">
+  <div id="mobile-nav">
+    <div><i class="fas fa-chevron-left"></i></div>
+    <div>LBL</div>
+    <div class="mobile-login"><i class="fas fa-sign-in-alt"></i></div>
+  </div>
+  <div class="mobile-read-box">
+  @foreach ($read as $reads )
+  <div class="mobile-read-top">
+    <div class="mobile-read-boardName">{{ $reads->subcategoryname }}</div>
+    <div class="mobile-read-title">{{ $reads->title }}</div>
+    <div class="mobil-read-infor">
+      <div class="mobile-read-profil-img">
+        <img src="{{URL::asset('/img/img.JPG')}}" alt="...">
+      </div>
+      <div class="mobile-read-top-item">
+        <div>{{ $reads->name }}</div>
+        <div>
+          <span class="time">{{ $reads->time }}</span>
+          <span>조회 {{ $reads->hit }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
  
+  <div class="mobile-read-description">
+    {!! $reads->description !!}
+  </div>
+  </div>
+  @endforeach
+
+  <footer class="mobile-comment-box"> 
+    <div class="review-box">
+      @foreach ($comment as $comments )
+      
+      <div class="reviews-box">
+    
+        <article class="comment">
+          <div class="comment-name">
+            <div class="mobile-comment-item">
+              <img src="{{URL::asset('/img/img.JPG')}}" alt="..."> 
+              <span class="mobile-comment-writer">{{ $comments->comment_writer }}</span>
+              <span class="comment-time">{{ $comments->created_at }}</span>
+            </div>
+            <div class="replyALink">
+           </div>
+            
+          </div>
+            <p class="replyContent" >{!! $comments->comment_content !!}</p>
+            <input type="hidden" data-update="{{ $comments->id }}" value="{{$comments->comment_content  }}">
+
+            <div class="replyPhotoBox">
+              <?php $photo = json_decode($comments->comment_photo)?>
+              @for($i = 0; $i < count($photo) ; $i++)
+              <div>
+                <img class="replyPhotos" src="{{URL::asset('/image/'.$photo[$i])}}">
+              </div>          
+              @endfor   
+            </div> 
+          
+            @if(Auth::user())
+              @if(Auth::user()->id === $comments->user_id)
+            <div class="reviewupdelBtn" id="commentBtns">             
+                <a href="#" class="commentDelBtn" data-commentdel="{{ $comments->id }}" data-toggle="modal" data-target="#commentDelModal">
+                  삭제
+                </a>   
+                          
+            </div>
+              @endif
+            @endif
+        </article>
+
+            {{-- 답글 폼 --}}
+          
+            <div data-reply ="{{ $comments->id }}" class="updatediv">
+              <input type="hidden" value="{{ $read[0]->idx }}" id="hidden-postid">
+            </div>
+              {{-- 답글 폼 끝 --}}
+
+            
+            {{-- 댓글 수정 폼 --}}
+            
+            <div data-updateform ="{{ $comments->id }}" class="updatediv">
+            </div>
+            
+            {{-- 댓글 수정 폼 끝 --}}
+
+
+              <div id="reply-box">
+                  @foreach ($reply as $replys )
+                  <article class="reply">
+                  @if($replys->comment_id == $comments->id)
+                  
+                  <div class=writerStar>
+                    <div class="replyWriter"><img src="{{URL::asset('/img/img.JPG')}}" alt="..."> <span>{{ $replys->reply_writer }}</span>
+                      <span class="comment-time">{{ $replys->created_at }}</span>
+                    </div>      
+                  </div>
+                    <p class="replyContent" >{!! $replys->reply_content !!}</p>
+                    <input type="hidden" data-replyupdate="{{ $replys->id }}" value="{{$replys->reply_content  }}">
+        
+                    <div class="replyPhotoBox">
+                     
+                      <?php $photo = json_decode($replys->reply_photo)?>
+                      @for($i = 0; $i < count($photo) ; $i++)
+                      <div>
+                        <img class="replyPhotos" src="{{URL::asset('/image/'.$photo[$i])}}">
+                      </div>          
+                      @endfor   
+                   
+                    </div> 
+        
+                    @if(Auth::user())
+                      @if(Auth::user()->id === $replys->user_id)
+                    <div class="reviewupdelBtn" id="replyBtns">
+                      <a href="#" class="replyDelBtn" data-replydel="{{ $replys->id }}" data-toggle="modal" data-target="#replyDelModal">
+                        삭제
+                      </a>               
+                    </div>
+
+
+                    {{-- 답글 수정 폼 --}}
+
+                    <div data-replyupdateform ="{{ $replys->id }}" class="updatediv">
+                    </div>
+
+                    {{-- 답글 수정 폼 끝 --}}
+
+                      @endif
+                    @endif
+                  @endif
+                </article>
+                @endforeach
+                  
+            </div>
+           
+        </div>          
+      @endforeach
+    </div>
+
+
+    <div>  
+        <form action="/commentcreate" method="post" id="form" enctype="multipart/form-data">
+            @csrf
+              <div class="review">
+                                   
+                    <textarea class="form-control" id="editor1" name="reply_content" ></textarea>
+                    
+                    <script>
+                    $( document ).ready( function() {
+                      $( 'textarea#editor1' ).ckeditor();
+                  } );
+                  </script>
+                
+                  <input type="hidden" class="ckeditorval" name="comment_content">
+                  <input type="hidden" name="replycode" value="0">
+                  <div class="commentitem">
+                    <div class="filebox"> 
+      
+                      <a href="javascript:" onclick="fileUploadAction();" class="my_button"><i class="fas fa-camera"></i> 사진첨부</a>
+                  <input type="file" id="input_imgs" name="comment_photo[]"multiple/>
+                    </div>
+                    <div>
+      
+                    <button class="reviewBtn" type="submit">등록</button>
+                    </div>
+                 </div>
+                 <div class="imgs_wrap">
+                  
+                </div>
+                
+                <input type="hidden" name="postid" value="{{ $read[0]->idx }}">
+            </form>
+    </div>
+ 
+  </div>
+</footer>
+  
+  <div id="footer">
+    <div class="mobile-footer-item">
+      <span><i class="far fa-address-card"></i></span>
+      <span><i class="fas fa-search"></i></span>
+      <span><a href="/mobile/board"><i class="fas fa-bars"></i></a></span>
+    </div>
+  </div>
+  
+  </div>
+
+
+ <script>
+   $(function(){
+    $('.mobile-read-description')
+    .children('p')
+    .children('img')
+    .attr('style','width: 100%');
+   })
+   
+ </script>
   
 
  

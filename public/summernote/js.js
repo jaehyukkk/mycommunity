@@ -33,14 +33,36 @@ var setting = {
     callbacks : { 
         onImageUpload : function(files, editor, welEditable) {
     // 파일 업로드(다중업로드를 위해 반복문 사용)
-    for (var i = files.length - 1; i >= 0; i--) {
-    uploadSummernoteImageFile(files[i],
-    this);
+        for (var i = files.length - 1; i >= 0; i--) {
+        uploadSummernoteImageFile(files[i],
+        this);
             }
+
         }
     }
  };
 $('#summernote').summernote(setting);
+
+
+
+
+ 
+var commentUpdateSetting = {
+    height : 200,
+    minHeight : null,
+    maxHeight : null,
+    focus : true,
+    lang : 'ko-KR',
+    toolbar:false,
+    callbacks: {
+        onEnter: function(){
+            box.summernote('insertNode', document.createTextNode("<br>")); 
+            console.log('uiwdbvuwecbweuiuinsjk');
+        }
+    }
+ };
+
+ $('.updatecomment').summernote(commentUpdateSetting);
 
 function uploadSummernoteImageFile(photo, el) {
     data = new FormData();
@@ -67,4 +89,6 @@ $("#summernote").on("summernote.enter", function(we, e) {
     $(this).summernote("pasteHTML", "<br><br>");
     e.preventDefault();
 });
+
+
 

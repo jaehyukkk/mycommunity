@@ -1,4 +1,4 @@
-
+{{-- 
 
     <table class="mail_form" border="0"> 
         <tr> 
@@ -15,7 +15,21 @@
     </tr> 
     <tr> 
         <th>Content</th> 
-        <td><?php echo nl2br($data_arr['content']); ?></td> 
+        <td></td> 
+    </tr> 
+    </table> --}}
+
+
+
+
+
+
+
+
+    <table class="mail_form" border="0"> 
+
+    <tr> 
+        <th>아이디</th> 
+        <td>{{ $data_arr['content'] }}</td> 
     </tr> 
     </table>
-

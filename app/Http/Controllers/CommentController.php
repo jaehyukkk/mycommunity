@@ -10,6 +10,7 @@ use App\Models\Noti;
 use Exception;
 use Faker\Extension\Extension;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -48,7 +49,6 @@ class CommentController extends Controller
 
        
         $notiPostTitle = Post::where('id',$post_id)->get('title');
-        $notiPostid = Post::where('id',$post_id)->get('user_id');
         
         Comment::create([
             'comment_content' => $comment_content,
@@ -59,11 +59,18 @@ class CommentController extends Controller
             'replycode'       => $replycode
         ]);
 
-        Noti::create([
-            'noti_content' => $notiPostTitle[0]->title,
-            'user_id' => $notiPostid[0]->user_id,
-            'post_id' => $post_id,
-            'noti_code' => 1 
+        $user_id = Post::where('id',$post_id)->get('user_id');
+        if(Auth::user()->id != $user_id[0]->user_id ){
+            Noti::create([
+                'noti_content' => $notiPostTitle[0]->title,
+                'user_id' => $user_id[0]->user_id,
+                'post_id' => $post_id,
+                'noti_code' => 1 
+            ]);
+        }
+
+        Post::where('id',$post_id)->update([
+            'commentnum' => DB::raw('commentnum+1')
         ]);
 
         return 1;
@@ -120,9 +127,20 @@ class CommentController extends Controller
     }
 
     public function delComment(Request $request){
+
         $id = $request->input('id');
+        $postid = $request->input('postid');
+
         Comment::where('id',$id)->delete();
-        Reply::where('comment_id',$id)->delete();        
+        $replyCount = Reply::where('comment_id',$id)->count();
+        Reply::where('comment_id',$id)->delete();
+
+        $getCount = 1+$replyCount;
+
+        Post::where('id',$postid)->update([
+            'commentnum' => DB::raw('commentnum-'.$getCount)
+        ]);       
+
         return 'success';
     }
 }

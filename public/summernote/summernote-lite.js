@@ -1096,6 +1096,7 @@ function withClosestSiblings(node, pred) {
 
 
 var blankHTML = env.isMSIE && env.browserVersion < 11 ? '&nbsp;' : '<br>';
+
 /**
  * @method nodeLength
  *

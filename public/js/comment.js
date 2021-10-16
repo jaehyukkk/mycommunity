@@ -1,31 +1,151 @@
-$(document).on('click','.reviewUpdateBtn',function(e){
-    e.preventDefault();
+var commentUpdateSetting = {
+    height : 150,
+    minHeight : null,
+    maxHeight : null,
+    focus : true,
+    lang : 'ko-KR',
+    toolbar:false,
+    callbacks: {
+        onEnter: function(){
+            box.summernote('insertNode', document.createTextNode("<br>")); 
+            console.log('uiwdbvuwecbweuiuinsjk');
+        }
+    }
+ };
+ var commentReplySetting = {
+    height : 150,
+    minHeight : null,
+    maxHeight : null,
+    focus : true,
+    lang : 'ko-KR',
+    toolbar:false,
+    placeholder: '답글을 작성해주세요',
+    callbacks: {
+        onEnter: function(){
+            box.summernote('insertNode', document.createTextNode("<br>")); 
+            console.log('uiwdbvuwecbweuiuinsjk');
+        }
+    }
+ };
 
+// 수정 폼 생성
+$(document).on('click','.commentUpdateBtn',function(e){
+    e.preventDefault();
+    var html = "";
     var getId = $(this).data('update');
+
+    var div = $("div[data-updateform='"+getId+"']");
+
+    $(div).children().remove();
+    $('.updatediv').children().remove();
+    html += "<form action='/updatecomment' method='post' id='updateForm' enctype='multipart/form-data'>";
+    html += "<textarea class='updatecomment' name='comment_content'></textarea>";
+    html += "<div class='commentitem'>";
+    html += "<div class='filebox'>";
+    html += "<a href='javascript:' onclick='";
+    html += "updataFileUploadAction();'";
+    html += "class='my_button'><i class='fas fa-camera'></i> 사진첨부</a>";
+    html += "<input type='file' id='input_img' name='comment_photo[]'multiple/>";
+    html += "<input type='hidden' value='"+getId+"' name='commentid' class='commentid'>";
+    html += "</div>";
+    html += "<div class='updatedelBtn'>";
+    html += "<button class='commentUpdateCancel'type='button'><i class='fas fa-times' id='cancelIcon'></i> 취소</button>";
+    html += "<button class='commentUpdateResult' id='commentUpdateResult' type='submit'>수정</button>";
+    html += "</div>";
+    html += "</div>";
+    html += "<div class='reviewImgsWrap'>";                 
+    html += "</div>";
+    html += "</form>";
+    $(div).append(html);
+
     var text = $("input[data-update='"+getId+"']").val();
-    $("textarea[data-update='"+getId+"']").val(text);
-    $("div[data-update='"+getId+"']").css('display','block');
+    $('.updatecomment').val(text);
 
-})
-
-$(document).on('click','.commentReplyBtn',function(e){
-    e.preventDefault();
-    var getId = $(this).data('reply');
-    $("div[data-reply='"+getId+"']").css('display','block');
+     $('.updatecomment').summernote(commentUpdateSetting);
+     $("#input_img").on("change", handleImgFile);
+   
 });
 
-$(document).on('click','.replyUpdateBtn',function(e){
+//리플 폼 생성(답글)
+$(document).on('click','.commentReplyBtn',function(e){
+
     e.preventDefault();
+    var html = "";
+    var getId = $(this).data('reply');
+    var postId = $('#hidden-postid').val();
+
+    var div = $("div[data-reply='"+getId+"']");
+
+    $(div).children().remove();
+    $('.updatediv').children().remove();
+    html += "<form action='/replycreate' method='post' id='replyForm' enctype='multipart/form-data'>";
+    html += "<textarea class='updatecomment' name='reply_content'></textarea>";
+    html += "<div class='commentitem'>";
+    html += "<div class='filebox'>";
+    html += "<a href='javascript:' onclick='";
+    html += "replyFileUploadAction();'";
+    html += "class='my_button'><i class='fas fa-camera'></i> 사진첨부</a>";
+    html += "<input type='file' id='reply_input_img' name='reply_photo[]'multiple/>";
+    html += "<input type='hidden' value='"+getId+"' name='commentid' class='commentid'>";
+    html += "<input type='hidden' value='"+postId+"' name='post_id'>";
+    html += "</div>";
+    html += "<div class='updatedelBtn'>";
+    html += "<button class='commentUpdateCancel'type='button'><i class='fas fa-times' id='cancelIcon'></i> 취소</button>";
+    html += "<button class='replyResult' type='submit'>수정</button>";
+    html += "</div>";
+    html += "</div>";
+    html += "<div class='reviewImgsWrap'>";                 
+    html += "</div>";
+    html += "</form>";
+    $(div).append(html);
+
+     $('.updatecomment').summernote(commentReplySetting);
+     $("#reply_input_img").on("change", replyhandleImgFile);
+   
+});
+
+//리플 업데이트 폼 생성(답글)
+
+$(document).on('click','.replyUpdateBtn',function(e){
+
+    e.preventDefault();
+    var html = "";
     var getId = $(this).data('replyupdate');
+    var replyid = $('.replyid').val();
+
+    var div = $("div[data-replyupdateform='"+getId+"']");
+
+    $(div).children().remove();
+    $('.updatediv').children().remove();
+    html += "<form action='/updatereply' method='post' id='replyupdateForm' enctype='multipart/form-data'>";
+    html += "<textarea class='updatecomment' name='reply_content'></textarea>";
+    html += "<div class='commentitem'>";
+    html += "<div class='filebox'>";
+    html += "<a href='javascript:' onclick='";
+    html += "replyFileUploadAction();'";
+    html += "class='my_button'><i class='fas fa-camera'></i> 사진첨부</a>";
+    html += "<input type='file' id='reply_input_img' name='replyupdate_photo[]'multiple/>";
+    html += "<input type='hidden' value='"+getId+"' name='replyid'>";
+    html += "</div>";
+    html += "<div class='updatedelBtn'>";
+    html += "<button class='commentUpdateCancel'type='button'><i class='fas fa-times' id='cancelIcon'></i> 취소</button>";
+    html += "<button class='replyUpdateResult' type='submit'>수정</button>";
+    html += "</div>";
+    html += "</div>";
+    html += "<div class='reviewImgsWrap'>";                 
+    html += "</div>";
+    html += "</form>";
+    div.append(html);
+
     var text = $("input[data-replyupdate='"+getId+"']").val();
-    $("textarea[data-replyupdate='"+getId+"']").val(text);
-    
-    $("div[data-replyupdate='"+getId+"']").css('display','block');
+    $('.updatecomment').val(text);
+
+     $('.updatecomment').summernote(commentUpdateSetting);
+     $("#reply_input_img").on("change", replyhandleImgFile);
 })
 
-$(document).on('click','.reviewUpdateCancel',function(){
-    var getId = $(this).data('update');
-    $("div[data-update='"+getId+"']").css('display','none');
+$(document).on('click','.commentUpdateCancel',function(){
+    $('.updatediv').children().remove();
 });
 
 $(document).on('click','.replyCancel',function(){
@@ -136,6 +256,7 @@ $(document).on('click','.replyUpdateCancel',function(){
 
   $(document).on('click','#commentDelModalBtn',function(){
     var id = $(this).data('commentdel');
+    var postid = $(this).data('postid');
 
         $.ajax({
         headers: {
@@ -143,7 +264,8 @@ $(document).on('click','.replyUpdateCancel',function(){
         },
         url:'/delcomment',
         data:{
-            id:id
+            id:id,
+            postid:postid
         },
         method:'post',
         success:function(){
@@ -163,6 +285,7 @@ $(document).on('click','.replyUpdateCancel',function(){
 
  $(document).on('click','#replyDelModalBtn',function(){
     var id = $(this).data('replydel');
+    var postid = $(this).data('postid');
 
         $.ajax({
         headers: {
@@ -170,7 +293,8 @@ $(document).on('click','.replyUpdateCancel',function(){
         },
         url:'/delreply',
         data:{
-            id:id
+            id:id,
+            postid:postid
         },
         method:'post',
         success:function(data){
@@ -187,10 +311,10 @@ $(document).on('click','.replyUpdateCancel',function(){
   //----------------코멘트 수정--------------------
 
   var sel_files = [];
-$(document).ready(function() {
+// $(document).ready(function() {
    
-    $("#input_img").on("change", handleImgFile);
-}); 
+//     $("#input_img").on("change", handleImgFile);
+// }); 
 
 function updataFileUploadAction() {
     console.log("fileUploadAction");
@@ -198,8 +322,8 @@ function updataFileUploadAction() {
 }
 
 function handleImgFile(e) {
-
     // 이미지 정보들을 초기화
+  
     sel_files = [];
     $(".imgs_wrap").empty();
 
@@ -212,36 +336,39 @@ function handleImgFile(e) {
             alert("확장자는 이미지 확장자만 가능합니다.");
             return;
         }
-
+        
         sel_files.push(f);
 
         var reader = new FileReader();
         reader.onload = function(e) {
             var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile'></a>";
-            $(".reviewImgsWrap").append(html);
+            $('.reviewImgsWrap').append(html);
             index++;
 
         }
         reader.readAsDataURL(f);
         
     });
+    // $('body').css('backgroundColor','black');
 }
 
 
 
 
-$('.reviewUpdateResult').on('click',function(e){
+$(document).on('click','.commentUpdateResult',function(e){
+    
 
     e.preventDefault();
-    var code = $(this).data('update');
-  
-
-  
-     var url = $('#updateForm'+code+'').attr('action');
-     var form = $('#updateForm'+code+'')[0];
+    
+     var url = $('#updateForm').attr('action');
+     var form = $('#updateForm')[0];
      var formData = new FormData(form);
 
      $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+      
         url:url,
         data:formData,
         enctype: 'multipart/form-data',
@@ -265,16 +392,24 @@ $('.reviewUpdateResult').on('click',function(e){
 
 //답글 관련
 
-$('.replyBtn').on('click',function(e){
+$(document).on('click','.replyResult', function(e){
 
     e.preventDefault();
-    var code = $(this).data('reply');
-  
-     var url = $('#replyForm'+code+'').attr('action');
-     var form = $('#replyForm'+code+'')[0];
+
+    var comment = $('.updatecomment').val();
+    if(comment.length == 0){
+        alert('내용을 입력해주세요.');
+        return false;
+    }
+
+     var url = $('#replyForm').attr('action');
+     var form = $('#replyForm')[0];
      var formData = new FormData(form);
     
      $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         url:url,
         data:formData,
         enctype: 'multipart/form-data',
@@ -286,10 +421,6 @@ $('.replyBtn').on('click',function(e){
                 else if(data == 2){
                     alert('로그인을 해주세요.');
                 }
-                else{
-                    alert('내용을 입력해주세요.');
-                }
-             
             },
             error: function(e){
                 console.log(e);
@@ -350,25 +481,35 @@ function replyhandleImgFile(e) {
 //답글관련 끝 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
 //답글 수정
-$('.replyUpdateResult').on('click',function(e){
+$(document).on('click','.replyUpdateResult',function(e){
 
     e.preventDefault();
-    var code = $(this).data('replyupdate');
   
-     var url = $('#replyupdateForm'+code+'').attr('action');
-     var form = $('#replyupdateForm'+code+'')[0];
+     var url = $('#replyupdateForm').attr('action');
+     var form = $('#replyupdateForm')[0];
      var formData = new FormData(form);
     
      $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         url:url,
         data:formData,
         enctype: 'multipart/form-data',
         type:'post',
         success:function(data){
-            history.go(0); 
+            if(data == 'success'){
+                history.go(0); 
+            }
+            else{
+                console.log(data);
+                alert('실패');
+            }
+            
            
         },
         error: function(data){
+            console.log(data);
             alert('실패');
         },
         cache: false,

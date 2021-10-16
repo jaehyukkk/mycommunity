@@ -5,8 +5,11 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\MailSendController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\MypageController;
+use App\Http\Controllers\SearchController;
 use App\Models\Maincategory;
 use App\Models\Subcategory;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -27,24 +30,60 @@ Route::get('/', function () {
     $maincategory = Maincategory::all();
     $subcategory = Subcategory::all();
 
-    return view('welcome', compact('maincategory','subcategory'));
-});
+    $board = DB::table('posts')
+    ->leftJoin('users', 'posts.user_id', '=', 'users.id')
+    ->select('*','posts.created_at as time','posts.id as idx')
+    ->orderBy('posts.id','desc')
+    ->get();
+
+    return view('welcome', compact('maincategory','subcategory','board'));
+})->name('main');
 
 Route::get('/mailSend',[MailSendController::class,'mailSend'])->name('mailSend');
 Route::post('/mailSendSubmit',[MailSendController::class,'mailSendSubmit'])->name('mailSendSubmit');
 
-Route::get('/board/create/{id}/{subid}',[PostController::class,'create']);
+//아이디찾기
+Route::post('/findIdSubmit',[MailSendController::class,'findIdSubmit']);
+Route::post('/findPwSubmit',[MailSendController::class,'findPwSubmit']);
+Route::post('/findPwChgSubmit',[MailSendController::class,'findPwChgSubmit']);
+
+Route::get('/findid',[MailSendController::class,'findId']);
+Route::get('/findpw',[MailSendController::class,'findPw']);
+Route::post('/findPwchg',[MailSendController::class,'findPwchg']);
+
+Route::get('/findPwchg', function(){
+    return redirect()->back();
+});
+
+
 Route::post('/board/store',[PostController::class,'store']);
 Route::get('/board/{id}',[PostController::class,'index']);
 Route::get('/board/{id}/{subid}',[PostController::class,'subIndex']);
 Route::get('/read/{id}',[PostController::class,'show']);
-Route::get('/edit/{idx}',[PostController::class,'edit']);
-Route::post('/update/{id}',[PostController::class,'update']);
-Route::post('/destroy/{id}',[PostController::class,'destroy']);
 
-Route::get('/join',[UserController::class,'join']);
-Route::post('/join',[UserController::class,'joinProcess']);
-Route::post('/login',[UserController::class,'loginProcess']);
+//검색
+Route::get('/search',[SearchController::class,'getSearch']);
+// Route::get('/search/{id}/{subid}',[SearchController::class,'getSubSearch']);
+
+
+Route::get('/mobile/board',[PostController::class,'mobileBoard']);
+
+
+
+Route::middleware('auth')->group(function(){
+    Route::get('/edit/{idx}',[PostController::class,'edit']);
+    Route::post('/update/{id}',[PostController::class,'update']);
+    Route::post('/destroy/{id}',[PostController::class,'destroy']);
+    Route::get('/board/create/{id}/{subid}',[PostController::class,'create']);
+});
+
+
+Route::middleware('guest')->group(function(){
+    Route::get('/join',[UserController::class,'join']);
+    Route::post('/join',[UserController::class,'joinProcess']);
+    Route::post('/login',[UserController::class,'loginProcess']);
+});
+
 Route::get('/logout',[UserController::class,'logout']);
 
 Route::post('/commentcreate',[CommentController::class,'create']);
@@ -55,4 +94,5 @@ Route::post('/delcomment',[CommentController::class,'delComment']);
 Route::post('/delreply',[ReplyController::class,'delReply']);
 
 
-
+Route::get('/noti/{id}',[MypageController::class,'getNoti']);
+Route::post('/deletenoti',[MypageController::class,'deleteNoti']);
