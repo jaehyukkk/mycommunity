@@ -29,30 +29,34 @@
     {{-- <script  src="http://code.jquery.com/jquery-latest.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" defer></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
+
+    <script type="text/javascript" src="{{ URL::asset('js/time.js') }}" defer></script>
+    <script type="text/javascript" src="{{ URL::asset('/js/post.js') }}" defer></script>
+
+    <div id="main-logo">
+      <div id ="mainTop">
+        <a href="/"><h1>LOVEBEAT</br>TALK</br>LOUNGE</h1></a>
+      </div>
+    </div>
+    <nav role="navigation">
     
-<script type="text/javascript" src="{{ URL::asset('/js/post.js') }}" defer></script>
-
-<div id="main-logo">
-  <div id ="mainTop">
-    <h1>LOVEBEAT</br>TALK</br>LOUNGE</h1>
-  </div>
-</div>
-
-<nav role="navigation">
-  <ul id="main-menu" class="main-menu-board">
-    @foreach ($maincategory as $maincategorys )  
-    <li><a href="/board/{{ $maincategorys->id }}">{{ $maincategorys->maincategoryname }}</a>
-      <ul id="sub-menu">
-        @foreach ($subcategory as $subcategorys)
-          @if($maincategorys->id === $subcategorys->maincategory_id)
-          <li id="main-menu-board"><a href="/board/{{ $maincategorys->id }}/{{ $subcategorys->id }}" aria-label="subemnu">{{ $subcategorys->subcategoryname }}</a></li>
-          @endif
-        @endforeach      
+      <ul id="main-menu" class="main-menu-board">
+        <li><a href="/viewall">최신글</a></li>
+        @foreach ($maincategory as $maincategorys )  
+        <li><a href="/board/{{ $maincategorys->id }}">{{ $maincategorys->maincategoryname }}</a>
+          <ul id="sub-menu">
+            @foreach ($subcategory as $subcategorys)
+              @if($maincategorys->id === $subcategorys->maincategory_id)
+              <li id="main-menu-board"><a href="#" aria-label="subemnu">{{ $subcategorys->subcategoryname }}</a></li>
+              @endif
+            @endforeach      
+          </ul>
+        </li>
+        @endforeach
+        <li><a href="#">건의사항</a></li>
       </ul>
-    </li>
-    @endforeach
-  </ul>
-</nav>
+    
+    </nav>
 
 <article id="main">
 <div>
@@ -89,9 +93,17 @@
         <td scope="row" class="noticeText">
           <div>공지</div>
         </td>
-        <td class="Title">{{ $notices->title }}</td>
-        <td>{{ $notices->time }}</td>
-        <td>{{ $notices->name }}</td>
+        <td class="Title"><a href="/read/{{ $notices->idx }}">{{ $notices->title }}</a>
+          @if($notices->code > 0)
+          <span class="imgicon"><i class="far fa-image"></i></span>
+          @endif
+  
+          @if($notices->commentnum > 0)
+          <span class="commentnum">[{{ $notices->commentnum }}]</span>
+          @endif
+        </td>
+        <td class="time">{{ $notices->time }}</td>
+        <td>{{ $notices->writer }}</td>
         <td>{{ $notices->hit }}</td>  
       </tr>
       @endif
@@ -102,8 +114,16 @@
         <td scope="row" class="noticeText">
           <div>공지</div>
         </td>
-        <td class="Title">{{ $notices->title }}</td>
-        <td>{{ $notices->time }}</td>
+        <td class="Title"><a href="/read/{{ $notices->idx }}">{{ $notices->title }}</a>
+          @if($notices->code > 0)
+          <span class="imgicon"><i class="far fa-image"></i></span>
+          @endif
+  
+          @if($notices->commentnum > 0)
+          <span class="commentnum">[{{ $notices->commentnum }}]</span>
+          @endif
+        </td>
+        <td class="time">{{ $notices->time }}</td>
         <td>{{ $notices->name }}</td>
         <td>{{ $notices->hit }}</td>  
       </tr>
@@ -115,9 +135,17 @@
     @foreach ($board as $boards )
     <tr>
       <td scope="row" class="bno">{{ $boards->idx }}</td>
-      <td class="Title">{{ $boards->title }}</td>
-      <td>{{ $boards->time }}</td>
-      <td>{{ $boards->name }}</td>
+      <td class="Title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a>
+        @if($boards->code > 0)
+        <span class="imgicon"><i class="far fa-image"></i></span>
+        @endif
+
+        @if($boards->commentnum > 0)
+        <span class="commentnum">[{{ $boards->commentnum }}]</span>
+        @endif
+      </td>
+      <td class="time">{{ $boards->time }}</td>
+      <td>{{ $boards->writer }}</td>
       <td>{{ $boards->hit }}</td>  
     </tr>
     @endforeach
@@ -130,12 +158,16 @@
   <div class="row">
     @foreach ($board as $boards )   
     <div class="col-md-3">
-      <a href="#">
+      <a href="/read/{{ $boards->idx }}">
       <img class="img" src="{{$boards->mainimg}}">
     </a>
-        <div class="imgBoardTitle"><a href="#">{{ $boards->title }}</a></div>
+        <div class="imgBoardTitle"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a>
+          @if($boards->commentnum > 0)
+          <span class="commentnum">[{{ $boards->commentnum }}]</span>
+          @endif
+        </div>
         <div class="imgBoardName">{{ $boards->name }}</div>
-        <div class="imgBoardTime">{{ $boards->time }}</div>
+        <div class="time" id="imgBoardTime">{{ $boards->time }}</div>
     </div>  
     @endforeach
   </div>
@@ -157,21 +189,33 @@
   </div>
 </div>
 
-<div>{{ $id }}</div>
-<div>{{ $subid }}</div>
 <form action="/search">
-  <input type="hidden" name="id" value="{{ $id }}">
-  <input type="hidden" name="subid" value="{{ $subid }}">
-  <select name="category" id="">
-  <option value="1">제목+내용</option>  
-  <option value="2">제목</option>  
-  <option value="3">내용</option>  
-  <option value="4">작성자</option>  
-  <option value="5">댓글</option>  
-  </select>
-  <input type="text" name="search">
-  <input type="submit">
-</form>
+
+  <div id="searchBox">
+    
+      <div class="searchSelect">
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="subid" value="{{ $subid }}">
+        <select name="category" id="">
+          <option value="1">제목+내용</option>  
+          <option value="2">제목</option>  
+          <option value="3">내용</option>  
+          <option value="4">작성자</option>  
+          <option value="5">댓글</option>  
+        </select>
+      </div>
+
+      <div class="searchInput">
+        <span class="inputbox int_search">
+          <input type="text" id="search" class="input" maxlength="20" name="search">
+        </span>
+      </div>
+      
+      <div class="searchSubmit">
+         <input type="submit" value="검색">
+      </div>
+    </div>
+  </form>
 
 </div>
 
@@ -200,7 +244,7 @@
       </div>
       @else
       <div id="username">
-        <div><img src="{{URL::asset('/img/img.JPG')}}" alt=""></div>
+        <div><img src="{{URL::asset('/image/'.Auth::user()->img)}}" alt=""></div>
         <div><b>{{ Auth::user()->name }}</b></div>
       </div>
       <div id="usermenu">

@@ -43,6 +43,7 @@ class SearchClass{
          $q = $this->search;
 
         if($this->val == 'seperately'){
+            
             $searchResult = 
             Post::
             join('users', 'posts.user_id', '=', 'users.id')
@@ -70,6 +71,7 @@ class SearchClass{
 
 
         else if($this->val == 'comment'){
+
             $searchResult = 
             Post::
             join('users', 'posts.user_id', '=', 'users.id')
@@ -95,6 +97,7 @@ class SearchClass{
 
 
         else{
+
             $searchResult = 
             Post::
             join('users', 'posts.user_id', '=', 'users.id')

@@ -27,7 +27,8 @@ class PostController extends Controller
     {  
         $maincategory = Maincategory::all();
         $subcategory = Subcategory::all();
-
+   
+       
         $board = DB::table('posts')
         ->where('posts.maincategory_id',$id)
         ->leftJoin('users', 'posts.user_id', '=', 'users.id')
@@ -36,17 +37,17 @@ class PostController extends Controller
         ->orderBy('posts.id','desc')
         ->paginate(16);
 
-        // $board = PostResource::collection($boards);
+        $int = Maincategory::where('id',$id)->first();
+        $photocode = $int->photocode;
+           
 
         $notice = Post::
-          
         join('users', 'posts.user_id', '=', 'users.id')
         ->where('notice',1)
         ->select('*','posts.id as idx','posts.created_at as time')
         ->get();
 
-        $int = Maincategory::where('id',$id)->get('photocode');
-        $photocode = $int[0]->photocode;
+        
 
         return view('post.index',compact('board','maincategory','subcategory','notice','id','photocode'));
        
@@ -76,6 +77,32 @@ class PostController extends Controller
         $photocode = $int[0]->photocode;
 
         return view('post.subindex',compact('board','maincategory','subcategory','id','subid','notice','photocode'));
+    }
+
+
+
+    public function viewAll()
+    {  
+        $maincategory = Maincategory::all();
+        $subcategory = Subcategory::all();
+   
+       
+        $board = DB::table('posts')
+        ->leftJoin('users', 'posts.user_id', '=', 'users.id')
+        ->leftJoin('subcategories', 'posts.subcategory_id', '=', 'subcategories.id')
+        ->select('*','posts.created_at as time','posts.id as idx','posts.maincategory_id as mainid')
+        ->orderBy('posts.id','desc')
+        ->paginate(16);      
+
+        $notice = Post::
+        join('users', 'posts.user_id', '=', 'users.id')
+        ->where('notice',1)
+        ->select('*','posts.id as idx','posts.created_at as time')
+        ->orderBy('posts.id','desc')
+        ->get();
+
+        return view('post.viewall',compact('board','maincategory','subcategory','notice'));
+       
     }
 
 
@@ -137,8 +164,8 @@ class PostController extends Controller
         $imgs  = $dom->getElementsByTagName("img");
 
         $subid = $data['subid'];
-        $int = Subcategory::where('id',$subid)->get('photocode');
-        $code = $int[0]->photocode;
+        $int = Subcategory::where('id',$subid)->first();
+        $code = $int->photocode;
         $userid = Auth::user()->id;
 
         if($code != 1){
@@ -224,6 +251,9 @@ class PostController extends Controller
         }
         else{
             session()->push('hit',$id);
+            Post::where('id',$id)->update([
+                'hit' => DB::raw('hit+1')
+            ]);
         }
         
 
@@ -241,7 +271,15 @@ class PostController extends Controller
         $commentId = Comment::where('post_id',$id)->get('id');
 
         $comment = Post::find($id)->getComment;
-        $reply = Reply::whereIn('comment_id',$commentId)->get();
+        $comment = Comment::where('post_id',$id)->
+        join('users', 'comments.user_id', 'users.id')
+        ->select('*','comments.created_at as created_at','comments.id as id')
+        ->get();
+
+        $reply = Reply::whereIn('comment_id',$commentId)->
+        join('users', 'replies.user_id', 'users.id')
+        ->select('*','replies.created_at as created_at','replies.id as id')
+        ->get();
         
         return view('post.show', compact('maincategory','subcategory','read','comment','reply'));  
         }
@@ -286,10 +324,16 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        $dom = new domDocument;
+        $dom->loadHTML(html_entity_decode($data['description']));
+        $dom->preserveWhiteSpace = false;
+        $imgs  = $dom->getElementsByTagName("img");
+
         Post::where('id',$id)->update([
             'title' => $data['title'],
             'description' =>$data['description'],
-            'notice' =>$data['notice']
+            'notice' =>$data['notice'],
+            'code' => $imgs->length
         ]);
         
         return redirect('/board/'.$data['caid'].'/'.$data['subid']);
@@ -303,13 +347,13 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-            $mainid = Post::where('id',$id)->get('maincategory_id');
-            $subid = Post::where('id',$id)->get('subcategory_id');
+            $mainid = Post::where('id',$id)->first();
+            $subid = Post::where('id',$id)->first();
             
             Post::where('id',$id)->delete();
 
-            $mid = $mainid[0]->maincategory_id;
-            $sid = $subid[0]->subcategory_id;
+            $mid = $mainid->maincategory_id;
+            $sid = $subid->subcategory_id;
             return redirect('/board/'.$mid.'/'.$sid); 
 
     }

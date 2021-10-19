@@ -38,24 +38,27 @@
 
 <div id="main-logo">
   <div id ="mainTop">
-    <h1>LOVEBEAT</br>TALK</br>LOUNGE</h1>
+    <a href="/"><h1>LOVEBEAT</br>TALK</br>LOUNGE</h1></a>
   </div>
 </div>
-
 <nav role="navigation">
+
   <ul id="main-menu" class="main-menu-board">
+    <li><a href="/viewall">최신글</a></li>
     @foreach ($maincategory as $maincategorys )  
     <li><a href="/board/{{ $maincategorys->id }}">{{ $maincategorys->maincategoryname }}</a>
       <ul id="sub-menu">
         @foreach ($subcategory as $subcategorys)
           @if($maincategorys->id === $subcategorys->maincategory_id)
-          <li id="main-menu-board"><a href="/board/{{ $maincategorys->id }}/{{ $subcategorys->id }}" aria-label="subemnu">{{ $subcategorys->subcategoryname }}</a></li>
+          <li id="main-menu-board"><a href="#" aria-label="subemnu">{{ $subcategorys->subcategoryname }}</a></li>
           @endif
         @endforeach      
       </ul>
     </li>
     @endforeach
+    <li><a href="#">건의사항</a></li>
   </ul>
+
 </nav>
 
 
@@ -72,9 +75,13 @@
 
         <div class="read-profil">
           <div class="read-profil-img">
-              <img src="{{URL::asset('/img/img.JPG')}}" alt="...">
+              @if($reads->img == null)
+              <img src="{{URL::asset('/image/img.JPG')}}" alt="...">
+              @else
+              <img src="{{URL::asset('/image/'.$reads->img)}}" alt="...">
+              @endif         
           </div>   
-          <span class="read-profil-name">{{ $reads->name }}</span>
+          <span class="read-profil-name">{{ $reads->writer }}</span>
         </div>
       </div>
       <?php $commentCount = count($comment) + count($reply) ?>
@@ -110,7 +117,8 @@
                 <article class="comment">
                   <div class="comment-name">
                     <div class="replyWriter">
-                      <img src="{{URL::asset('/img/img.JPG')}}" alt="..."> 
+                
+                      <img src="{{URL::asset('/image/'.$comments->img)}}" alt="..."> 
                       <span>{{ $comments->comment_writer }}</span>
                       <span class="comment-time">{{ $comments->created_at }}</span>
                     </div>
@@ -166,7 +174,15 @@
                           @if($replys->comment_id == $comments->id)
                           
                           <div class=writerStar>
-                            <div class="replyWriter"><img src="{{URL::asset('/img/img.JPG')}}" alt="..."> <span>{{ $replys->reply_writer }}</span>
+                            <div class="replyWriter">
+                              
+                              @if($reads->img == null)
+                              <img src="{{URL::asset('/image/img.JPG')}}" alt="...">
+                              @else
+                              <img src="{{URL::asset('/image/'.$replys->img)}}" alt="...">
+                              @endif  
+                              
+                              <span>{{ $replys->reply_writer }}</span>
                               <span class="comment-time">{{ $replys->created_at }}</span>
                             </div>      
                           </div>
@@ -298,7 +314,7 @@
       </div>
       @else
       <div id="username">
-        <div><img src="{{URL::asset('/img/img.JPG')}}" alt=""></div>
+        <div><img src="{{URL::asset('/image/'.Auth::user()->img)}}" alt=""></div>
         <div><b>{{ Auth::user()->name }}</b></div>
       </div>
       <div id="usermenu">
@@ -406,6 +422,7 @@
         <article class="comment">
           <div class="comment-name">
             <div class="mobile-comment-item">
+
               <img src="{{URL::asset('/img/img.JPG')}}" alt="..."> 
               <span class="mobile-comment-writer">{{ $comments->comment_writer }}</span>
               <span class="comment-time">{{ $comments->created_at }}</span>
@@ -508,29 +525,29 @@
 
 
     <div>  
-        <form action="/commentcreate" method="post" id="form" enctype="multipart/form-data">
+        <form action="/commentcreate" method="post" id="mobileform" enctype="multipart/form-data">
             @csrf
               <div class="review">
                                    
-                    <textarea class="form-control" id="editor1" name="reply_content" ></textarea>
+                    <textarea class="form-control" id="editor2" name="reply_content" ></textarea>
                     
                     <script>
                     $( document ).ready( function() {
-                      $( 'textarea#editor1' ).ckeditor();
+                      $( 'textarea#editor2' ).ckeditor();
                   } );
                   </script>
                 
-                  <input type="hidden" class="ckeditorval" name="comment_content">
+                  <input type="hidden" class="mobileckeditorval" name="comment_content">
                   <input type="hidden" name="replycode" value="0">
                   <div class="commentitem">
                     <div class="filebox"> 
       
-                      <a href="javascript:" onclick="fileUploadAction();" class="my_button"><i class="fas fa-camera"></i> 사진첨부</a>
-                  <input type="file" id="input_imgs" name="comment_photo[]"multiple/>
+                      <a href="javascript:" onclick="mobileFileUploadAction();" class="my_button"><i class="fas fa-camera"></i> 사진첨부</a>
+                  <input type="file" id="mobile_input_imgs" name="comment_photo[]"multiple/>
                     </div>
                     <div>
       
-                    <button class="reviewBtn" type="submit">등록</button>
+                    <button class="mobileCommentBtn" type="submit">등록</button>
                     </div>
                  </div>
                  <div class="imgs_wrap">

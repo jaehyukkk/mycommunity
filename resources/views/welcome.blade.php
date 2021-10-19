@@ -29,11 +29,13 @@
 
 <div id="main-logo">
   <div id ="mainTop">
-    <h1>LOVEBEAT</br>TALK</br>LOUNGE</h1>
+    <a href="/"><h1>LOVEBEAT</br>TALK</br>LOUNGE</h1></a>
   </div>
 </div>
 <nav role="navigation">
+
   <ul id="main-menu" class="main-menu-board">
+    <li><a href="/viewall">최신글</a></li>
     @foreach ($maincategory as $maincategorys )  
     <li><a href="/board/{{ $maincategorys->id }}">{{ $maincategorys->maincategoryname }}</a>
       <ul id="sub-menu">
@@ -45,7 +47,9 @@
       </ul>
     </li>
     @endforeach
+    <li><a href="#">건의사항</a></li>
   </ul>
+
 </nav>
 
 <article>
@@ -64,7 +68,7 @@
           @endif
         <div class="main-free-board-title">
           <div><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
-          <div>{{ $boards->name }}</div>
+          <div>{{ $boards->writer }}</div>
         </div>
         @endforeach
        
@@ -78,14 +82,14 @@
         
           <?php $cnt1 = 0?>
           @foreach ($board as $boards )
-          <?php $cnt1++?>
           @if($boards->maincategory_id == 1 && $boards->subcategory_id == 1)
-          @if($cnt1== 11)
+          <?php $cnt1++?>
+          @if($cnt1 == 11)
           <?php break;?>
           @endif
           <div class="main-free-board-title">
           <div>{{ $boards->title }}</div>
-          <div>{{ $boards->name }}</div> 
+          <div>{{ $boards->writer }}</div> 
           </div>       
           @endif
           @endforeach    
@@ -117,7 +121,7 @@
     </div>
     @else
     <div id="username">
-      <div><img src="{{URL::asset('/img/img.JPG')}}" alt=""></div>
+      <div><img src="{{URL::asset('/image/'.Auth::user()->img)}}" alt=""></div>
       <div><b>{{ Auth::user()->name }}</b></div>
     </div>
     <div id="usermenu">
@@ -144,6 +148,18 @@
 </article>
 
 
+
+
+
+
+
+
+
+
+
+
+
+{{-- 모바일 화면 --}}
 <div id="mobile">
 <div id="mobile-nav">
   <div><i class="fas fa-chevron-left"></i></div>

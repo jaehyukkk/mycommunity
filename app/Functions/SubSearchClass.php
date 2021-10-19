@@ -24,14 +24,6 @@ class SubSearchClass extends SearchClass{
 
         if($this->val == 'seperately'){
             $searchResult = 
-            // Post::
-            // join('users', 'posts.user_id', '=', 'users.id')
-            // ->join('subcategories', 'posts.subcategory_id', '=', 'subcategories.id')
-            // ->where('posts.maincategory_id', 1)
-            // ->where('posts.subcategory_id', 1)
-            // ->where('posts.title','LIKE',"%{$this->search}%" )
-            // ->orwhere('posts.description','LIKE',"%{$this->search}%")
-            // ->paginate(16);
 
             Post::
             join('users', 'posts.user_id', '=', 'users.id')

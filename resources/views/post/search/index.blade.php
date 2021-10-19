@@ -30,50 +30,133 @@
 
 <div id="main-logo">
   <div id ="mainTop">
-    <h1>LOVEBEAT</br>TALK</br>LOUNGE</h1>
+    <a href="/"><h1>LOVEBEAT</br>TALK</br>LOUNGE</h1></a>
   </div>
 </div>
-
 <nav role="navigation">
+
   <ul id="main-menu" class="main-menu-board">
+    <li><a href="/viewall">최신글</a></li>
     @foreach ($maincategory as $maincategorys )  
     <li><a href="/board/{{ $maincategorys->id }}">{{ $maincategorys->maincategoryname }}</a>
       <ul id="sub-menu">
         @foreach ($subcategory as $subcategorys)
           @if($maincategorys->id === $subcategorys->maincategory_id)
-          <li id="main-menu-board"><a href="/board/{{ $maincategorys->id }}/{{ $subcategorys->id }}" aria-label="subemnu">{{ $subcategorys->subcategoryname }}</a></li>
+          <li id="main-menu-board"><a href="#" aria-label="subemnu">{{ $subcategorys->subcategoryname }}</a></li>
           @endif
         @endforeach      
       </ul>
     </li>
     @endforeach
+    <li><a href="#">건의사항</a></li>
   </ul>
+
 </nav>
 
 
 
 
-
 <article id="main">
-<div>
-@foreach ($searchResult as $searchs )
-<h1 style="color:red">제목 : {{ $searchs->title }}</h1>
-<h2 style="color:blue">{{ $searchs->subcategory_id }}</h2>
-<h1>내용 : {!! $searchs->description !!}</h1>
-@endforeach
-</div>
+<div class="table-div">
+  <div class="board-top">
+    <div>
+      <h2><a href="#">검색</a></h2>
+    </div>
+  </div>
 
-<form action="/search/{{ $id }}">
-  <select name="category" id="">
-  <option value="1">제목+내용</option>  
-  <option value="2">제목</option>  
-  <option value="3">내용</option>  
-  <option value="4">작성자</option>  
-  <option value="5">댓글</option>  
-  </select>
-  <input type="text" name="search">
-  <input type="submit">
-</form>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" class="bno"></th>
+      <th scope="col">제목</th>
+      <th scope="col">작성일</th>
+      <th scope="col">글쓴이</th>
+      <th scope="col">조회수</th>
+    </tr>
+  </thead>
+
+  @if($photocode != 1)
+  <tfoot>
+    @foreach ($searchResult as $search )
+ 
+    <tr>
+      <td scope="row" class="bno" id="subcategoryname">{{ $search->subcategoryname }}</td>
+      <td class="Title"><a href="/read/{{ $search->idx }}">{{ $search->title }} 
+        @if($search->code > 0)
+        <span class="imgicon"><i class="far fa-image"></i></span>
+        @endif
+
+        @if($search->commentnum > 0)
+        <span class="commentnum">[{{ $search->commentnum }}]</span>
+        @endif
+      </a></td>
+      <td class="time">{{ $search->time }}</td>
+      <td>{{ $search->writer }}</td>
+      <td>{{ $search->hit }}</td>  
+    </tr>
+    @endforeach
+  </tfoot>
+</table>
+@else
+</table>
+<div id="imgboard">
+<div class="container"> 
+  <div class="row" >
+    @foreach ($searchResult as $search )   
+    <div class="col-md-3" id="imgboard-img">
+      <a href="/read/{{ $search->idx }}">
+      <img class="img" src="{{$search->mainimg}}">
+    </a>
+      <div id="imgboard-text">
+        <div class="imgBoardsubcategory">{{ $search->subcategoryname }}</div>
+        <div class="mainimgBoardTitle"><a href="/read/{{ $search->idx }}">{{ $search->title }}</a>
+          @if($search->commentnum > 0)
+          <span class="commentnum">[{{ $search->commentnum }}]</span>
+          @endif
+        </div>
+        <div class="imgBoardName">{{ $search->writer }}</div>
+        <div class="time" id="imgBoardTime">{{ $search->time }}</div>
+      </div>
+    </div>  
+    @endforeach
+  </div>
+</div>
+</div>
+@endif
+
+@if(count($searchResult) == 0)
+<center class="searchNull"><b>검색 결과가 없습니다.</b></br>
+  <span style="font-size: small">정확한 검색어 인지 확인하시고 다시 검색해 주세요.</span>  
+  </center>
+@endif
+
+<form action="/search">
+
+  <div id="searchBox">
+    
+      <div class="searchSelect">
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="subid" value="{{ $subid }}">
+        <select name="category" id="">
+          <option value="1">제목+내용</option>  
+          <option value="2">제목</option>  
+          <option value="3">내용</option>  
+          <option value="4">작성자</option>  
+          <option value="5">댓글</option>  
+        </select>
+      </div>
+
+      <div class="searchInput">
+        <span class="inputbox int_search">
+          <input type="text" id="search" class="input" maxlength="20" name="search">
+        </span>
+      </div>
+      
+      <div class="searchSubmit">
+         <input type="submit" value="검색">
+      </div>
+    </div>
+  </form>
 
 </div>
 
@@ -102,7 +185,7 @@
       </div>
       @else
       <div id="username">
-        <div><img src="{{URL::asset('/img/img.JPG')}}" alt=""></div>
+        <div><img src="{{URL::asset('/image/'.Auth::user()->img)}}" alt=""></div>
         <div><b>{{ Auth::user()->name }}</b></div>
       </div>
       <div id="usermenu">

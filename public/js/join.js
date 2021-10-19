@@ -11,15 +11,9 @@ var pwMsgArea = document.querySelector('.int_pass');
 
 var userName = document.querySelector('#name');
 
-var yy = document.querySelector('#yy');
-var mm = document.querySelector('#mm');
-var dd = document.querySelector('#dd');
-
 var gender = document.querySelector('#gender');
 
 var email = document.querySelector('#email');
-
-var mobile = document.querySelector('#mobile');
 
 var error = document.querySelectorAll('.error_next_box');
 
@@ -28,9 +22,6 @@ id.addEventListener("focusout", checkId);
 pw1.addEventListener("focusout", checkPw);
 pw2.addEventListener("focusout", comparePw);
 userName.addEventListener("focusout", checkName);
-yy.addEventListener("focusout", isBirthCompleted);
-mm.addEventListener("focusout", isBirthCompleted);
-dd.addEventListener("focusout", isBirthCompleted);
 gender.addEventListener("focusout", function() {
     if(gender.value === "성별") {
         error[5].style.display = "block";
@@ -39,7 +30,6 @@ gender.addEventListener("focusout", function() {
     }
 })
 email.addEventListener("focusout", isEmailCorrect);
-mobile.addEventListener("focusout", checkPhoneNum);
 
 
 
@@ -119,15 +109,36 @@ function comparePw() {
 
 function checkName() {
     var namePattern = /[a-zA-Z가-힣]/;
-    if(userName.value === "") {
-        error[3].innerHTML = "필수 정보입니다.";
-        error[3].style.display = "block";
-    } else if(!namePattern.test(userName.value) || userName.value.indexOf(" ") > -1) {
-        error[3].innerHTML = "한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)";
-        error[3].style.display = "block";
-    } else {
-        error[3].style.display = "none";
-    }
+    var username = userName.value;
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url:'/joincheckname',
+        data:{username:username},
+        method:'post'
+
+    }).done(function(result){
+
+        if(userName.value === "") {
+            error[3].innerHTML = "필수 정보입니다.";
+            error[3].style.display = "block";
+        } else if(!namePattern.test(userName.value) || userName.value.indexOf(" ") > -1) {
+            error[3].innerHTML = "한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)";
+            error[3].style.display = "block";
+        } else if(result >= 1){
+            error[3].innerHTML = "중복된 닉네임입니다.";
+            error[3].style.display = "block";
+        } else {
+            error[3].innerHTML = "사용 가능한 닉네임입니다.";
+            error[3].style.color = "#000000";
+            error[3].style.display = "block";
+        }
+       
+
+    })
+   
 }
 
 
@@ -199,21 +210,6 @@ function isEmailCorrect() {
 
 }
 
-function checkPhoneNum() {
-    var isPhoneNum = /([01]{2})([01679]{1})([0-9]{3,4})([0-9]{4})/;
-
-    if(mobile.value === "") {
-        error[7].innerHTML = "필수 정보입니다.";
-        error[7].style.display = "block";
-    } else if(!isPhoneNum.test(mobile.value)) {
-        error[7].innerHTML = "형식에 맞지 않는 번호입니다.";
-        error[7].style.display = "block";
-    } else {
-        error[7].style.display = "none";
-    }
-
-    
-}
 
 
 //다음 우편번호찾기

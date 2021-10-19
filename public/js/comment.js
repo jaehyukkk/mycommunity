@@ -172,7 +172,6 @@ $(document).on('click','.replyUpdateCancel',function(){
 
         function handleImgFileSelect(e) {
 
-            // 이미지 정보들을 초기화
             sel_files = [];
             $(".imgs_wrap").empty();
 
@@ -555,6 +554,97 @@ function replyUpdateHandleImgFile(e) {
         reader.onload = function(e) {
             var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile'></a>";
             $(".replyUpdateImgsWrap").append(html);
+            index++;
+
+        }
+        reader.readAsDataURL(f);
+        
+    });
+}
+
+
+
+
+
+
+
+
+
+
+$('.mobileCommentBtn').on('click',function(e){
+
+    e.preventDefault();
+    var ContentFromEditor = CKEDITOR.instances.editor2.getData();
+
+    var dataString = $("#Form").serialize();
+        dataString += ContentFromEditor;
+    
+    $('.mobileckeditorval').val(dataString);
+
+     var url = $('#mobileform').attr('action');
+     var form = $('#mobileform')[0];
+     var formData = new FormData(form);
+
+     $.ajax({
+        url:url,
+        data:formData,
+        enctype: 'multipart/form-data',
+        type:'post',
+        success:function(data){
+            if(data == 1){
+            history.go(0);
+            }
+            else if(data == 2){
+                alert('로그인을 해주세요.');
+            }
+            else{
+                alert('내용을 입력해주세요.');
+            }
+           
+        },
+        error: function(data){
+            console.log(data);
+        },
+        cache: false,
+        contentType:false,
+        processData:false
+     });
+
+
+});
+
+var mobile_files = [];
+$(document).ready(function() {
+   
+    $("#mobile_input_imgs").on("change", mobileHandleImgFile);
+}); 
+
+function mobileFileUploadAction() {
+    $("#mobile_input_imgs").trigger('click');
+}
+
+function mobileHandleImgFile(e) {
+
+    // 이미지 정보들을 초기화
+    mobile_files = [];
+    $(".imgs_wrap").empty();
+
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    var index = 0;
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        mobile_files.push(f);
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile'></a>";
+            $(".imgs_wrap").append(html);
             index++;
 
         }

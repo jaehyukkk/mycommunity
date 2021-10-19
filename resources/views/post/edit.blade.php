@@ -41,26 +41,30 @@
   </script>
 
 <div id="main-logo">
-    <div id ="mainTop">
-      <h1>LOVEBEAT</br>TALK</br>LOUNGE</h1>
-    </div>
+  <div id ="mainTop">
+    <a href="/"><h1>LOVEBEAT</br>TALK</br>LOUNGE</h1></a>
   </div>
+</div>
+<nav role="navigation">
 
-    <nav role="navigation">
-    <ul id="main-menu" class="main-menu-board">
-        @foreach ($maincategory as $maincategorys )  
-        <li><a href="/board/{{ $maincategorys->id }}">{{ $maincategorys->maincategoryname }}</a>
-        <ul id="sub-menu">
-            @foreach ($subcategory as $subcategorys)
-            @if($maincategorys->id === $subcategorys->maincategory_id)
-            <li id="main-menu-board"><a href="#" aria-label="subemnu">{{ $subcategorys->subcategoryname }}</a></li>
-            @endif
-            @endforeach      
-        </ul>
-        </li>
-        @endforeach
-    </ul>
-    </nav>
+  <ul id="main-menu" class="main-menu-board">
+    <li><a href="/viewall">최신글</a></li>
+    @foreach ($maincategory as $maincategorys )  
+    <li><a href="/board/{{ $maincategorys->id }}">{{ $maincategorys->maincategoryname }}</a>
+      <ul id="sub-menu">
+        @foreach ($subcategory as $subcategorys)
+          @if($maincategorys->id === $subcategorys->maincategory_id)
+          <li id="main-menu-board"><a href="#" aria-label="subemnu">{{ $subcategorys->subcategoryname }}</a></li>
+          @endif
+        @endforeach      
+      </ul>
+    </li>
+    @endforeach
+    <li><a href="#">건의사항</a></li>
+  </ul>
+
+</nav>
+
 <article id="create-main">
     @foreach ($post as $posts ) 
     <form action="/update/{{ $posts->id }}" method="post">
@@ -121,7 +125,7 @@
         </div>
         @else
         <div id="username">
-          <div><img src="{{URL::asset('/img/img.JPG')}}" alt=""></div>
+          <div><img src="{{URL::asset('/image/'.Auth::user()->img)}}" alt=""></div>
           <div><b>{{ Auth::user()->name }}</b></div>
         </div>
         <div id="usermenu">

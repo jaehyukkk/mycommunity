@@ -1,0 +1,51 @@
+#admin-logo{
+    background-color: rgb(61, 61, 61);
+    padding:4px;
+    font-weight: 600;
+}
+#admin-logo a{
+    color:rgb(231, 231, 231);
+    margin-left: 10px;
+}
+
+a:active {text-decoration: none;}
+
+a{
+  color: #212121;
+}
+a:hover{
+    text-decoration: none;
+}
+#admin-nav a:hover{color:rgb(0, 0, 0);}
+
+#admin-nav li{
+    list-style: none;
+    text-align: center;
+    border-left: 1px solid rgb(197, 197, 197);
+    width: 80px;
+    padding:5px 10px 5px 10px;
+}
+#admin-nav ul{
+    display: flex;
+    border-bottom: 1px solid rgb(197, 197, 197);
+    justify-content: center;
+    padding-right: 20px;
+    /* background-color: rgb(241, 241, 241); */
+    background: linear-gradient( to bottom, rgb(255, 255, 255), rgb(233, 233, 233) );
+    box-shadow: 1px 1px 1px 1px rgb(219, 219, 219);
+}
+#admin-nav li:last-child{
+    border-right: 1px solid rgb(197, 197, 197);
+}
+#admin-nav li a div:last-child{
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+#admin-nav li a div:not(:last-child){
+    color: rgb(88, 88, 88);
+}
+
+#admin-nav li a div:not(:last-child):hover{
+    color:rgb(126, 126, 126);
+}

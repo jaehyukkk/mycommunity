@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\AdminController;
 use App\Models\Maincategory;
 use App\Models\Subcategory;
 use App\Models\Post;
@@ -59,11 +60,11 @@ Route::get('/findPwchg', function(){
 Route::post('/board/store',[PostController::class,'store']);
 Route::get('/board/{id}',[PostController::class,'index']);
 Route::get('/board/{id}/{subid}',[PostController::class,'subIndex']);
+Route::get('/viewall',[PostController::class,'viewAll']);
 Route::get('/read/{id}',[PostController::class,'show']);
 
 //검색
-Route::get('/search',[SearchController::class,'getSearch']);
-// Route::get('/search/{id}/{subid}',[SearchController::class,'getSubSearch']);
+Route::get('/search',[SearchController::class,'getSearchResult']);
 
 
 Route::get('/mobile/board',[PostController::class,'mobileBoard']);
@@ -75,6 +76,14 @@ Route::middleware('auth')->group(function(){
     Route::post('/update/{id}',[PostController::class,'update']);
     Route::post('/destroy/{id}',[PostController::class,'destroy']);
     Route::get('/board/create/{id}/{subid}',[PostController::class,'create']);
+
+    //마이페이지
+    Route::get('/noti/{id}',[MypageController::class,'getNoti']);
+    Route::post('/deletenoti',[MypageController::class,'deleteNoti']);
+
+    Route::get('/chginfor/{user}',[MypageController::class,'chgInfor']);
+    Route::post('/chginfor',[MypageController::class,'postChgInfor']);
+
 });
 
 
@@ -83,6 +92,8 @@ Route::middleware('guest')->group(function(){
     Route::post('/join',[UserController::class,'joinProcess']);
     Route::post('/login',[UserController::class,'loginProcess']);
 });
+
+Route::post('/joincheckname',[UserController::class,'joinCheckName']);
 
 Route::get('/logout',[UserController::class,'logout']);
 
@@ -93,6 +104,12 @@ Route::post('/updatereply',[ReplyController::class,'updataReply']);
 Route::post('/delcomment',[CommentController::class,'delComment']);
 Route::post('/delreply',[ReplyController::class,'delReply']);
 
+Route::post('/checkid/chginfor',[UserController::class,'checkIdChgInfor']);
+Route::post('/checkname',[UserController::class,'checkName']);
 
-Route::get('/noti/{id}',[MypageController::class,'getNoti']);
-Route::post('/deletenoti',[MypageController::class,'deleteNoti']);
+
+
+
+
+
+Route::get('/admin',[AdminController::class,'index']);

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use Exception;
 
 class UserController extends Controller
 {
@@ -21,6 +22,51 @@ class UserController extends Controller
         $count = User::where('userid',$userid)->count();
 
         return $count;
+    }
+
+    public function checkIdChgInfor(Request $request){
+        $userid = $request->userid;
+        if($userid == Auth::user()->userid){
+            return 0;
+        }
+        $count = User::where('userid',$userid)->count();
+        return $count;
+    }
+
+    public function joinCheckName(Request $request){
+
+        try{
+
+        $username = $request->username;
+    
+        $count = User::where('name',$username)->count();
+        return $count;
+       
+
+        }
+        catch(Exception $e){
+            return $e->getMessage();
+        }
+        
+    }
+
+    public function checkName(Request $request){
+
+        try{
+
+        $username = $request->username;
+        if($username == Auth::user()->name){
+            return 0;
+        }
+        $count = User::where('name',$username)->count();
+        return $count;
+       
+
+        }
+        catch(Exception $e){
+            return $e->getMessage();
+        }
+        
     }
 
 
@@ -60,7 +106,8 @@ class UserController extends Controller
             'userid'            => $data['userid'],
             'password'          => Hash::make($data['password']),
             'sex'               => $data['sex'],
-            'email'               => $data['email'],
+            'email'             => $data['email'],
+            'img'               => 'img.JPG'
         ]);      
     }
 

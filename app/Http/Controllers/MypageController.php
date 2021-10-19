@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Maincategory;
 use App\Models\Subcategory;
 use App\Models\Noti;
+use App\Models\User;
 use Exception;
 
 class MypageController extends Controller
@@ -53,4 +54,46 @@ class MypageController extends Controller
         }
   
     }
+
+
+    public function chgInfor(User $user){
+    
+            if($user->id == Auth::user()->id){
+                return view('mypage.chginfor',compact('user'));
+            }
+            else{
+                return redirect('/')->with('alert','잘못된 접근입니다.');
+            }
+        
+    }
+
+    public function postChgInfor(Request $request){
+        $userid = $request->userid;
+        $name = $request->name;
+        $email = $request->email;
+
+        if($request->hasfile('profileimg')){
+               
+            $photo = $request->file('profileimg');
+            $filename = time().rand(1,9999).'.'.$photo->extension();
+            $photo->move(public_path('image'),$filename);
+            $files = $filename;
+            
+            User::where('id',Auth::user()->id)->update([
+                'userid' => $userid,
+                'name' => $name,
+                'email' => $email,
+                'img' => $files
+            ]);
+        }
+        else{
+            User::where('id',Auth::user()->id)->update([
+                'userid' => $userid,
+                'name' => $name,
+                'email' => $email,
+            ]);
+        }
+            
+    }
+
 }
