@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\MailSendController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminCategoryController;
 use App\Models\Maincategory;
 use App\Models\Subcategory;
 use App\Models\Post;
@@ -72,6 +74,7 @@ Route::get('/mobile/board',[PostController::class,'mobileBoard']);
 
 
 Route::middleware('auth')->group(function(){
+
     Route::get('/edit/{idx}',[PostController::class,'edit']);
     Route::post('/update/{id}',[PostController::class,'update']);
     Route::post('/destroy/{id}',[PostController::class,'destroy']);
@@ -80,7 +83,6 @@ Route::middleware('auth')->group(function(){
     //마이페이지
     Route::get('/noti/{id}',[MypageController::class,'getNoti']);
     Route::post('/deletenoti',[MypageController::class,'deleteNoti']);
-
     Route::get('/chginfor/{user}',[MypageController::class,'chgInfor']);
     Route::post('/chginfor',[MypageController::class,'postChgInfor']);
 
@@ -113,3 +115,28 @@ Route::post('/checkname',[UserController::class,'checkName']);
 
 
 Route::get('/admin',[AdminController::class,'index']);
+Route::get('/admin/post',[AdminController::class,'post']);
+Route::get('/admin/category',[AdminCategoryController::class,'index']);
+Route::get('/admin/users',[AdminController::class,'users']);
+Route::get('/admin/comment',[AdminController::class,'comment']);
+Route::get('/admin/reply',[AdminController::class,'reply']);
+
+Route::post('/addcategory',[AdminCategoryController::class,'addCategory']);
+Route::post('/updatecategory',[AdminCategoryController::class,'updateCategory']);
+Route::post('/delcategory',[AdminCategoryController::class,'delCategory']);
+Route::post('/deleteuser',[AdminController::class,'deleteUser']);
+Route::post('/admin/delete',[AdminController::class,'deleteFunction']);
+
+Route::get('/admin/login',[AdminAuthController::class,'adminLogin']);
+Route::post('/admin/login',[AdminAuthController::class,'loginProcess']);
+Route::get('/admin/join',[AdminAuthController::class,'viewJoin']);
+Route::post('/admin/join',[AdminAuthController::class,'joinProcess']);
+Route::get('/admin/logout',[AdminAuthController::class,'logout']);
+
+
+
+
+
+
+
+

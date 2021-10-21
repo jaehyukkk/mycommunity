@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Maincategory;
@@ -11,10 +10,9 @@ use App\Models\Comment;
 use App\Models\Reply;
 use DOMDocument;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Exception;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -23,6 +21,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        
+    }
     public function index($id)
     {  
         $maincategory = Maincategory::all();
@@ -255,22 +258,20 @@ class PostController extends Controller
                 'hit' => DB::raw('hit+1')
             ]);
         }
-        
+
+        $maincategory = Maincategory::all();
+        $subcategory = Subcategory::all();
+        $commentId = Comment::where('post_id',$id)->get('id');
+        $comment = Post::find($id)->getComment;
 
         $read = DB::table('posts')
         ->where('posts.id',$id)
         ->leftJoin('users', 'posts.user_id', '=', 'users.id')
         ->leftJoin('subcategories', 'posts.subcategory_id', '=', 'subcategories.id')
-        ->select('*','posts.created_at as time','posts.id as idx')
+        ->select('*','posts.created_at as time','posts.id as id')
         ->orderBy('posts.id','desc')
         ->get();
-
-        $maincategory = Maincategory::all();
-        $subcategory = Subcategory::all();
-
-        $commentId = Comment::where('post_id',$id)->get('id');
-
-        $comment = Post::find($id)->getComment;
+        
         $comment = Comment::where('post_id',$id)->
         join('users', 'comments.user_id', 'users.id')
         ->select('*','comments.created_at as created_at','comments.id as id')
@@ -296,22 +297,16 @@ class PostController extends Controller
      */
     public function edit($idx)
     {   
-        $postUserId = Post::where('id',$idx)->get('user_id');
-        
-        if(Auth::user()->id != $postUserId[0]->user_id){
-            return redirect()->back();
-        }
+        $post = Post::find($idx);
 
-        $post = Post::where('id',$idx)->get();
-        $sub = Post::where('id',$idx)->get('subcategory_id');
-        $main = Post::where('id',$idx)->get('maincategory_id');
+        if(!Gate::allows('edit-post', $post) ){
+            return redirect()->back();
+        } else {
         $maincategory = Maincategory::all();
         $subcategory = Subcategory::all();
 
-        $id = $main[0]->maincategory_id;
-        $subid = $sub[0]->subcategory_id;
-
-        return view('post.edit',compact('post','maincategory','subcategory','id','subid'));
+        return view('post.edit',compact('post','maincategory','subcategory'));
+        }
     }
 
     /**
@@ -328,15 +323,26 @@ class PostController extends Controller
         $dom->loadHTML(html_entity_decode($data['description']));
         $dom->preserveWhiteSpace = false;
         $imgs  = $dom->getElementsByTagName("img");
-
-        Post::where('id',$id)->update([
-            'title' => $data['title'],
-            'description' =>$data['description'],
-            'notice' =>$data['notice'],
-            'code' => $imgs->length
-        ]);
         
-        return redirect('/board/'.$data['caid'].'/'.$data['subid']);
+        $post = Post::find($id);
+
+        if(!Gate::allows('edit-post', $post) ){
+            return redirect()->back();
+        }
+
+        else{
+
+            $post->update([
+                'title' => $data['title'],
+                'description' =>$data['description'],
+                'notice' =>$data['notice'],
+                'code' => $imgs->length
+            ]);
+            
+            return redirect('/board/'.$data['caid'].'/'.$data['subid']);
+
+        }
+        
     }
 
     /**
@@ -347,6 +353,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        $post = Post::find($id);
+
+        if(!Gate::allows('edit-post', $post) ){
+            return redirect()->back();
+        }
+
+        else{
+
             $mainid = Post::where('id',$id)->first();
             $subid = Post::where('id',$id)->first();
             
@@ -355,6 +369,10 @@ class PostController extends Controller
             $mid = $mainid->maincategory_id;
             $sid = $subid->subcategory_id;
             return redirect('/board/'.$mid.'/'.$sid); 
+
+        }
+
+            
 
     }
 

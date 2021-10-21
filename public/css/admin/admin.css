@@ -1,7 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;  
+    font-family: 'Source Sans Pro', sans-serif; 
+    /* background-color: rgb(230, 230, 230); */
+  }
+
 #admin-logo{
     background-color: rgb(61, 61, 61);
     padding:4px;
     font-weight: 600;
+    width: 100%;
 }
 #admin-logo a{
     color:rgb(231, 231, 231);
@@ -16,7 +31,12 @@ a{
 a:hover{
     text-decoration: none;
 }
+a:link { text-decoration: none;}
+a:visited { text-decoration: none;}
 #admin-nav a:hover{color:rgb(0, 0, 0);}
+#admin-nav{
+    width: 100%;
+}
 
 #admin-nav li{
     list-style: none;
@@ -29,8 +49,7 @@ a:hover{
     display: flex;
     border-bottom: 1px solid rgb(197, 197, 197);
     justify-content: center;
-    padding-right: 20px;
-    /* background-color: rgb(241, 241, 241); */
+    /* padding-right: 20px; */
     background: linear-gradient( to bottom, rgb(255, 255, 255), rgb(233, 233, 233) );
     box-shadow: 1px 1px 1px 1px rgb(219, 219, 219);
 }
@@ -49,3 +68,142 @@ a:hover{
 #admin-nav li a div:not(:last-child):hover{
     color:rgb(126, 126, 126);
 }
+
+.table{
+    width: 1200px;
+    margin-top: 100px;
+    
+}
+.table-checkbox{
+    width: 5%;
+}
+.table-title{
+    font-weight: 600;
+    font-size:20px;
+    border-bottom: 1px solid rgb(190, 190, 190);
+    padding-bottom: 5px;
+    margin-bottom: 40px;
+    width: 70%;
+}
+#category-menu{
+    border: 1px solid rgb(190, 190, 190);
+    height: 800px;
+    width: 320px;
+}
+#category-menu div{
+    cursor: pointer;
+}
+#category-btns{
+    display: flex;
+    border-bottom: 1px solid rgb(144, 144, 144); 
+    background: linear-gradient( to bottom, rgb(255, 255, 255), rgb(233, 233, 233) );
+ 
+ 
+}
+#category-btns div{
+    font-weight: 600;
+    font-size: 12px;
+    width: 106px;
+    text-align: center;
+}
+#category-btns div:not(:last-child){
+    border-right: 1px solid rgb(216, 216, 216);
+}
+#category-btns div div{
+    padding:8px
+}
+/* .subcategory{
+    padding-left: 12px;
+} */
+.maincategory{
+    font-weight: 600;
+}
+#category-list{
+    padding-top:8px
+}
+#category-list div{
+    padding: 0px 3px 3px 15px;
+}
+.subcategory{
+    color: gray;
+}
+
+
+
+
+.input {
+    display: block;
+    position: relative;
+    width: 250px;
+    height: 34px;
+    background: #fff;
+    font-size: 14px;
+    border:1px solid #dadada;
+}
+
+#categoryBox{
+    display: flex;
+}
+
+input:focus {
+    outline: none;
+}
+#add-category{
+    border:1px solid rgb(190, 190, 190);
+    border-left: 0;
+}
+#add-category-menu{
+    padding:30px 30px 0px 30px;
+}
+.add-category-title p, .category-purpose p{
+    font-weight: 600;
+    font-size: 14px;
+}
+.category-purpose{
+    margin-top: 15px;
+}
+.category-purpose select{
+    border:1px solid #dadada;
+    width: 250px;
+    height: 34px;
+}
+
+.category-titleSubmit{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    margin-bottom: 15px;
+    margin-top: 80px;
+}
+.category-titleSubmit button{
+    border: 0;
+    border-radius: 3px;
+    width: 80px;
+    height: 20px;
+    font-size: 12px;
+    margin-top:8px;
+    background-color: rgb(93, 93, 93);
+    color: white;
+}
+.category-titleSubmit-title p{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.maincategory{
+    margin-top: 3px;
+}
+
+#category-title{
+    border-bottom: 1px solid rgb(144, 144, 144); 
+    background: linear-gradient( to bottom, rgb(255, 255, 255), rgb(233, 233, 233) );
+}
+
+#add-category-top{
+    padding:8px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+
+

@@ -5,13 +5,8 @@ var commentUpdateSetting = {
     focus : true,
     lang : 'ko-KR',
     toolbar:false,
-    callbacks: {
-        onEnter: function(){
-            box.summernote('insertNode', document.createTextNode("<br>")); 
-            console.log('uiwdbvuwecbweuiuinsjk');
-        }
-    }
  };
+
  var commentReplySetting = {
     height : 150,
     minHeight : null,
@@ -20,13 +15,9 @@ var commentUpdateSetting = {
     lang : 'ko-KR',
     toolbar:false,
     placeholder: '답글을 작성해주세요',
-    callbacks: {
-        onEnter: function(){
-            box.summernote('insertNode', document.createTextNode("<br>")); 
-            console.log('uiwdbvuwecbweuiuinsjk');
-        }
-    }
  };
+
+
 
 // 수정 폼 생성
 $(document).on('click','.commentUpdateBtn',function(e){
@@ -63,6 +54,11 @@ $(document).on('click','.commentUpdateBtn',function(e){
 
      $('.updatecomment').summernote(commentUpdateSetting);
      $("#input_img").on("change", handleImgFile);
+
+     $(".updatecomment").on("summernote.enter", function(we, e) {
+        $(this).summernote("pasteHTML", "<br><br>");
+        e.preventDefault();
+    });
    
 });
 
@@ -101,6 +97,11 @@ $(document).on('click','.commentReplyBtn',function(e){
 
      $('.updatecomment').summernote(commentReplySetting);
      $("#reply_input_img").on("change", replyhandleImgFile);
+
+     $(".updatecomment").on("summernote.enter", function(we, e) {
+        $(this).summernote("pasteHTML", "<br><br>");
+        e.preventDefault();
+    });
    
 });
 
@@ -142,6 +143,11 @@ $(document).on('click','.replyUpdateBtn',function(e){
 
      $('.updatecomment').summernote(commentUpdateSetting);
      $("#reply_input_img").on("change", replyhandleImgFile);
+
+     $(".updatecomment").on("summernote.enter", function(we, e) {
+        $(this).summernote("pasteHTML", "<br><br>");
+        e.preventDefault();
+    });
 })
 
 $(document).on('click','.commentUpdateCancel',function(){

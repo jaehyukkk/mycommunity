@@ -129,7 +129,6 @@ class UserController extends Controller
     }
 
     public function logout(){
-        Session::flush();
         Auth::logout();
         return redirect('/')->with('alert','로그아웃 되었습니다.');
     }  

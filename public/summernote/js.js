@@ -54,12 +54,6 @@ var commentUpdateSetting = {
     focus : true,
     lang : 'ko-KR',
     toolbar:false,
-    callbacks: {
-        onEnter: function(){
-            box.summernote('insertNode', document.createTextNode("<br>")); 
-            console.log('uiwdbvuwecbweuiuinsjk');
-        }
-    }
  };
 
  $('.updatecomment').summernote(commentUpdateSetting);
@@ -89,6 +83,8 @@ $("#summernote").on("summernote.enter", function(we, e) {
     $(this).summernote("pasteHTML", "<br><br>");
     e.preventDefault();
 });
+
+
 
 
 
