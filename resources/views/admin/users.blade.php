@@ -26,7 +26,22 @@
             <td>{{ $users->userid }}</td>
             <td>{{ $users->name }}</td>
             <td>{{ $users->email }}</td>
-            <td>{{ $users->level }}</td>
+            <td>
+                <form action="/admin/chguserlevel" method="post">
+                    @csrf
+                    <select name="user_level" id="user-level">
+                        @if($users->level != 1)
+                        <option value="0">일반회원</option>    
+                        <option value="1">관리자</option>   
+                        @else
+                        <option value="0">일반회원</option>    
+                        <option value="1" selected >관리자</option> 
+                        @endif
+                    </select>
+                    <input type="hidden" name="user" value="{{ $users->id }}">
+                    <button type="submit">변경</button>
+                </form>
+            </td>
             <td>
                 <form action="/deleteuser" method="post" id="userdeleteForm">
                 @csrf

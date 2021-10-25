@@ -22,20 +22,16 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        
-    }
     public function index($id)
     {  
         $maincategory = Maincategory::all();
         $subcategory = Subcategory::all();
    
        
-        $board = DB::table('posts')
-        ->where('posts.maincategory_id',$id)
-        ->leftJoin('users', 'posts.user_id', '=', 'users.id')
-        ->leftJoin('subcategories', 'posts.subcategory_id', '=', 'subcategories.id')
+        $board = Post::
+        where('posts.maincategory_id',$id)
+        ->join('users', 'posts.user_id', '=', 'users.id')
+        ->join('subcategories', 'posts.subcategory_id', '=', 'subcategories.id')
         ->select('*','posts.created_at as time','posts.id as idx','posts.maincategory_id as mainid')
         ->orderBy('posts.id','desc')
         ->paginate(16);
@@ -57,8 +53,10 @@ class PostController extends Controller
     }
 
     public function subIndex($id,$subid){
+
         $maincategory = Maincategory::all();
         $subcategory = Subcategory::all();
+
         $board = DB::table('posts')
         ->where('posts.maincategory_id',$id)
         ->where('posts.subcategory_id',$subid)
@@ -76,8 +74,8 @@ class PostController extends Controller
         ->orderBy('posts.id','desc')
         ->get();
 
-        $int = Subcategory::where('id',$subid)->get('photocode');
-        $photocode = $int[0]->photocode;
+        $int = Subcategory::where('id',$subid)->first();
+        $photocode = $int->photocode;
 
         return view('post.subindex',compact('board','maincategory','subcategory','id','subid','notice','photocode'));
     }
@@ -159,7 +157,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {   
+
+        $request->validate([
+            'title'             => 'required|min:1|max:30',
+            'description'       => 'required|min:1|max:10000',
+        ]);
+
         $data = $request->all();
+
+        if(isset($request->notice)){
+            $data['notice'] = $request->notice;
+        }
+        else{
+            $data['notice'] = 0;
+        }
 
         $dom = new domDocument;
         $dom->loadHTML(html_entity_decode($data['description']));
@@ -189,8 +200,6 @@ class PostController extends Controller
          }
          else{
 
-        
-
             if($imgs->length == 0){
                 return redirect()->back()->with('alert','사진전용 게시판은 사진을 1개이상 올려야됩니다.');
             }
@@ -206,7 +215,9 @@ class PostController extends Controller
                 'notice' => $data['notice'],
                 'hit' => 0,
                 'comment' => 0,
+                'commentnum' => 0,
                 'mainimg' => $links,
+                'writer' => Auth::user()->name,  
             ]);
 
             return redirect('/board/'.$data['caid'].'/'.$data['subid']);
@@ -232,6 +243,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
+
         
         try{
         
@@ -318,6 +330,12 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'title'             => 'required|min:1|max:30',
+            'description'       => 'required|min:1|max:10000',
+        ]);
+        
         $data = $request->all();
         $dom = new domDocument;
         $dom->loadHTML(html_entity_decode($data['description']));

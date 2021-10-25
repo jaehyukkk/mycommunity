@@ -14,11 +14,62 @@ $(function(){
 $(function(){
     $('#deleteNotiBtn').on('click', function(e){
         e.preventDefault();
+
+        var chkArray = new Array();
+
+        $('input[name="delete[]"]:checked').each(function(){
+            var tmpVal = $(this).val();
+            chkArray.push(tmpVal);
+        });
+
+        if(chkArray.length < 1){
+            alert('알림을 선택해주세요.');
+            return;
+        }
+
+        if (confirm("해당 알림을 정말 삭제하시겠습니까 ?") == true){ 
+            $('#deleteNotiForm').submit();
+         }else{  
+             return false;
+         } 
     });
-    $('#notiDelModalBtn').on('click',function(){
-        $('#deleteNotiForm').submit();
-    })
-})
+});
+
+
+function allCheck(thisId){
+    if($('#'+thisId).prop('checked')){
+        $("input[type=checkbox]").prop("checked",true);
+    }
+    else{
+        $("input[type=checkbox]").prop("checked",false);
+    }
+    
+   }
+
+// $(function(){
+//     $('.deleteBtn').on('click',function(e){
+//          e.preventDefault();
+
+//          var chkArray = new Array();
+
+//          $('input[name="checkdid[]"]:checked').each(function(){
+//              var tmpVal = $(this).val();
+//              chkArray.push(tmpVal);
+//          });
+
+//          if(chkArray.length < 1){
+//              alert('게시물을 선택해주세요.');
+//              return;
+//          }
+
+//          if (confirm("해당 게시물을 정말 삭제하시겠습니까 ?") == true){ 
+//              $('#deleteForm').submit();
+//          }else{  
+//              return false;
+//          } 
+
+//     })
+// });
 
 
 $(document).ready(function(){
@@ -144,5 +195,9 @@ $(document).ready(function(){
              alert('인증번호를 입력해주세요.');
          }
      })
- })
+ });
+
+
+
+
 

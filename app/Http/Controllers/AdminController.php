@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Reply;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -41,8 +42,13 @@ class AdminController extends Controller
     public function deleteUser(Request $request){
 
         $id = $request->id;
-        User::find($id)->delete();
-        return redirect()->back();
+        
+        if(Auth::user()->level == 1){
+            User::find($id)->delete();
+            return redirect()->back();
+        }
+        return redirect()->back()->with('alert','최고 관리자 권한입니다.');
+       
     }
 
     public function deleteFunction(Request $request){
@@ -93,6 +99,25 @@ class AdminController extends Controller
         ->get();
 
         return view('admin.reply',compact('reply'));
+    }
+
+    public function chgUserLevel(Request $request){
+
+        $level = $request->user_level;
+        $userId = $request->user;
+
+        if(Auth::user()->level == 1){
+            User::find($userId)->update([
+                'level' => $level
+            ]);
+         
+            return redirect()->back();
+        }
+        else{
+            return redirect()->back()->with('alert','최고 관리자 권한입니다.');
+        }
+          
+
     }
 
 }

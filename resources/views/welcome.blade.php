@@ -11,8 +11,8 @@
 <div class="board">
   <div class="main-free-board">
     <div class="main-free-board-top">
-      <div>최신글보기</div>
-      <span>더보기</span>
+      <div><a href="/viewall">최신글보기</a></div>
+      <span><a href="/viewall">더보기</a></span>
     </div>
     <?php $cnt = 0 ;?>
     @foreach ($board as $boards )
@@ -22,16 +22,15 @@
       @endif
     <div class="main-free-board-title">
       <div><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
-      <div>{{ $boards->writer }}</div>
+      <div><a href="/viewmypost/{{ $boards->writer }}">{{ $boards->writer }}</a></div>
     </div>
     @endforeach
-   
   </div>
 
   <div class="main-free-board">
     <div class="main-free-board-top">
-      <div>자유게시판</div>
-      <span>더보기</span>
+      <div><a href="/board/1/1">자유게시판</a></div>
+      <span><a href="/board/1/1">더보기</a></span>
     </div>
     
       <?php $cnt1 = 0?>
@@ -42,8 +41,8 @@
       <?php break;?>
       @endif
       <div class="main-free-board-title">
-      <div>{{ $boards->title }}</div>
-      <div>{{ $boards->writer }}</div> 
+      <div><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
+      <div><a href="/viewmypost/{{ $boards->writer }}">{{ $boards->writer }}</a></div> 
       </div>       
       @endif
       @endforeach    
@@ -51,6 +50,11 @@
 </div>
 @endsection
 
+
+@section('loginbox')
+@component('layouts.loginbox')
+@endcomponent
+@endsection
 
 
 
@@ -91,3 +95,5 @@
   
   </div>
 @endsection
+
+

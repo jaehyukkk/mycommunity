@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Maincategory;
 use App\Models\Subcategory;
+use App\Models\Post;
 use App\Functions\SearchClass;
 use Illuminate\Http\Request;
 
@@ -35,5 +36,7 @@ class SearchController extends Controller
 
         return view('post.search.index',compact('maincategory','subcategory','searchResult','id','subid','photocode'));
     }
+
+  
    
 }

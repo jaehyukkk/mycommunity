@@ -6,9 +6,17 @@
         <title>회원가입</title>
         
         <link rel="stylesheet" type="text/css" href="<?php echo asset('css/join.css')?>" >
+        <link rel="stylesheet" type="text/css" href="<?php echo asset('css/mypage/find.css')?>" >
+        <link rel="stylesheet" type="text/css" href="<?php echo asset('css/fileinput.css')?>" >
         
     </head>
     <body>
+        <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="{{ URL::asset('js/fileinput.js') }}" defer></script>
+
+        <script src="https://kit.fontawesome.com/db98d81eec.js" 
+        crossorigin="anonymous">
+        </script>
 
         <script>
             var msg = '{{Session::get('alert')}}';
@@ -17,7 +25,6 @@
                 alert(msg);
             }
         </script>
-
         @if (count($errors) > 0)
         <div class="alert-errors">
             <ul>
@@ -29,9 +36,21 @@
         @endif
 
         <!-- header -->
-        <div id="header">
-            LB TALKLOUNGE
-        </div>
+        <nav>
+            <ul class="logo">
+              <li>
+                <a href="/">LTL</a>
+              </li>
+            </ul>
+            <ul class="nav-item" style="padding-right: 100px">
+              <li>
+                <a href="#" style="color:white"><i class="fas fa-user-edit"></i> 회원정보 변경</a>
+              </li>
+            </ul>
+            <ul>
+              
+            </ul>
+          </nav>
 
 
         <!-- wrapper -->
@@ -45,10 +64,18 @@
                 <!-- ID -->
                 <div>
                     <h3 class="join_title">
-                        <label for="id">아이디</label>
+                        <label for="id">아이디
+                            @if(isset($social))
+                            <span style="color:rgb(255, 119, 119); font-size:11px;">소셜로그인 사용자 변경불가능</span>
+                            @endif
+                        </label>
                     </h3>
                     <span class="box int_id">
+                        @if(isset($social))
+                        <input type="text" id="id" class="int" maxlength="20" name="userid" value="{{ $user->userid }}" readonly>
+                        @else
                         <input type="text" id="id" class="int" maxlength="20" name="userid" value="{{ $user->userid }}">
+                        @endif
                     </span>
                     <span class="error_next_box"></span>
                 </div>
@@ -70,23 +97,28 @@
                 <div>
                     <h3 class="join_title"><label for="email">이메일</label></h3>
                     <span class="box int_email">
-                        <input type="text" id="email" class="int" maxlength="100" placeholder="이메일" name="email">
+                        <input type="text" id="email" class="int" maxlength="100" placeholder="이메일" name="email" value="{{ $user->email }}">
                     </span>
                     <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>    
                 </div>         
 
                 <div>
                     <h3 class="join_title"><label for="email">프로필 사진</label></h3>
-                    <span class="box int_email">
-                        <input type="file" name="profileimg">
-                    </span>  
+
+                    <div class="filebox preview-image"> 
+                        <input class="upload-name" value="사진선택" disabled="disabled" > 
+                        <label for="input-file">업로드</label> 
+                        <input type="file" id="input-file" class="upload-hidden" name="profileimg"> 
+                    </div>
+
                 </div>  
+
+
                 <!-- JOIN BTN-->
-                <center><div class="btn_area">
-                    <button type="submit" id="btnJoin">
-                        <span>JOIN</span>
-                    </button>
-                </div></center>
+
+                <button type="submit" class="find-result" style="margin-top: 30px;">
+                    <span>확인</span>
+                </button>
             </form>
                 
 

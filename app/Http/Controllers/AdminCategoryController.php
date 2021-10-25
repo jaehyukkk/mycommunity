@@ -68,7 +68,8 @@ class AdminCategoryController extends Controller
         }
         else{
             Subcategory::where('id',$data['categoryid'])->update([
-                'subcategoryname' => $data['name']
+                'subcategoryname' => $data['name'],
+                'photocode'       => $data['purpose'],
             ]);
         }
     }

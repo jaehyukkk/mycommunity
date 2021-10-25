@@ -5,11 +5,9 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/board/board.css') }}" >
 @endsection
 @section('script')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" defer></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('js/time.js') }}" defer></script>
-<script type="text/javascript" src="{{ URL::asset('/js/post.js') }}" defer></script>
+<script type="text/javascript" src="{{ URL::asset('js/post.js') }}" defer></script>
 @endsection
 @section('content')
 <div>
@@ -56,7 +54,7 @@
           @endif
         </td>
         <td class="time">{{ $notices->time }}</td>
-        <td>{{ $notices->writer }}</td>
+        <td>{{ $notices->name }}</td>
         <td>{{ $notices->hit }}</td>  
       </tr>
       @endif
@@ -88,7 +86,7 @@
     @foreach ($board as $boards )
     <tr>
       <td scope="row" class="bno">{{ $boards->idx }}</td>
-      <td class="Title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a>
+      <td class="Title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }} 
         @if($boards->code > 0)
         <span class="imgicon"><i class="far fa-image"></i></span>
         @endif
@@ -96,9 +94,9 @@
         @if($boards->commentnum > 0)
         <span class="commentnum">[{{ $boards->commentnum }}]</span>
         @endif
-      </td>
+      </a></td>
       <td class="time">{{ $boards->time }}</td>
-      <td>{{ $boards->writer }}</td>
+      <td>{{ $boards->name }}</td>
       <td>{{ $boards->hit }}</td>  
     </tr>
     @endforeach
@@ -110,7 +108,7 @@
 <div class="container"> 
   <div class="row">
     @foreach ($board as $boards )   
-    <div class="col-md-3">
+    <div class="col-md-3" id="imgboard-img">
       <a href="/read/{{ $boards->idx }}">
       <img class="img" src="{{$boards->mainimg}}">
     </a>
@@ -148,7 +146,7 @@
     
       <div class="searchSelect">
         <input type="hidden" name="id" value="{{ $id }}">
-        <input type="hidden" name="subid" value="{{ $subid }}">
+        <input type="hidden" name="subid" value="0">
         <select name="category" id="">
           <option value="1">제목+내용</option>  
           <option value="2">제목</option>  
@@ -159,7 +157,7 @@
       </div>
 
       <div class="searchInput">
-        <span class="inputbox int_search">
+        <span class="inputbox input_search">
           <input type="text" id="search" class="input" maxlength="20" name="search">
         </span>
       </div>
@@ -172,3 +170,4 @@
 
 </div>
 @endsection
+

@@ -6,10 +6,12 @@
     $(function(){
         $('.maincategory').on('click',function(){
             var getId = $(this).data('id');
+            var getPhotoCode = $(this).data('photocode');
+
             var div = $("div[data-id='"+getId+"']");
 
             chgBackground(div);
-            chgValue(div,getId);
+            chgValue(div,getId,getPhotoCode);
 
             $('#division').val('0');
             $('#maincategory_id').val(getId);
@@ -20,10 +22,12 @@
     $(function(){
         $('.subcategory').on('click',function(){
             var getId = $(this).data('subid');
+            var getPhotoCode = $(this).data('photocode');
+
             var div = $("div[data-subid='"+getId+"']");
 
             chgBackground(div);
-            chgValue(div,getId);
+            chgValue(div,getId, getPhotoCode);
  
             $('#division').val('1');
             $('#maincategory_id').val("");
@@ -36,11 +40,12 @@
         div.css('backgroundColor','#e1e1ff');
     }
 
-    function chgValue(div,getId){
+    function chgValue(div,getId,getPhotoCode){
         $('#name').val(div.text());
         $('#categoryid').val(getId);
         $('#add-category-top').text('(수정)'+div.text()); 
         $('#addcategoryForm').attr('action','/updatecategory');
+        $('#purpose').val(getPhotoCode).prop('selected',true);
     }
   
 
@@ -66,6 +71,12 @@
               
         });
     });
+
+
+
+    
+
+
 
     function removeCheck() {
 

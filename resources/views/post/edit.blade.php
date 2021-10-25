@@ -32,12 +32,14 @@
      <input type="hidden" name="subid" value="{{ $post->subcategory_id }}">
      <div id="create-option">
          <div>
+             @auth('admin')
              <span>공지설정</span>
              <select name="notice">
                  <option value="0">선택안함</option>
                  <option value="1">전체공지</option>
                  <option value="2">게시판공지</option>
              </select>
+             @endauth
          </div>
          <div>
              <input type="submit" value="등록">

@@ -1,19 +1,3 @@
-$(document).ready(function(){
-    var id = $('#container-title').data('id');
-    
-    $.ajax({
-        url:'/api/getcategorytitle',
-        method:'get',
-        data:{id:id},
-        success:function(data){
-            var title = data[0].subcategoryname;
-            $('#container-title').text(title);
-        }
-    })
-});
-
-
-
 
 $(function(){
 
@@ -34,48 +18,14 @@ $(function(){
  });
 
 
- $(document).ready(function(){
-    var id = $('#mobile-container-title').data('id');
-    
-    $.ajax({
-        url:'/api/getcategorytitle',
-        method:'get',
-        data:{id:id},
-        success:function(data){
-            var title = data[0].subcategoryname;
-            $('#mobile-container-title').text(title);
-        }
-    })
-});
 
 
 
-  
-    // $(function(){
-    //     var id = $('#maincategoryId').val();
-    //     var subid = $('#subcategoryId').val();
 
-    //     $.ajax({
-    //         url:'/api/getnotice',
-    //         method:'get',
-    //         data:{id:id,subid:subid},
-    //         success:function(data){   
-    //               var html = $('#board-content');
-    //               var str="";
-    //           $.each(data,function(i){
-    //               str += '<tr>';
-    //               str += '<th scope="row" class="bno">공지</th>';
-    //               str += '<td class="Title">'+data[i].title+'</td>';
-    //               str += '<td>'+data[i].time+'</td>';
-    //               str += '<td>'+data[i].name+'</td>';
-    //               str += '<td>'+data[i].hit+'</td>';
-    //               str += '</tr>'; 
-    //           });
-    //           html.prepend(str);
-    //         }
-    //       });
-    // })
-   
+
+
+
+
 
    
     

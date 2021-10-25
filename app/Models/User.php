@@ -26,6 +26,7 @@ class User extends Authenticatable
         'social',
         'news',
         'img',
+        'level',
     ];
 
     /**

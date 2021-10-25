@@ -7,16 +7,17 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/summernote/summernote-lite.css') }}" >
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/summernote/css.css') }}" >
 @endsection
+
 @section('script')
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('/summernote/summernote-lite.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('/summernote/js.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('js/comment.js') }}" defer></script>
+<script type="text/javascript" src="{{ URL::asset('js/post.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('/ckeditor_review/ckeditor/ckeditor.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('/ckeditor_review/ckeditor/adapters/jquery.js') }}" defer></script>
 @endsection
 @section('content')
-
 <article class="read-main">
   <div class="read-baord-box">
       @foreach ($read as $reads )    
@@ -67,7 +68,7 @@
           
               <article class="comment">
                 <div class="comment-name">
-                  <div class="replyWriter">
+                  <div class="comment-name-box">
               
                     <img src="{{URL::asset('/image/'.$comments->img)}}" alt="..."> 
                     <span>{{ $comments->comment_writer }}</span>
@@ -89,16 +90,16 @@
                     </div>          
                     @endfor   
                   </div> 
-                
-                  @can('edit-post',$comments )
-                  <div class="reviewupdelBtn" id="commentBtns">             
+      
+                  <div class="reviewupdelBtn" id="commentBtns">     
+                    @can('edit-post', $comments)        
                       <a href="#"class="commentUpdateBtn" data-update="{{ $comments->id }}">수정</a>
                       <a href="#" class="commentDelBtn" data-commentdel="{{ $comments->id }}" data-toggle="modal" data-target="#commentDelModal">
                         삭제
-                      </a>                   
+                      </a>   
+                    @endcan
+                                
                   </div>
-                  @endcan
-                   
               </article>
 
                   {{-- 답글 폼 --}}
@@ -123,7 +124,7 @@
                         @if($replys->comment_id == $comments->id)
                         
                         <div class=writerStar>
-                          <div class="replyWriter">
+                          <div class="comment-name-box">
                             
                             @if($reads->img == null)
                             <img src="{{URL::asset('/image/img.JPG')}}" alt="...">
@@ -135,7 +136,7 @@
                             <span class="comment-time">{{ $replys->created_at }}</span>
                           </div>      
                         </div>
-                          <p class="replyContent">{!! $replys->reply_content !!}</p>
+                          <p class="replyContent" >{!! $replys->reply_content !!}</p>
                           <input type="hidden" data-replyupdate="{{ $replys->id }}" value="{{$replys->reply_content  }}">
               
                           <div class="replyPhotoBox">
@@ -148,11 +149,15 @@
                             @endfor   
                          
                           </div> 
-                          @can('edit-post',$replys )
+              
+                     
+                          <div class="reviewupdelBtn" id="replyBtns">
+                            @can('edit-post', $replys)
                             <a href="#"class="replyUpdateBtn" data-replyupdate="{{ $replys->id }}">수정</a>
                             <a href="#" class="replyDelBtn" data-replydel="{{ $replys->id }}" data-toggle="modal" data-target="#replyDelModal">
                               삭제
-                            </a>               
+                            </a>  
+                            @endcan             
                           </div>
 
 
@@ -162,8 +167,6 @@
                           </div>
 
                           {{-- 답글 수정 폼 끝 --}}
-
-                          @endcan
                         @endif
                       </article>
                       @endforeach
@@ -212,30 +215,36 @@
         </div>
       </footer>
         
-  <?php $post = $read[0]?>
-  <div id="read-foot-1">
-    <div id="read-updataDeleteBtn">
-      @can('edit-post',$post)
+    <?php $post = $read[0]?>   
+    <div id="read-foot-1">
+      <div id="read-updataDeleteBtn">
+        @can('edit-post', $post)
         <div id="read-updataDeleteBtn-update">    
-        <a href="/edit/{{ $post->id }}">수정</a>  
-        </div>  
-      <form action="/destroy/{{ $post->id }}" method="post">
-      @csrf
-        <div id="read-updataDeleteBtn-delete">        
-          <button type="submit">삭제</button>        
+        <a href="/edit/{{ $post->id }}">수정</a>
+        </div>      
+        <form action="/destroy/{{ $post->id }}" method="post">
+        @csrf
+        <div id="read-updataDeleteBtn-delete">
+          <button type="submit">삭제</button>
         </div>
-      </form>  
-      @endcan  
+        </form> 
+        @endcan   
+      </div>
+      <div id="read-return">
+        <div><a href="javascript:history.back();">목록</a></div>
+      </div>
     </div>
-    <div id="read-return">
-      <div><a href="">목록</a></div>
-    </div>
+  </article>   
   </div>
 
-  </div>
-
-</article>
 @endsection
+
+
+
+
+
+
+
 @section('subContent')
 
 <div class="modal fade" id="commentDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -251,7 +260,7 @@
         댓글을 정말 삭제하시겠습니까?
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="commentDelModalBtn" data-postid="{{ $post->id }}">삭제하기</button>
+          <button type="button" class="btn btn-danger" id="commentDelModalBtn" data-postid="{{ $read[0]->id }}">삭제하기</button>
            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
       </div>
     </div>
@@ -272,7 +281,7 @@
         답글을 정말 삭제하시겠습니까?
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="replyDelModalBtn" data-postid="{{ $post->id }}">삭제하기</button>
+          <button type="button" class="btn btn-danger" id="replyDelModalBtn" data-postid="{{ $read[0]->id }}">삭제하기</button>
            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
       </div>
     </div>
@@ -281,15 +290,6 @@
 
 
   
-
-
-
-
-
-
-
-{{-- 모바일화면ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ --}}
-
 <div id="mobile">
   <div id="mobile-nav">
     <div><i class="fas fa-chevron-left"></i></div>
@@ -363,13 +363,14 @@
             @endif
         </article>
 
+
               <div id="reply-box">
                   @foreach ($reply as $replys )
                   <article class="reply">
                   @if($replys->comment_id == $comments->id)
                   
                   <div class=writerStar>
-                    <div class="replyWriter"><img src="{{URL::asset('/img/img.JPG')}}" alt="..."> <span>{{ $replys->reply_writer }}</span>
+                    <div class="comment-name-box"><img src="{{URL::asset('/img/img.JPG')}}" alt="..."> <span>{{ $replys->reply_writer }}</span>
                       <span class="comment-time">{{ $replys->created_at }}</span>
                     </div>      
                   </div>
@@ -453,7 +454,7 @@
     </div>
   </div>
   
-</div>
+  </div>
 
 
  <script>

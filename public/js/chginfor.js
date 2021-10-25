@@ -28,7 +28,7 @@ function checkId() {
     var check = 0;
     var idPattern = /[a-zA-Z0-9_-]{5,20}/;
     $.ajax({
-        url:'/checkid/chginfor',
+        url:'/chgCheckId',
         method:'post',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -68,7 +68,7 @@ function checkName() {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url:'/checkname',
+        url:'/chgCheckName',
         data:{username:username},
         method:'post'
 

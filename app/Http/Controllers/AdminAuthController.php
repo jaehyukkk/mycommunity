@@ -12,7 +12,9 @@ class AdminAuthController extends Controller
 {
 
     public function viewJoin(){
-        return view('admin.join');
+        if(Auth::user()->level >= 1){
+            return view('admin.join');
+        }
     } 
 
     public function joinProcess(Request $request){
@@ -45,12 +47,15 @@ class AdminAuthController extends Controller
 
         return Admin::create([
             'name'              => $data['name'], 
-            'adminid'            => $data['userid'],
+            'adminid'           => $data['userid'],
             'password'          => Hash::make($data['password']),
         ]);      
     }
 
     public function adminLogin(){
+        if(Auth::guard('admin')->check()){
+            return redirect('/admin');
+        }
         return view('admin.login');
     }
 
@@ -74,7 +79,7 @@ class AdminAuthController extends Controller
     public function logout(){
 
             Auth::guard('admin')->logout();
-            return redirect('/')->with('alert','로그아웃 되었습니다.');
+            return redirect('/admin/login')->with('alert','로그아웃 되었습니다.');
     }
 
    

@@ -5953,6 +5953,7 @@ var Editor_Editor = /*#__PURE__*/function () {
           }
 
           $image.css('width', '100%');
+
         }
 
         $image.show();

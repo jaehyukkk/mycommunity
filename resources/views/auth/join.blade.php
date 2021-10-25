@@ -6,9 +6,14 @@
         <title>회원가입</title>
         
         <link rel="stylesheet" type="text/css" href="<?php echo asset('css/join.css')?>" >
+        <link rel="stylesheet" type="text/css" href="<?php echo asset('css/mypage/find.css')?>" >
         
     </head>
     <body>
+
+        <script src="https://kit.fontawesome.com/db98d81eec.js" 
+        crossorigin="anonymous">
+        </script>
 
         <script>
             var msg = '{{Session::get('alert')}}';
@@ -18,20 +23,34 @@
             }
         </script>
 
-        @if (count($errors) > 0)
-        <div class="alert-errors">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+       
 
         <!-- header -->
-        <div id="header">
-            LB TALKLOUNGE
-        </div>
+        <nav>
+            <ul class="logo">
+              <li>
+                <a href="/">LTL</a>
+              </li>
+            </ul>
+            <ul class="nav-item" style="padding-right: 140px">
+              <li>
+                <a href="#" style="color:white"><i class="fas fa-user-plus"></i> 회원가입</a>
+              </li>
+            </ul>
+            <ul>
+              
+            </ul>
+          </nav>
+
+          @if (count($errors) > 0)
+          <div class="alert-errors">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+          @endif
 
 
         <!-- wrapper -->
@@ -106,8 +125,8 @@
                 </div>         
                 <!-- JOIN BTN-->
                 <center><div class="btn_area">
-                    <button type="submit" id="btnJoin">
-                        <span>JOIN</span>
+                    <button type="submit" class="find-result">
+                        <span>회원가입</span>
                     </button>
                 </div></center>
             </form>

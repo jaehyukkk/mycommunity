@@ -58,6 +58,10 @@
           <div><i class="fas fa-reply fa-2x"></i></div>  
           <div>답글</div>  
         </a></li>
+        <li><a href="/admin/logout">
+          <div><i class="fas fa-sign-out-alt fa-2x"></i></div>  
+          <div>로그아웃</div>  
+        </a></li>
       </ul>
     </nav>
 

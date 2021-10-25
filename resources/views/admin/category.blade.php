@@ -32,12 +32,13 @@
                     <div onclick="removeCheck()">제거</div>
                 </div>       
             </div>
+            
             <div id="category-list">
                 @foreach ($maincategory as $mains )
-                <div class="maincategory" data-id="{{ $mains->id }}">{{ $mains->maincategoryname }}</div>
+                <div class="maincategory" data-id="{{ $mains->id }}" data-photocode = "{{ $mains->photocode }}">{{ $mains->maincategoryname }}</div>
                 @foreach ($subcategory as $subs )
                 @if($subs->maincategory_id == $mains->id)
-                <div class="subcategory"data-subid ="{{ $subs->id }}">{{ $subs->subcategoryname }}</div>
+                <div class="subcategory"data-subid ="{{ $subs->id }}" data-photocode ="{{ $subs->photocode }}">{{ $subs->subcategoryname }}</div>
                 @endif        
                 @endforeach       
                 @endforeach   
@@ -61,7 +62,7 @@
                 </div>
                 <div class="category-purpose">
                     <p>용도</p>
-                    <select name="purpose" id="">
+                    <select name="purpose" id="purpose">
                         <option value="0">일반게시판</option>
                         <option value="1">포토게시판</option>
                     </select>

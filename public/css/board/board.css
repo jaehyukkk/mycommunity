@@ -9,7 +9,9 @@
     margin-right: 30px;
     border-bottom: 1px solid #e0e0e0;
 }
-
+.notisTitle{
+    font-weight: 600;
+}
 .table td, .table th{
     padding:0;
     padding-top:10px;
@@ -46,6 +48,13 @@ table .Title{
     font-size: 25px;
     color:#010101;
 
+}
+
+#deleteNotiBtn{
+    cursor: pointer;
+}
+.notiDel{
+    color: rgb(82, 82, 82);
 }
 
 input::placeholder {

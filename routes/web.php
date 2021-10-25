@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminAuthController;
+use App\Functions\SearchClass;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\MailSendController;
@@ -8,8 +8,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\AdminController;
+
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminController;
+
 use App\Models\Maincategory;
 use App\Models\Subcategory;
 use App\Models\Post;
@@ -62,11 +65,12 @@ Route::get('/findPwchg', function(){
 Route::post('/board/store',[PostController::class,'store']);
 Route::get('/board/{id}',[PostController::class,'index']);
 Route::get('/board/{id}/{subid}',[PostController::class,'subIndex']);
-Route::get('/viewall',[PostController::class,'viewAll']);
 Route::get('/read/{id}',[PostController::class,'show']);
+Route::get('/viewall',[PostController::class,'viewAll']);
 
 //검색
 Route::get('/search',[SearchController::class,'getSearchResult']);
+Route::get('/viewmypost/{name}',[MypageController::class,'viewMyPost']);
 
 
 Route::get('/mobile/board',[PostController::class,'mobileBoard']);
@@ -74,18 +78,22 @@ Route::get('/mobile/board',[PostController::class,'mobileBoard']);
 
 
 Route::middleware('auth')->group(function(){
-
     Route::get('/edit/{idx}',[PostController::class,'edit']);
     Route::post('/update/{id}',[PostController::class,'update']);
     Route::post('/destroy/{id}',[PostController::class,'destroy']);
     Route::get('/board/create/{id}/{subid}',[PostController::class,'create']);
+
 
     //마이페이지
     Route::get('/noti/{id}',[MypageController::class,'getNoti']);
     Route::post('/deletenoti',[MypageController::class,'deleteNoti']);
     Route::get('/chginfor/{user}',[MypageController::class,'chgInfor']);
     Route::post('/chginfor',[MypageController::class,'postChgInfor']);
+    Route::get('/mypage',[MypageController::class,'index']);
 
+
+    Route::post('/chgCheckId',[MypageController::class,'chgInforCheckId']);
+    Route::post('/chgCheckName',[MypageController::class,'chgInforCheckName']);
 });
 
 
@@ -93,9 +101,12 @@ Route::middleware('guest')->group(function(){
     Route::get('/join',[UserController::class,'join']);
     Route::post('/join',[UserController::class,'joinProcess']);
     Route::post('/login',[UserController::class,'loginProcess']);
-});
+    Route::post('/joincheckname',[UserController::class,'joinCheckName']);
 
-Route::post('/joincheckname',[UserController::class,'joinCheckName']);
+    //소셜 로그인
+    Route::get('login/google',[UserController::class,'redirectToGoogle'])->name('login.google');
+    Route::get('login/google/callback',[UserController::class,'handleGoogleCallback']);
+});
 
 Route::get('/logout',[UserController::class,'logout']);
 
@@ -105,13 +116,6 @@ Route::post('/updatecomment',[CommentController::class,'updataComment']);
 Route::post('/updatereply',[ReplyController::class,'updataReply']);
 Route::post('/delcomment',[CommentController::class,'delComment']);
 Route::post('/delreply',[ReplyController::class,'delReply']);
-
-Route::post('/checkid/chginfor',[UserController::class,'checkIdChgInfor']);
-Route::post('/checkname',[UserController::class,'checkName']);
-
-
-
-
 
 
 Route::get('/admin',[AdminController::class,'index']);
@@ -126,6 +130,7 @@ Route::post('/updatecategory',[AdminCategoryController::class,'updateCategory'])
 Route::post('/delcategory',[AdminCategoryController::class,'delCategory']);
 Route::post('/deleteuser',[AdminController::class,'deleteUser']);
 Route::post('/admin/delete',[AdminController::class,'deleteFunction']);
+Route::post('/admin/chguserlevel',[AdminController::class,'chgUserLevel']);
 
 Route::get('/admin/login',[AdminAuthController::class,'adminLogin']);
 Route::post('/admin/login',[AdminAuthController::class,'loginProcess']);
@@ -137,6 +142,6 @@ Route::get('/admin/logout',[AdminAuthController::class,'logout']);
 
 
 
+//test
 
-
-
+Route::get('/testss',[UserController::class,'randName']);
