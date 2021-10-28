@@ -303,12 +303,12 @@
     <div class="mobile-read-title">{{ $reads->title }}</div>
     <div class="mobil-read-infor">
       <div class="mobile-read-profil-img">
-        <img src="{{URL::asset('/img/img.JPG')}}" alt="...">
+        <img src="{{URL::asset('/image/'.$reads->img)}}">
       </div>
       <div class="mobile-read-top-item">
-        <div>{{ $reads->name }}</div>
-        <div>
-          <span class="time">{{ $reads->time }}</span>
+        <div class="mobile-read-name">{{ $reads->name }}</div>
+        <div class="mobile-read-datenhit">
+          <span>{{ $reads->time }}</span>
           <span>조회 {{ $reads->hit }}</span>
         </div>
       </div>
@@ -321,93 +321,77 @@
   </div>
   @endforeach
 
-  <footer class="mobile-comment-box"> 
-    <div class="review-box">
-      @foreach ($comment as $comments )
-      
-      <div class="reviews-box">
-    
-        <article class="comment">
-          <div class="comment-name">
-            <div class="mobile-comment-item">
+  <div class="mobile-comment-reply-read">
+    @foreach ($comment as $cmt )
+    <article class="mobile-comment-read">
+    <div class="mobile-comment-info">
 
-              <img src="{{URL::asset('/img/img.JPG')}}" alt="..."> 
-              <span class="mobile-comment-writer">{{ $comments->comment_writer }}</span>
-              <span class="comment-time">{{ $comments->created_at }}</span>
-            </div>
-            <div class="replyALink">
-           </div>
-            
-          </div>
-            <p class="replyContent" >{!! $comments->comment_content !!}</p>
-            <input type="hidden" data-update="{{ $comments->id }}" value="{{$comments->comment_content  }}">
+      <div class="mobile-comment-info-img">
+        <img src="{{URL::asset('/image/'.$cmt->img)}}" alt="...">
+      </div>
 
-            <div class="replyPhotoBox">
-              <?php $photo = json_decode($comments->comment_photo)?>
-              @for($i = 0; $i < count($photo) ; $i++)
-              <div>
-                <img class="replyPhotos" src="{{URL::asset('/image/'.$photo[$i])}}">
-              </div>          
-              @endfor   
-            </div> 
-          
-            @if(Auth::user())
-              @if(Auth::user()->id === $comments->user_id)
-            <div class="reviewupdelBtn" id="commentBtns">             
-                <a href="#" class="commentDelBtn" data-commentdel="{{ $comments->id }}" data-toggle="modal" data-target="#commentDelModal">
-                  삭제
-                </a>   
-                          
-            </div>
-              @endif
-            @endif
-        </article>
+      <div class="mobile-comment-info-namedate">
+        <span class="mobile-comment-info-name">{{ $cmt->comment_writer }}</span>
+        <span class="mobile-comment-info-date">{{ $cmt->created_at }}</span>
+      </div>
 
-
-              <div id="reply-box">
-                  @foreach ($reply as $replys )
-                  <article class="reply">
-                  @if($replys->comment_id == $comments->id)
-                  
-                  <div class=writerStar>
-                    <div class="comment-name-box"><img src="{{URL::asset('/img/img.JPG')}}" alt="..."> <span>{{ $replys->reply_writer }}</span>
-                      <span class="comment-time">{{ $replys->created_at }}</span>
-                    </div>      
-                  </div>
-                    <p class="replyContent" >{!! $replys->reply_content !!}</p>
-                    <input type="hidden" data-replyupdate="{{ $replys->id }}" value="{{$replys->reply_content  }}">
-        
-                    <div class="replyPhotoBox">
-                     
-                      <?php $photo = json_decode($replys->reply_photo)?>
-                      @for($i = 0; $i < count($photo) ; $i++)
-                      <div>
-                        <img class="replyPhotos" src="{{URL::asset('/image/'.$photo[$i])}}">
-                      </div>          
-                      @endfor   
-                   
-                    </div> 
-        
-                    @if(Auth::user())
-                      @if(Auth::user()->id === $replys->user_id)
-                    <div class="reviewupdelBtn" id="replyBtns">
-                      <a href="#" class="replyDelBtn" data-replydel="{{ $replys->id }}" data-toggle="modal" data-target="#replyDelModal">
-                        삭제
-                      </a>               
-                    </div>
-
-                      @endif
-                    @endif
-                  @endif
-                </article>
-                @endforeach
-                  
-            </div>
-           
-        </div>          
-      @endforeach
     </div>
 
+    <div class="mobile-comment-content">
+      {!! $cmt->comment_content !!}
+    </div>
+
+    <div id="commentBtns" class="mobile-commentBtn">     
+      @can('edit-post', $cmt)        
+        <a href="#" class="commentDelBtn" data-commentdel="{{ $cmt->id }}" data-toggle="modal" data-target="#commentDelModal">
+          삭제
+        </a>   
+      @endcan
+                  
+    </div>
+    
+    
+  </article>
+
+
+  {{-- ㅡㅡㅡ모바일 답글ㅡㅡㅡ --}}
+  <article class="mobile-reply-read">
+    @foreach ($reply as $rpy )
+    @if($rpy->comment_id == $cmt->id)
+    <div class="mobile-comment-info">
+
+      <div class="mobile-comment-info-img">
+        <img src="{{URL::asset('/image/'.$rpy->img)}}" alt="...">
+      </div>
+
+      <div class="mobile-comment-info-namedate">
+        <span class="mobile-comment-info-name">{{ $rpy->reply_writer }}</span>
+        <span class="mobile-comment-info-date">{{ $rpy->created_at }}</span>
+      </div>
+
+    </div>
+
+    <div class="mobile-comment-content">
+      {!! $rpy->reply_content !!}
+    </div>
+
+    <div class="reviewupdelBtn" id="replyBtns">
+      @can('edit-post', $replys)
+      <a href="#" class="replyDelBtn" data-replydel="{{ $replys->id }}" data-toggle="modal" data-target="#replyDelModal">
+        삭제
+      </a>  
+      @endcan             
+    </div>
+    @endif
+    @endforeach
+    
+    
+  </article>
+  
+  @endforeach
+
+  {{-- ㅡㅡㅡㅡ답글 끝 ㅡㅡㅡㅡ --}}
+  </div>
 
     <div>  
         <form action="/commentcreate" method="post" id="mobileform" enctype="multipart/form-data">

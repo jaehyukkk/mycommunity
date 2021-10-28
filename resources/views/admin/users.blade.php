@@ -13,7 +13,7 @@
 <table id="table_id" class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>아이디sdsd</th>
+            <th>아이디</th>
             <th>이름</th>
             <th>이메일</th>
             <th>등급</th>

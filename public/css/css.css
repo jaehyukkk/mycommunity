@@ -418,6 +418,10 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
 
 /* 모바일화면 */
 @media screen and (max-width: 850px){
+
+  #foot{
+    display: none;
+  }
   #main{
       display: none;
   }
@@ -489,11 +493,32 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   color: rgb(248, 248, 248);
   
 }
-
+.mobile-read-name{
+  font-weight: 500;
+}
 
 
 /* 글읽기 */
-
+.mobileCommentBtn{
+  background-color: rgb(122, 146, 255);
+  color:white;
+  border:0;
+  border-radius: 4px;
+  width: 60px;
+  height: 30px;
+}
+.mobile-read-boardName{
+  color:rgb(185, 185, 185);
+}
+.mobile-read-title{
+  font-size: 19px;
+  color:#424242;
+  font-weight: 600;
+}
+.mobile-read-datenhit{
+  color:gray;
+  font-size: 13px;
+}
 .mobil-read-infor{
   display: flex;
   font-size: 14px;
@@ -518,17 +543,40 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   border-bottom: 1px solid rgb(241, 241, 241);
 }
 
-.mobile-comment-box{
-  margin:20px;
-  /* border: 1px solid #dadada; */
+/* comment */
+
+.mobile-comment-info{
+  display: flex;
 }
-.mobile-comment-item img{
+.mobile-comment-info img{
   width: 30px;
-  height: 30px;
+  border-radius: 70%;
 }
-.mobile-comment-writer{
-  font-size: 14px;
-  font-weight: 600;
+.mobile-comment-info-namedate{
+  margin-top: 2px;
+  margin-left: 3px;
+}
+.mobile-comment-read{
+  padding:10px;
+}
+.mobile-reply-read{
+  padding: 10px 10px 10px 40px;
+}
+.mobile-commentBtn{
+  display: flex;
+  justify-content: right;
+}
+.mobile-comment-info-name{
+  font-weight: 500;
+  font-size: 15px;
+  color: #424242;
+}
+.mobile-comment-info-date{
+  color:gray;
+  font-size: 12px;
+}
+.mobile-comment-content{
+  color:#555555;
 }
 /* 게시판 */
 
@@ -558,8 +606,6 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   width: 95%;
   height: 45px;
   border:0;
- 
- 
 }
  
 #mobile-container-title{
@@ -583,4 +629,5 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   border-radius: 4px;
   font-size: 13px;
 }
+
 }
