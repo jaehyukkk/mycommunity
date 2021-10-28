@@ -138,7 +138,7 @@ section {
   padding: 2em 12em;
 }
 
-.main-free-board-top{
+/* .main-free-board-top{
   display: flex;
   justify-content:space-between;
   border-bottom: 1px solid gray;
@@ -158,7 +158,7 @@ section {
 .main-free-board{
   margin-top: 50px;
   margin-right: 35px;
-  width: 520px;
+  width: 100%;
 
 }
 .main-free-board-title{
@@ -172,10 +172,52 @@ section {
 .board{
   z-index: 0;
   display: flex;
+  width: 100%;
+} */
+
+.board{
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+.main-free-board{
+  width: 50%;
+  margin-top: 75px;
+}
+
+.main-free-board:not(:last-child){
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.main-free-board-title{
+  display: flex;
+  justify-content:space-between;
+  margin-left: 5px;
+  font-size: 18px;
+}
+
+.main-free-board-top div{
+  font-weight: 600;
+  font-size: 25px;
+}
+.main-free-board-top span{
+  font-size: 16px;
+  margin-top: 5px;
+  margin-right: 7px;
+  color:gray
+}
+.main-free-board-top{
+  display: flex;
+  justify-content:space-between;
+  border-bottom: 1px solid gray;
+  margin-bottom: 10px;
 }
 
 #main{
   display: flex;
+  justify-content: center;
+  width: 100%;
 }
 #loginBox input{
   margin-bottom: 1px;
@@ -244,7 +286,6 @@ section {
   font-size: 12px;
   justify-content: space-between;
   margin: 5px 15px 15px 15px;
-  /* letter-spacing: -2px; */
   color:gray;  
 }
 #loginSubMenu div{
