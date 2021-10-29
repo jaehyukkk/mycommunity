@@ -442,7 +442,7 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   #mobile{
     display: block;
   }
-  #mobile-nav{
+  /* #mobile-nav{
     display: flex;
     justify-content: space-between;
     padding:20px;
@@ -452,11 +452,10 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
     color:white;
     position: fixed;
     top: 0;
-    /* width: 100% */
     left: 0;
     right: 0;
    
-  }
+  } */
 
   .mobile-nav-left{
     color:white;
