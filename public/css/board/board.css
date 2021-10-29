@@ -329,7 +329,7 @@ table .noticeText div{
 }
 
 .read-main{
-    border-radius: 3px;
+    
     margin-top: 70px;
    
 }
@@ -446,6 +446,109 @@ table .noticeText div{
   
 }
 
+#mobile-searchBox{
+    display: none;
+}
+
+@media screen and (max-width: 850px){
+
+    
+
+    .mobile-board-box{
+        display: block;
+      }
+      table,.board-top{
+        display: none;
+        
+      }
+
+      .mobile-board-info{
+        color:gray;
+        font-size: 14px;
+      }
+      .mobile-board-info span{
+        margin-right: 3px;
+      }
+      .mobile-board-info span:not(:first-child){
+        font-size: 13px;
+      }
+      .mobile-board-category{
+        color:gray;
+        font-size: 13px;
+      }
+      .mobile-board-info-name{
+        color:black;
+      }
+      .mobile-board{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 10px;
+        border-top: 1px solid rgb(240, 240, 240);
+        width: 100%;
+        padding-top: 10px;
+        margin-bottom: 10px;
+      }
+    
+      .mobile-board-commnet{
+        padding: 20px;
+        font-size: 22px;
+        color:rgb(255, 102, 102);
+      }
+      #searchBox{
+          display: block;
+      }
+      .mobile-board-box{
+          width: 100%;
+      }
+
+      #mobile-sebindex-board-box{
+        border-bottom: 1px solid rgb(236, 236, 236);
+      }
+      
+      #mobile-board-sebindex-list{
+        margin-top: 10px;
+      }
+
+     #board-foot .createbtn{
+          margin:0;
+          
+      }
+      #searchBox{
+          display: none;
+      }
+
+      #mobile-searchBox{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .mobile-serch-result{
+        display: flex;
+        justify-content: center;
+      }
+      
+      .mobile-serch-select select{
+        border:1px solid rgb(221, 221, 221);
+        width: 100%;
+        margin-bottom: 5px;
+        height: 40px;
+      }
+
+      .read-baord-box{
+          width: 100%;
+          padding:0;
+      }
+
+      .read-title,.read-time,.board-content{
+          margin-left: 8px;
+      }
+      .read-num{
+          margin-right: 5px;
+      }
+     
+      
+    
+}
 
 
 

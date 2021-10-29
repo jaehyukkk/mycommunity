@@ -129,6 +129,24 @@
 <input type="hidden" value="{{ $id }}" id="maincategoryId">
 <input type="hidden" value="{{ $subid }}" id="subcategoryId">
 
+<div class="mobile-board-box">
+  
+  @foreach ($board as $boards )
+  
+    <div class="mobile-board">
+      <div class="mobile-board-item" id="mobile-board-sebindex-list">
+        <div class="mobile-board-title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
+        <div class="mobile-board-info"><span class="mobile-board-info-name">{{ $boards->name }}</span><span class="time">{{ $boards->time }}</span><span>조회{{ $boards->hit }}</span></div>
+      </div>
+      <div>
+       <div class="mobile-board-commnet">{{ $boards->commentnum }}</div>  
+      </div>
+    </div> 
+  
+    @endforeach
+  
+  </div>
+
 <div id="board-foot">
   <div>
   </div>
@@ -142,6 +160,37 @@
 
 <form action="/search">
 
+  <div id="mobile-searchBox">
+    <div>
+      <div class="mobile-serch-select">
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="subid" value="0">
+        <select name="category" id="">
+          <option value="1">제목+내용</option>  
+          <option value="2">제목</option>  
+          <option value="3">내용</option>  
+          <option value="4">작성자</option>  
+          <option value="5">댓글</option>  
+        </select>
+      </div>
+      
+      <div class="mobile-serch-result">
+      <div class="searchInput">
+        <span class="inputbox input_search">
+          <input type="text" id="search" class="input" maxlength="20" name="search">
+        </span>
+      </div>
+      
+      <div class="searchSubmit">
+         <input type="submit" value="검색">
+      </div>
+    </div>
+
+  </div>
+  </div>
+  </form>
+
+<form action="/search">
   <div id="searchBox">
     
       <div class="searchSelect">
@@ -172,7 +221,7 @@
 @endsection
 
 
-@section('subContent')
+{{-- @section('subContent')
 
 <div id="mobile">
   @component('layouts.mobilenav')
@@ -236,4 +285,4 @@
   </div>
 
 
-@endsection
+@endsection --}}

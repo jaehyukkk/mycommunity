@@ -399,8 +399,54 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
 	font-weight:700;
 }
 
+.mobile-board-box{
+  display: none;
+}
+
+@media screen and (max-width: 850px){
+  body{
+    display: block;
+    margin:0;
+    padding:0;
+  }
+
+  nav{
+    display: none;
+  }
+
+  #main{
+    width: 100%;
+    display: block;
+  }
+
+  #loginBox,#userbox{
+    display: none;
+  }
+  #foot{
+    display: none;
+  }
+
+  .board{
+    display: block;
+    width: 100%;
+}
+.main-free-board{
+  width: 100%;
+
+ 
+}
+.main-free-board:not(:last-child){
+  margin-right: 0;
+  margin-left: 0;
+}
 
 
+/* 게시판 --------------------*/
+
+
+
+
+}
 
 
 
@@ -417,331 +463,4 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
 
 
 /* 모바일화면 */
-@media screen and (max-width: 850px){
 
-  #foot{
-    display: none;
-  }
-  #main{
-      display: none;
-  }
-  nav{
-      display: none;
-  }
-  #main-logo, #loginBox, .container{
-    display: none;
-  }
-  body{
-    display: block;
-    margin: 0;
-    padding:0;
-    padding-top:75px;
-    margin-bottom: 100px;
-  }
-  #mobile{
-    display: block;
-  }
-  #mobile-nav{
-    display: flex;
-    justify-content: space-between;
-    padding:20px;
-    font-size: 20px;
-    padding-top: 30px;
-    background-color: #316B83;
-    color:white;
-    position: fixed;
-    top: 0;
-    /* width: 100% */
-    left: 0;
-    right: 0;
-   
-  }
-
-  .mobile-nav-left,.mobile-login-a{
-    color:white;
-  }
-  .mobile-nav-left:active, .mobile-login-a:active{
-    text-decoration: none;
-    color:white;
-  }
-
-  .mobile-board{
-    display: flex;
-    justify-content: space-between;
-    padding-left: 10px;
-    border-top: 1px solid rgb(240, 240, 240);
-    width: 100%;
-    padding-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  .mobile-board-commnet{
-    padding: 20px;
-    font-size: 22px;
-    color:rgb(255, 102, 102);
-  }
-
-  .mobile-board-box{
-    margin-bottom: 100px;
-  }
-  #footer{
-    position: fixed;
-    background-color: #316B83; /*임의색상*/
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 5.5rem;
-  }
-  #footer a{
-    color:white;
-  }
-.mobile-footer-item{
-  display: flex;
-  justify-content:space-between;
-  margin-top: 15px;
-  padding:5px 15px 5px 15px;
-  
-}
-.mobile-footer-item span{
-  font-size: 22px;
-  font-weight: 500;
-  color: rgb(248, 248, 248);
-  
-}
-.mobile-read-name{
-  font-weight: 500;
-}
-
-
-/* 글읽기 */
-.mobileCommentBtn{
-  background-color: rgb(122, 146, 255);
-  color:white;
-  border:0;
-  border-radius: 4px;
-  width: 60px;
-  height: 30px;
-}
-.mobile-read-boardName{
-  color:rgb(185, 185, 185);
-}
-.mobile-read-title{
-  font-size: 19px;
-  color:#424242;
-  font-weight: 600;
-}
-.mobile-read-datenhit{
-  color:gray;
-  font-size: 13px;
-}
-.mobil-read-infor{
-  display: flex;
-  font-size: 14px;
-  
-}
-.mobile-read-top-item{
-  margin-left: 5px;
-}
-
-.mobile-read-profil-img img{
-  width: 38px;
-  height: 38px;
-}
-
-.mobile-read-top{
-  padding:15px;
-  border-bottom: 1px solid rgb(241, 241, 241);
-}
-.mobile-read-description{
-  padding:10px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid rgb(241, 241, 241);
-}
-
-/* comment */
-
-.mobile-comment-info{
-  display: flex;
-}
-.mobile-comment-info img{
-  width: 30px;
-  border-radius: 70%;
-}
-.mobile-comment-info-namedate{
-  margin-top: 2px;
-  margin-left: 3px;
-}
-.mobile-comment-read{
-  padding:10px;
-}
-.mobile-reply-read{
-  padding: 10px 10px 10px 40px;
-}
-.mobile-commentBtn{
-  display: flex;
-  justify-content: right;
-}
-.mobile-comment-info-name{
-  font-weight: 500;
-  font-size: 15px;
-  color: #424242;
-}
-.mobile-comment-info-date{
-  color:gray;
-  font-size: 12px;
-}
-.mobile-comment-content{
-  color:#555555;
-}
-/* 게시판 */
-
-.mobile-subCategory{
- padding:5px 13px 5px 13px;
- color: rgb(100, 100, 100);
- background-color:rgb(243, 243, 243);
-
-}
-.mobile-subCategory:not(:last-child){
-  border-bottom: 1px solid rgb(233, 233, 233);
-  color: #444444;
-}
-
-.mobile-mainCategory{
-  border-top: 1px solid rgb(238, 238, 238);
-  border-bottom: 2px solid rgb(240, 240, 240);
-  padding:5px;
-  font-weight: 600;
-  color: #424242;
-
-}
-
-.mobile-board-info{
-  color:gray;
-  font-size: 14px;
-}
-.mobile-board-info span{
-  margin-right: 3px;
-}
-.mobile-board-info span:not(:first-child){
-  font-size: 13px;
-}
-.mobile-board-category{
-  color:gray;
-  font-size: 13px;
-}
-.mobile-board-info-name{
-  color:black;
-}
-
-
-/* 글쓰기 */
-.mobile-create-title{
-  width: 95%;
-  height: 45px;
-  border:0;
-}
- 
-#mobile-container-title{
-  font-weight: 600;
-  margin: 10px;
-  color: rgb(110, 110, 110);
-}
-#mobile-container{
-  border-bottom: 1px solid rgb(240, 240, 240);
-}
-#mobile-create-nav-item{
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  border-bottom: 1px solid rgb(236, 236, 236);
-}
-#mobile-create-nav-item button{
-  border:0;
-  background-color: rgb(131, 117, 255);
-  color:white;
-  border-radius: 4px;
-  font-size: 13px;
-}
-
-
-/* 로그인 */
-
-.loginForm{    
-  width: 100%;
-  margin-top: 40px; 
-}
-.loginForm input{
-  width: 100%;
-  height: 55px;
-  border: 0;
-
-}
-
-.box {
-  display: block;
-  width: 100%;
-  height: 80px;
-  border: solid 1px #dadada;
-  padding: 10px 14px 10px 14px;
-  box-sizing: border-box;
-  background: #fff;
-  position: relative;
-}
-#input-pw{
-  margin-bottom: 40px;
-  margin-top: 10px;
-}
-
-.btnLogin{
-  width: 100%;
-  height: 50px;
-  margin-bottom: 10px;
-  color: #ffffff;
-  background: #31363d;
-  border: 1px solid #31363d;
-  
-}
-
-.loginForm a{
-  color:black;
-  text-decoration: none;
-}
-
-.btnGoogle{
-  width: 100%;
-  height: 50px;
-  margin-bottom: 10px;
-  background: #ff6c5e;
-  border: 1px solid #ff7b6f;
-  text-align: center;
-}
-.btnGoogle div{
-  color: white;
-  font-size: 20px;
-  margin-top: 5px;
-}
-#mobile-searchBox{
-  display: flex;
-  justify-content: center;
-}
-.mobile-serch-result{
-  display: flex;
-  justify-content: center;
-}
-
-.mobile-serch-select select{
-  border:1px solid rgb(221, 221, 221);
-  width: 100%;
-  margin-bottom: 5px;
-  height: 40px;
-}
-
-#mobile-sebindex-board-box{
-  border-bottom: 1px solid rgb(236, 236, 236);
-}
-
-#mobile-board-sebindex-list{
-  margin-top: 10px;
-}
-
-}
