@@ -68,9 +68,9 @@
   
     <div class="mobile-board">
       <div class="mobile-board-item">
-        <div><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
-        <div><span>{{ $boards->name }}</span><span class="time">{{ $boards->time }}</span><span>조회{{ $boards->hit }}</span></div>
-        <div>자유게시판</div>
+        <div class="mobile-board-title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
+        <div class="mobile-board-info"><span class="mobile-board-info-name">{{ $boards->name }}</span><span class="time">{{ $boards->time }}</span><span>조회{{ $boards->hit }}</span></div>
+        <div class="mobile-board-category">자유게시판</div>
       </div>
       <div>
        <div class="mobile-board-commnet">{{ $boards->commentnum }}</div>  

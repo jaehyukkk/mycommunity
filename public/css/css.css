@@ -457,10 +457,10 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
    
   }
 
-  .mobile-nav-left{
+  .mobile-nav-left,.mobile-login-a{
     color:white;
   }
-  .mobile-nav-left:active{
+  .mobile-nav-left:active, .mobile-login-a:active{
     text-decoration: none;
     color:white;
   }
@@ -615,6 +615,24 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
 
 }
 
+.mobile-board-info{
+  color:gray;
+  font-size: 14px;
+}
+.mobile-board-info span{
+  margin-right: 3px;
+}
+.mobile-board-info span:not(:first-child){
+  font-size: 13px;
+}
+.mobile-board-category{
+  color:gray;
+  font-size: 13px;
+}
+.mobile-board-info-name{
+  color:black;
+}
+
 
 /* 글쓰기 */
 .mobile-create-title{
@@ -701,6 +719,29 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   color: white;
   font-size: 20px;
   margin-top: 5px;
+}
+#mobile-searchBox{
+  display: flex;
+  justify-content: center;
+}
+.mobile-serch-result{
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-serch-select select{
+  border:1px solid rgb(221, 221, 221);
+  width: 100%;
+  margin-bottom: 5px;
+  height: 40px;
+}
+
+#mobile-sebindex-board-box{
+  border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+#mobile-board-sebindex-list{
+  margin-top: 10px;
 }
 
 }
