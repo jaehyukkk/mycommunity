@@ -75,6 +75,10 @@ Route::get('/viewmypost/{name}',[MypageController::class,'viewMyPost']);
 
 Route::get('/mobile/board',[PostController::class,'mobileBoard']);
 
+Route::get('mobile/login',function(){
+    return view('mobile.login');
+});
+
 
 
 Route::middleware('auth')->group(function(){
