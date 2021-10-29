@@ -437,6 +437,7 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
     padding:0;
     padding-top:75px;
     margin-bottom: 100px;
+    background-color: black;
   }
   #mobile{
     display: block;
