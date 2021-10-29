@@ -437,12 +437,11 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
     padding:0;
     padding-top:75px;
     margin-bottom: 100px;
-    background-color: black;
   }
   #mobile{
     display: block;
   }
-  /* #mobile-nav{
+  #mobile-nav{
     display: flex;
     justify-content: space-between;
     padding:20px;
@@ -452,10 +451,11 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
     color:white;
     position: fixed;
     top: 0;
+    /* width: 100% */
     left: 0;
     right: 0;
    
-  } */
+  }
 
   .mobile-nav-left{
     color:white;
@@ -694,7 +694,7 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   height: 50px;
   margin-bottom: 10px;
   background: #ff6c5e;
-  border: 1px solid #ff6c5e;
+  border: 1px solid #ff7b6f;
   text-align: center;
 }
 .btnGoogle div{
