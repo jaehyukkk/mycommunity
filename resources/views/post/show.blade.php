@@ -16,6 +16,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/post.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('/ckeditor_review/ckeditor/ckeditor.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('/ckeditor_review/ckeditor/adapters/jquery.js') }}" defer></script>
+<script type="text/javascript" src="{{ URL::asset('js/time.js') }}" defer></script>
 @endsection
 @section('content')
 <article class="read-main">
@@ -291,11 +292,8 @@
 
   
 <div id="mobile">
-  <div id="mobile-nav">
-    <div><i class="fas fa-chevron-left"></i></div>
-    <div>LBL</div>
-    <div class="mobile-login"><i class="fas fa-sign-in-alt"></i></div>
-  </div>
+  @component('layouts.mobilenav')
+  @endcomponent
   <div class="mobile-read-box">
   @foreach ($read as $reads )
   <div class="mobile-read-top">
@@ -430,13 +428,8 @@
   </div>
 </footer>
   
-  <div id="footer">
-    <div class="mobile-footer-item">
-      <span><i class="far fa-address-card"></i></span>
-      <span><i class="fas fa-search"></i></span>
-      <span><a href="/mobile/board"><i class="fas fa-bars"></i></a></span>
-    </div>
-  </div>
+@component('layouts.mobilefooter')
+@endcomponent
   
   </div>
 

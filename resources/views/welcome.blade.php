@@ -60,11 +60,8 @@
 
 @section('subContent')
 <div id="mobile">
-  <div id="mobile-nav">
-    <div><i class="fas fa-chevron-left"></i></div>
-    <div>LBL</div>
-    <div><i class="fas fa-sign-in-alt"></i></div>
-  </div>
+  @component('layouts.mobilenav')
+  @endcomponent
   <div class="mobile-board-box">
   
   @foreach ($board as $boards )
@@ -85,13 +82,8 @@
   </div>
   
   
-  <div id="footer">
-    <div class="mobile-footer-item">
-      <span><i class="far fa-address-card"></i></span>
-      <span><i class="fas fa-search"></i></span>
-      <span><a href="/mobile/board"><i class="fas fa-bars"></i></a></span>
-    </div>
-  </div>
+  @component('layouts.mobilefooter')
+  @endcomponent
   
   </div>
 @endsection
