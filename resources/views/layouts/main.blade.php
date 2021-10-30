@@ -36,7 +36,7 @@
 <div class="mobile-nav">
 <div class="header">
   <div class="menu_btn"><a href="#">       
-    <i class="fas fa-bars"></i>
+    메뉴메뉴메뉴
   </a>
   </div>
 </div>
