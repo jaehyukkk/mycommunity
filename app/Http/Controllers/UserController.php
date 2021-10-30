@@ -45,6 +45,13 @@ class UserController extends Controller
         
     }
 
+    public function joinCheckEmail(Request $request){
+        $email = $request->email;
+
+        $count = User::where('email',$email)->count();
+        return $count;
+    }
+
 
  
 
@@ -84,7 +91,7 @@ class UserController extends Controller
             'name'              => $data['name'], 
             'userid'            => $data['userid'],
             'password'          => Hash::make($data['password']),
-            'sex'               => $data['sex'],
+            // 'sex'               => $data['sex'],
             'email'             => $data['email'],
             'img'               => 'img.JPG'
         ]);      

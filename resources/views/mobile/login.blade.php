@@ -15,11 +15,9 @@
     crossorigin="anonymous">
     </script>
 
-<div id="mobile">
-  @component('layouts.mobilenav')
-  @endcomponent
+<div id="mobile-auth">
     
-  <center><h1 style="margin-top: 70px">LOGO</h1></center>
+  <center><h1 style="margin-top: 70px">LTL</h1></center>
 
   <div class="loginForm">
     <div>
@@ -42,10 +40,6 @@
         
     </div>
  </div>
-
-
-  @component('layouts.mobilefooter')
-  @endcomponent
   
   </div>
     

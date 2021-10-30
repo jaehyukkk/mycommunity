@@ -78,6 +78,9 @@ Route::get('/mobile/board',[PostController::class,'mobileBoard']);
 Route::get('mobile/login',function(){
     return view('mobile.login');
 });
+Route::get('mobile/join',function(){
+    return view('mobile.join');
+});
 
 
 
@@ -105,7 +108,9 @@ Route::middleware('guest')->group(function(){
     Route::get('/join',[UserController::class,'join']);
     Route::post('/join',[UserController::class,'joinProcess']);
     Route::post('/login',[UserController::class,'loginProcess']);
+
     Route::post('/joincheckname',[UserController::class,'joinCheckName']);
+    Route::post('/joincheckemail',[UserController::class,'joinCheckEmail']);
 
     //소셜 로그인
     Route::get('login/google',[UserController::class,'redirectToGoogle'])->name('login.google');

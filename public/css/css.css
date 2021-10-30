@@ -45,7 +45,7 @@ body {
 
 
 
-nav {
+.navigation, #join-navigation {
   width: 100%;
   display: flex;
   justify-content:center;
@@ -53,6 +53,7 @@ nav {
   background: #316B83;
   padding-bottom: 10px;
   padding-top: 10px;
+  margin:0;
 }
 
 ul, li {
@@ -399,18 +400,30 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
 	font-weight:700;
 }
 
-.mobile-board-box{
+.mobile-board-box,#mobile-nav{
   display: none;
 }
 
+.mobile-nav{
+  display: none;
+}
+
+
 @media screen and (max-width: 850px){
+  .mobile-nav{
+    display: block;
+  }
   body{
     display: block;
     margin:0;
     padding:0;
   }
+  #mainTop img{
+    width: 45%;
+  }
 
-  nav{
+ 
+  #navigation{
     display: none;
   }
 
@@ -429,19 +442,195 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   .board{
     display: block;
     width: 100%;
+  
 }
 .main-free-board{
   width: 100%;
+  border-bottom: 1px solid rgb(212, 212, 212);
+  margin:0;
+  padding:0;
+}
+.main-free-board-top{
+  border-bottom: 1px solid rgb(212, 212, 212);
+  background-color: rgb(245, 245, 245);
+}
+.main-free-board-top div, .main-free-board-title div{
+  padding-left: 5px;
+}
+.main-free-board-title div:last-child{
+  margin-right: 5px;
+}
+.main-free-board-title{
+  margin-bottom: 3px;
+}
+.main-free-board-top div a{
+  color: #616161;
+  font-weight: 500;
 
- 
 }
 .main-free-board:not(:last-child){
   margin-right: 0;
   margin-left: 0;
 }
+#mobile-nav{
+  display: block;
+  margin-top: 0;
+}
+
+.mobile-nav-items{
+  display: flex;
+  justify-content: space-between;
+}
+.mobile-nav-items div a i{
+  color: white;
+}
 
 
-/* 게시판 --------------------*/
+
+
+
+
+
+
+body, html{width:100%;height: 100%;overflow-x: hidden;}
+    .header{
+      display: block;
+        width: 100%;
+        height: 50px;
+        background: #316B83;
+    }
+    .menu_btn{
+        text-align: right;
+        padding: 10px;
+    }
+    .menu_btn a{
+      color: white;
+    }
+    .menu_bg{
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        position: absolute;
+        top:0;
+        display: none;
+    }
+    .sidebar_menu{
+ display: none;
+        width: 70%;
+        height: 100%;
+        background: #ffffff;
+        position: absolute;
+        top:0;
+        right: -50%;
+        
+    }
+    .close_btn{
+        width: 25px;
+        height: 25px;
+        margin:10px;
+    }
+    .close_btn > a{
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .menu_wrap{
+        list-style: none;
+        padding: 20px 20px;   
+    }
+    .menu_wrap li a{
+        color: rgb(83, 83, 83);
+        text-decoration: none;
+    }
+    .mobile-menu-list{
+      border-top: 1px solid #dadada;
+    }
+    .mobile-menu-maincategory{
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    .mobile-menu-subcategory{
+      padding-left: 10px;
+    }
+    .mobile-menu-maincategory a{
+      font-weight: 600;
+    }
+
+    .mobile-menu-title{
+      display: flex;
+      justify-content: right;
+      border-top: 1px solid #dadada;
+      padding:3px;
+    }
+
+
+
+    /* login */
+
+    .loginForm{    
+      width: 100%;
+      margin-top: 40px; 
+    }
+    .loginForm input{
+      width: 100%;
+      height: 55px;
+      border: 0;
+    }
+    
+    .box {
+      display: block;
+      width: 100%;
+      height: 80px;
+      border-top: solid 1px #dadada;
+      border-bottom: solid 1px #dadada;
+      padding: 10px 14px 10px 14px;
+      box-sizing: border-box;
+      background: #fff;
+      position: relative;
+      margin-bottom: 5px;
+    }
+    /* #input-pw{
+      margin-bottom: 40px;
+      margin-top: 10px;
+    } */
+    
+    .btnLogin{
+      width: 100%;
+      height: 50px;
+      margin-bottom: 10px;
+      color: #ffffff;
+      background: #31363d;
+      border: 1px solid #31363d;
+      
+    }
+    
+    .loginForm a{
+      color:black;
+      text-decoration: none;
+    }
+    
+    .btnGoogle{
+      width: 100%;
+      height: 50px;
+      margin-bottom: 10px;
+      background: #ff6c5e;
+      border: 1px solid #ff7b6f;
+      text-align: center;
+    }
+    .btnGoogle div{
+      color: white;
+      font-size: 20px;
+      margin-top: 5px;
+    }
+
+    .check-btn{
+      width: 100%;
+      height: 40px;
+      margin-bottom: 5px;
+      border:1px solid 0;
+      background-color: #316B83;
+      color:white;
+    }
 
 
 

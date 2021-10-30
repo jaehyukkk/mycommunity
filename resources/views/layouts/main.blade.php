@@ -33,7 +33,52 @@
     <a href="/"><img src="{{URL::asset('/img/logo.png')}}" id=""alt="..."></a>
   </div>
 </div>
-<nav role="navigation">
+<div class="mobile-nav">
+<div class="header">
+  <div class="menu_btn"><a href="#">       
+    <i class="fas fa-bars"></i>
+  </a>
+  </div>
+</div>
+<div class="menu_bg"></div>
+<div class="sidebar_menu">
+<div class="close_btn"><a href="#">       
+  <i class="fas fa-times"></i>
+   </a>
+</div>
+<ul class="menu_wrap">
+  <div class="mobile-menu-title">
+    <div>내정보</div>
+  </div>
+  <div class="mobile-menu-list">
+    @guest
+      <li class="mobile-menu-maincategory"><a href="/mobile/login">로그인</a></li> 
+      <li class="mobile-menu-maincategory"><a href="/mobile/login">회원가입</a></li>  
+    @endguest
+    @auth
+      <li class="mobile-menu-maincategory"><a href="/logout">로그아웃</a></li>
+    @endauth
+    
+  </div>
+    <div class="mobile-menu-title">
+      <div>리스트</div>
+    </div>
+    @foreach ($maincategory as $mains )
+    <div class="mobile-menu-list">
+    <li class="mobile-menu-maincategory"><a href="#">{{ $mains->maincategoryname }}</a></li>
+      @foreach ($subcategory as $subs )
+        @if($subs->maincategory_id == $mains->id)
+        <li class="mobile-menu-subcategory"><a href="/board/{{ $mains->id }}/{{ $subs->id }}">{{ $subs->subcategoryname }}</a></li>
+        @endif
+      @endforeach
+    </div>
+    @endforeach
+</ul>
+</div>
+</div>
+
+
+<nav role="navigation" id="navigation"class="navigation">
 
   <ul id="main-menu" class="main-menu-board">
     <li><a href="/viewall">최신글목록</a></li>

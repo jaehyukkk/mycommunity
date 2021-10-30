@@ -6,8 +6,6 @@
         <title>회원가입</title>
         
         <link rel="stylesheet" type="text/css" href="<?php echo asset('css/join.css')?>" >
-        <link rel="stylesheet" type="text/css" href="<?php echo asset('css/mobilejoin.css')?>" >
-        <link rel="stylesheet" type="text/css" href="<?php echo asset('css/css.css')?>" >
         <link rel="stylesheet" type="text/css" href="<?php echo asset('css/mypage/find.css')?>" >
         
     </head>
@@ -28,7 +26,7 @@
        
 
         <!-- header -->
-        <nav class="joinnav">
+        <nav>
             <ul class="logo">
               <li>
                 <a href="/">LTL</a>

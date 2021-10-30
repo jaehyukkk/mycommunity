@@ -290,7 +290,7 @@
 </div>
 
 
-  
+{{--   
 <div id="mobile">
   @component('layouts.mobilenav')
   @endcomponent
@@ -352,7 +352,7 @@
   </article>
 
 
-  {{-- ㅡㅡㅡ모바일 답글ㅡㅡㅡ --}}
+
   <article class="mobile-reply-read">
     @foreach ($reply as $rpy )
     @if($rpy->comment_id == $cmt->id)
@@ -388,7 +388,6 @@
   
   @endforeach
 
-  {{-- ㅡㅡㅡㅡ답글 끝 ㅡㅡㅡㅡ --}}
   </div>
 
     <div>  
@@ -431,7 +430,7 @@
 @component('layouts.mobilefooter')
 @endcomponent
   
-  </div>
+  </div> --}}
 
 
  <script>

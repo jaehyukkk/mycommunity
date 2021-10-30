@@ -57,7 +57,7 @@
 @endsection
 
 
-
+{{-- 
 @section('subContent')
 <div id="mobile">
   @component('layouts.mobilenav')
@@ -86,6 +86,6 @@
   @endcomponent
   
   </div>
-@endsection
+@endsection --}}
 
 
