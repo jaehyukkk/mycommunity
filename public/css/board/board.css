@@ -507,6 +507,7 @@ table .noticeText div{
       
       #mobile-board-sebindex-list{
         margin-top: 10px;
+        width: 100%;
       }
 
      #board-foot .createbtn{
@@ -545,8 +546,30 @@ table .noticeText div{
       .read-num{
           margin-right: 5px;
       }
-     
+
+    #imgboard{
+        display: none;
+    }
+
+    .mobile-board img{
+        width: 30%;
+        margin-right: 10px;
+        border-radius: 4px;
+    }
+
+    .mobile-board-content{
+        display: flex;
+    }
       
+
+    #create-container{
+        width: 100%;
+        margin:0;
+    }
+    #create-title input{
+        width: 100%;
+    }
+
     
 }
 

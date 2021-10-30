@@ -67,6 +67,6 @@
     {{ $noti->links('pagination::custom')}}
 </div>
 </div>
-</div>
+
 @endsection
 

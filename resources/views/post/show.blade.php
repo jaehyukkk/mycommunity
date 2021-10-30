@@ -61,7 +61,7 @@
           </div>
 
       
-           <footer class="comment-box"> 
+           <div class="comment-box"> 
           <div class="review-box">
             @foreach ($comment as $comments )
             
@@ -75,7 +75,7 @@
                     <span>{{ $comments->comment_writer }}</span>
                     <span class="comment-time">{{ $comments->created_at }}</span>
                   </div>
-                  <div class="replyALink">
+                  <div>
                     <a href="#"class="commentReplyBtn" data-reply="{{ $comments->id }}">답글</a>
                  </div>
                   
@@ -182,7 +182,7 @@
           <div>  
               <form action="/commentcreate" method="post" id="form" enctype="multipart/form-data">
                   @csrf
-                    <div class="review">
+                    <div class="comment">
                                          
                           <textarea class="form-control" id="editor1" name="reply_content" ></textarea>
                           
@@ -210,11 +210,11 @@
                       </div>
                       
                       <input type="hidden" name="postid" value="{{ $read[0]->id }}">
-                  </form>
-          </div>
-       
+                  
+                </div>
+              </form>
         </div>
-      </footer>
+      </div>
         
     <?php $post = $read[0]?>   
     <div id="read-foot-1">
@@ -236,210 +236,66 @@
       </div>
     </div>
   </article>   
-  </div>
+  
 
-@endsection
-
-
-
-
-
-
-
-@section('subContent')
-
-<div class="modal fade" id="commentDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        댓글을 정말 삭제하시겠습니까?
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="commentDelModalBtn" data-postid="{{ $read[0]->id }}">삭제하기</button>
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="replyDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        답글을 정말 삭제하시겠습니까?
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="replyDelModalBtn" data-postid="{{ $read[0]->id }}">삭제하기</button>
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-{{--   
-<div id="mobile">
-  @component('layouts.mobilenav')
-  @endcomponent
-  <div class="mobile-read-box">
-  @foreach ($read as $reads )
-  <div class="mobile-read-top">
-    <div class="mobile-read-boardName">{{ $reads->subcategoryname }}</div>
-    <div class="mobile-read-title">{{ $reads->title }}</div>
-    <div class="mobil-read-infor">
-      <div class="mobile-read-profil-img">
-        <img src="{{URL::asset('/image/'.$reads->img)}}">
-      </div>
-      <div class="mobile-read-top-item">
-        <div class="mobile-read-name">{{ $reads->name }}</div>
-        <div class="mobile-read-datenhit">
-          <span>{{ $reads->time }}</span>
-          <span>조회 {{ $reads->hit }}</span>
+  <div class="modal fade" id="commentDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          댓글을 정말 삭제하시겠습니까?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="commentDelModalBtn" data-postid="{{ $read[0]->id }}">삭제하기</button>
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
         </div>
       </div>
     </div>
   </div>
- 
-  <div class="mobile-read-description">
-    {!! $reads->description !!}
-  </div>
-  </div>
-  @endforeach
-
-  <div class="mobile-comment-reply-read">
-    @foreach ($comment as $cmt )
-    <article class="mobile-comment-read">
-    <div class="mobile-comment-info">
-
-      <div class="mobile-comment-info-img">
-        <img src="{{URL::asset('/image/'.$cmt->img)}}" alt="...">
-      </div>
-
-      <div class="mobile-comment-info-namedate">
-        <span class="mobile-comment-info-name">{{ $cmt->comment_writer }}</span>
-        <span class="mobile-comment-info-date">{{ $cmt->created_at }}</span>
-      </div>
-
-    </div>
-
-    <div class="mobile-comment-content">
-      {!! $cmt->comment_content !!}
-    </div>
-
-    <div id="commentBtns" class="mobile-commentBtn">     
-      @can('edit-post', $cmt)        
-        <a href="#" class="commentDelBtn" data-commentdel="{{ $cmt->id }}" data-toggle="modal" data-target="#commentDelModal">
-          삭제
-        </a>   
-      @endcan
-                  
-    </div>
-    
-    
-  </article>
-
-
-
-  <article class="mobile-reply-read">
-    @foreach ($reply as $rpy )
-    @if($rpy->comment_id == $cmt->id)
-    <div class="mobile-comment-info">
-
-      <div class="mobile-comment-info-img">
-        <img src="{{URL::asset('/image/'.$rpy->img)}}" alt="...">
-      </div>
-
-      <div class="mobile-comment-info-namedate">
-        <span class="mobile-comment-info-name">{{ $rpy->reply_writer }}</span>
-        <span class="mobile-comment-info-date">{{ $rpy->created_at }}</span>
-      </div>
-
-    </div>
-
-    <div class="mobile-comment-content">
-      {!! $rpy->reply_content !!}
-    </div>
-
-    <div class="reviewupdelBtn" id="replyBtns">
-      @can('edit-post', $replys)
-      <a href="#" class="replyDelBtn" data-replydel="{{ $replys->id }}" data-toggle="modal" data-target="#replyDelModal">
-        삭제
-      </a>  
-      @endcan             
-    </div>
-    @endif
-    @endforeach
-    
-    
-  </article>
   
-  @endforeach
-
-  </div>
-
-    <div>  
-        <form action="/commentcreate" method="post" id="mobileform" enctype="multipart/form-data">
-            @csrf
-              <div class="review">
-                                   
-                    <textarea class="form-control" id="editor2" name="reply_content" ></textarea>
-                    
-                    <script>
-                    $( document ).ready( function() {
-                      $( 'textarea#editor2' ).ckeditor();
-                  } );
-                  </script>
-                
-                  <input type="hidden" class="mobileckeditorval" name="comment_content">
-                  <input type="hidden" name="replycode" value="0">
-                  <div class="commentitem">
-                    <div class="filebox"> 
-      
-                      <a href="javascript:" onclick="mobileFileUploadAction();" class="my_button"><i class="fas fa-camera"></i> 사진첨부</a>
-                  <input type="file" id="mobile_input_imgs" name="comment_photo[]"multiple/>
-                    </div>
-                    <div>
-      
-                    <button class="mobileCommentBtn" type="submit">등록</button>
-                    </div>
-                 </div>
-                 <div class="imgs_wrap">
-                  
-                </div>
-                
-                <input type="hidden" name="postid" value="{{ $read[0]->id }}">
-            </form>
+  
+  <div class="modal fade" id="replyDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          답글을 정말 삭제하시겠습니까?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="replyDelModalBtn" data-postid="{{ $read[0]->id }}">삭제하기</button>
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+        </div>
+      </div>
     </div>
- 
   </div>
-</footer>
   
-@component('layouts.mobilefooter')
-@endcomponent
-  
-  </div> --}}
-
-
- <script>
-   $(function(){
-    $('.mobile-read-description')
-    .children('p')
-    .children('img')
-    .attr('style','width: 100%');
-   })
-   
- </script>
+  <script>
+    $(function(){
+     $('.mobile-read-description')
+     .children('p')
+     .children('img')
+     .attr('style','width: 100%');
+    })
+    
+  </script>
 @endsection
+
+
+
+
+
+
+
+
+
+

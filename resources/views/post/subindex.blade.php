@@ -131,8 +131,9 @@
 
 <div class="mobile-board-box">
   
-  @foreach ($board as $boards )
   
+  @foreach ($board as $boards )
+  @if($photocode != 1)
     <div class="mobile-board">
       <div class="mobile-board-item" id="mobile-board-sebindex-list">
         <div class="mobile-board-title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
@@ -142,9 +143,23 @@
        <div class="mobile-board-commnet">{{ $boards->commentnum }}</div>  
       </div>
     </div> 
-  
+    @else
+    <div class="mobile-board">
+      <div class="mobile-board-content">
+      <img class="img" src="{{$boards->mainimg}}">
+      <div class="mobile-board-item" id="mobile-board-sebindex-list">
+          <div class="mobile-board-title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
+          <div class="mobile-board-info"><span class="mobile-board-info-name">{{ $boards->name }}</span><span class="time">{{ $boards->time }}</span><span>조회{{ $boards->hit }}</span></div>
+      </div>
+    </div>
+      <div>
+       <div class="mobile-board-commnet">{{ $boards->commentnum }}</div>  
+      </div>
+
+    </div> 
+    @endif
     @endforeach
-  
+    
   </div>
 
 <div id="board-foot">

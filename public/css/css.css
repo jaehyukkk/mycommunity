@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 
 
 
@@ -19,7 +19,7 @@ body {
   align-items: center;
   overflow-x: hidden;  
 
-  font-family: 'Noto Sans KR', sans-serif;}
+  font-family: 'Nanum Gothic', sans-serif;}
 
 #mainTop h1 {
   margin: 1.8em 0 1.2em 0;
@@ -133,48 +133,9 @@ input:focus {
  text-decoration: underline;
 }
 
-section {
-  column-width: 15em;
-  background: #dadadf;
-  padding: 2em 12em;
-}
 
-/* .main-free-board-top{
-  display: flex;
-  justify-content:space-between;
-  border-bottom: 1px solid gray;
-  margin-bottom: 10px;
-}
-.main-free-board-top div{
-  font-weight: 600;
-  font-size: 25px;
-}
-.main-free-board-top span{
-  font-size: 16px;
-  margin-top: 5px;
-  margin-right: 7px;
-  color:gray
-}
 
-.main-free-board{
-  margin-top: 50px;
-  margin-right: 35px;
-  width: 100%;
 
-}
-.main-free-board-title{
-  display: flex;
-  justify-content:space-between;
-  margin-left: 5px;
-  font-size: 18px;
-  
-}
-
-.board{
-  z-index: 0;
-  display: flex;
-  width: 100%;
-} */
 
 .board{
   width: 70%;
@@ -386,42 +347,57 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   background-color: #484e58;
   color: rgb(209, 209, 209);
   font-size: 14px;
+	bottom: 0px;
+	position: absolute;
 }
 #foot #foot-content{
   margin-left: 130px;
   margin-top: 30px;
 }
-#foot #foot-content div{
-  cursor:default;
-}
-#foot #foot-content div:hover{
-  padding: 3px 0;
-	margin-left:5px;
-	font-weight:700;
-}
 
-.mobile-board-box,#mobile-nav{
+
+.mobile-board-box,.burger-check,.mobile-nav-menu{
   display: none;
 }
 
-.mobile-nav{
-  display: none;
+.main-wrap{
+  min-height: 100vh;
+    position: relative;
+    width: 100%;
+    
 }
+
+section {
+	padding-bottom: 150px; 
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media screen and (max-width: 850px){
-  .mobile-nav{
-    display: block;
-  }
+ 
   body{
     display: block;
     margin:0;
     padding:0;
+    
   }
   #mainTop img{
     width: 45%;
   }
-
+  #foot #foot-content{
+    margin-left: 10px;
+    margin-top: 20px;
+  }
  
   #navigation{
     display: none;
@@ -435,9 +411,7 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
   #loginBox,#userbox{
     display: none;
   }
-  #foot{
-    display: none;
-  }
+
 
   .board{
     display: block;
@@ -466,103 +440,30 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
 .main-free-board-top div a{
   color: #616161;
   font-weight: 500;
+  font-size: 17px;
+}
 
+.main-free-board-top span a{
+  font-size: 14px;
+}
+
+.main-free-board-top span{
+  margin-top: 8px;
 }
 .main-free-board:not(:last-child){
   margin-right: 0;
   margin-left: 0;
 }
-/* }
-#mobile-nav{
-  display: block;
-  margin-top: 0;
-}
 
-.mobile-nav-items{
-  display: flex;
-  justify-content: space-between;
-}
-.mobile-nav-items div a i{
-  color: white;
+.main-free-board-title div a{
+  font-size: 16px;
+  color:rgb(85, 85, 85)
 }
 
 
 
 
-
-
-
-
-body, html{width:100%;height: 100%;overflow-x: hidden;}
-    .header{
-      display: block;
-        width: 100%;
-        height: 50px;
-        background: #316B83;
-    }
-    .menu_btn{
-        text-align: right;
-        padding: 10px;
-    }
-    .menu_btn a{
-      color: white;
-    }
-    .menu_bg{
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.7);
-        position: absolute;
-        top:0;
-        display: none;
-    }
-    .sidebar_menu{
- display: none;
-        width: 70%;
-        height: 100%;
-        background: #ffffff;
-        position: absolute;
-        top:0;
-        right: -50%;
-        
-    }
-    .close_btn{
-        width: 25px;
-        height: 25px;
-        margin:10px;
-    }
-    .close_btn > a{
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-    .menu_wrap{
-        list-style: none;
-        padding: 20px 20px;   
-    }
-    .menu_wrap li a{
-        color: rgb(83, 83, 83);
-        text-decoration: none;
-    }
-    .mobile-menu-list{
-      border-top: 1px solid #dadada;
-    }
-    .mobile-menu-maincategory{
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
-    .mobile-menu-subcategory{
-      padding-left: 10px;
-    }
-    .mobile-menu-maincategory a{
-      font-weight: 600;
-    }
-
-    .mobile-menu-title{
-      display: flex;
-      justify-content: right;
-      border-top: 1px solid #dadada;
-      padding:3px;
-    } */
+/* 네비게이션 메뉴 */
     .mobile-nav-menu{
       position: absolute;
       top: 0;
@@ -571,7 +472,8 @@ body, html{width:100%;height: 100%;overflow-x: hidden;}
       max-width: 0;
       transition: 0.5s ease;
       z-index: 1;
-      background-color: #eee;
+      background-color: rgb(255, 255, 255);
+      display: none;
     }
     
     .burger-icon {
@@ -588,17 +490,20 @@ body, html{width:100%;height: 100%;overflow-x: hidden;}
     }
     
     .burger-icon .burger-sticks {
-      background: #333;
+      background:rgb(214, 214, 214);
       display: block;
       height: 2px;
       position: relative;
       transition: background .2s ease-out;
-      width: 18px;
+      width: 25px;
+      margin-right: 5px;
+      margin-top: 5px;
+      
     }
     
     .burger-icon .burger-sticks:before,
     .burger-icon .burger-sticks:after {
-      background: #333;
+      background: rgb(214, 214, 214);
       content: '';
       display: block;
       height: 100%;
@@ -620,7 +525,8 @@ body, html{width:100%;height: 100%;overflow-x: hidden;}
     }
     
     .burger-check:checked~.mobile-nav-menu {
-      max-width: 200px;
+      max-width: 320px;
+      display: block;
     }
     
     .burger-check:checked~.burger-icon .burger-sticks {
@@ -639,6 +545,33 @@ body, html{width:100%;height: 100%;overflow-x: hidden;}
     .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:after {
       top: 0;
     }
+
+    .mobile-nav-menu ul{
+      margin:40px 10px 10px 20px;
+    }
+    .mobile-menu-title{
+      
+      border-bottom:1px solid #dadada;
+      margin-bottom: 3px;
+      color: rgb(85, 85, 85);
+      font-weight: 700;
+      font-size: 17px;
+
+    }
+    .mobile-menu-maincategory a{
+      margin-left: 5px;
+      color:rgb(109, 109, 109);
+      font-size: 17px;
+    }
+    .mobile-menu-list{
+      border-bottom: 1px solid #dadada;
+      padding-bottom: 3px;
+    }
+
+    /* 네비게이션 메뉴 끝 */
+
+
+
 
 
     /* login */
