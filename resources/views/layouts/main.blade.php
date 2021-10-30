@@ -33,7 +33,7 @@
     <a href="/"><img src="{{URL::asset('/img/logo.png')}}" id=""alt="..."></a>
   </div>
 </div>
-<div class="mobile-nav">
+{{-- <div class="mobile-nav">
 <div class="header">
   <div class="menu_btn"><a href="#">       
     메뉴메뉴메뉴
@@ -75,8 +75,11 @@
     @endforeach
 </ul>
 </div>
+</div> --}}
+<input class="burger-check" type="checkbox" id="burger-check" /><label class="burger-icon" for="burger-check"><span class="burger-sticks"></span></label>
+<div class="mobile-nav-menu">
+  <div style="width: 200px;"></div>
 </div>
-
 
 <nav role="navigation" id="navigation"class="navigation">
 
