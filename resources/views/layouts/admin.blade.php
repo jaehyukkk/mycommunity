@@ -13,7 +13,7 @@
   </head>
   <body>
     @section('script')
-     <script  src="http://code.jquery.com/jquery-latest.min.js" defer></script>
+     <script  src="https://code.jquery.com/jquery-latest.min.js" defer></script>
     @show
 
     <script>

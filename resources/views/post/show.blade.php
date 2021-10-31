@@ -9,7 +9,7 @@
 @endsection
 
 @section('script')
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script  src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('/summernote/summernote-lite.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('/summernote/js.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('js/comment.js') }}" defer></script>
@@ -21,38 +21,65 @@
 @section('content')
 <article class="read-main">
   <div class="read-baord-box">
-      @foreach ($read as $reads )    
-      <div class="read-board">{{ $reads->subcategoryname }}</div>
-      <div class="title-profil">
-      <div class="read-title">{{ $reads->title }}</div>
+      @foreach ($read as $reads )  
 
-      <div class="read-profil">
-        <div class="read-profil-img">
-            @if($reads->img == null)
-            <img src="{{URL::asset('/image/img.JPG')}}" alt="...">
-            @else
-            <img src="{{URL::asset('/image/'.$reads->img)}}" alt="...">
-            @endif         
-        </div>   
-        <span class="read-profil-name">{{ $reads->writer }}</span>
+      <article class="read">  
+        <div class="read-board">{{ $reads->subcategoryname }}</div>
+        <div class="title-profil">
+        <div class="read-title">{{ $reads->title }}</div>
+
+        <div class="read-profil">
+          <div class="read-profil-img">
+              @if($reads->img == null)
+              <img src="{{URL::asset('/image/img.JPG')}}" alt="...">
+              @else
+              <img src="{{URL::asset('/image/'.$reads->img)}}" alt="...">
+              @endif         
+          </div>   
+          <span class="read-profil-name">{{ $reads->writer }}</span>
+        </div>
       </div>
-    </div>
-    <?php $commentCount = count($comment) + count($reply) ?>
-          <div class="read-data">
-              <div class="read-data-1">
-                  
-                  <span class="read-time">{{ $reads->time }}</span>
-              </div>
-              <div class="read-data-2">
-                  <span>조회수<span class="read-num">{{ $reads->hit }}</span></span>
-                  <span>댓글<span class="read-num">{{ $commentCount }}</span></span>
-              </div>       
-          </div>
+      <?php $commentCount = count($comment) + count($reply) ?>
+            <div class="read-data">
+                <div class="read-data-1">
+                    
+                    <span class="read-time">{{ $reads->time }}</span>
+                </div>
+                <div class="read-data-2">
+                    <span>조회수<span class="read-num">{{ $reads->hit }}</span></span>
+                    <span>댓글<span class="read-num">{{ $commentCount }}</span></span>
+                </div>       
+            </div>
 
-          <div class="board-content">
-              {!! $reads->description !!}
+            <div class="board-content">
+                {!! $reads->description !!}
+            </div>
+      </article>
+
+      <div class="mobile-read">
+        <div class="mobile-read-top">
+          <div class="mobile-read-boardName">{{ $reads->subcategoryname }}</div>
+          <div class="mobile-read-title">{{ $reads->title }}</div>
+          <div class="mobil-read-infor">
+            <div class="mobile-read-profil-img">
+              <img src="{{URL::asset('/image/'.$reads->img)}}">
+            </div>
+            <div class="mobile-read-top-item">
+              <div class="mobile-read-name">{{ $reads->name }}</div>
+              <div class="mobile-read-datenhit">
+                <span>{{ $reads->time }}</span>
+                <span>조회 {{ $reads->hit }}</span>
+              </div>
+            </div>
           </div>
-          @endforeach
+        </div>
+      
+        <div class="mobile-read-description">
+          {!! $reads->description !!}
+        </div>
+      </div>
+    @endforeach
+    
 
           <div class="comment-title">
             <i class="far fa-comment-dots"></i> 
@@ -197,7 +224,7 @@
                         <div class="commentitem">
                           <div class="filebox"> 
             
-                            <a href="javascript:" onclick="fileUploadAction();" class="my_button"><i class="fas fa-camera"></i> 사진첨부</a>
+                            <a href="javascript:" onclick="fileUploadAction();" class="my_button"><i class="fas fa-camera"></i> 사진</a>
                         <input type="file" id="input_imgs" name="comment_photo[]"multiple/>
                           </div>
                           <div>

@@ -446,7 +446,7 @@ table .noticeText div{
   
 }
 
-#mobile-searchBox{
+#mobile-searchBox, .mobile-read{
     display: none;
 }
 
@@ -462,9 +462,12 @@ table .noticeText div{
         
       }
 
+   
+
       .mobile-board-info{
         color:gray;
         font-size: 14px;
+        margin-top: 3px;
       }
       .mobile-board-info span{
         margin-right: 3px;
@@ -552,7 +555,14 @@ table .noticeText div{
     }
 
     .mobile-board img{
-        width: 30%;
+        display: block;
+        overflow: hidden;
+        position: relative;
+        width: 35%;
+        /* height: 50%; */
+        
+        object-fit: cover;
+    
         margin-right: 10px;
         border-radius: 4px;
     }
@@ -570,7 +580,53 @@ table .noticeText div{
         width: 100%;
     }
 
+    .read{
+        display: none;
+    }
+    .mobile-read{
+        display: block;
+    }
+    .mobile-read-boardName{
+        color:rgb(185, 185, 185);
+      }
+      .mobile-read-title{
+        font-size: 19px;
+        color:#424242;
+        font-weight: 600;
+      }
+      .mobile-read-datenhit{
+        color:gray;
+        font-size: 13px;
+      }
+      .mobil-read-infor{
+        display: flex;
+        font-size: 14px;
+        
+      }
+      .mobile-read-top-item{
+        margin-left: 5px;
+      }
+      
+      .mobile-read-profil-img img{
+        width: 38px;
+        height: 38px;
+      }
+      
+      .mobile-read-top{
+        padding:15px;
+        border-bottom: 1px solid rgb(241, 241, 241);
+      }
+      .mobile-read-description{
+        padding:10px;
+        padding-bottom: 30px;
+        
+      }
     
+      .read-main{
+    
+        margin-top: 0;
+       
+    }
 }
 
 

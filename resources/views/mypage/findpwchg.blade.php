@@ -9,7 +9,7 @@
         
     </head>
     <body>
-      <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
       <script type="text/javascript" src="{{ URL::asset('js/mypage.js') }}" defer></script>
         <script>
             var msg = '{{Session::get('alert')}}';

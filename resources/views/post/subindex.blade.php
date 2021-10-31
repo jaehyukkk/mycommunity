@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/board/board.css') }}" >
 @endsection
 @section('script')
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script  src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('js/time.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('js/post.js') }}" defer></script>
 @endsection

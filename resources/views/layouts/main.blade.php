@@ -61,7 +61,7 @@
   <div style="width: 320px;">
   <ul>
     <div class="mobile-menu-title">
-      <div>내정보</div>
+      <div><i class="far fa-address-card"></i> 내정보</div>
     </div>
     <div class="mobile-menu-list">
       @guest
@@ -74,11 +74,11 @@
       
     </div>
       <div class="mobile-menu-title">
-        <div>리스트</div>
+        <div><i class="fas fa-chalkboard-teacher"></i> 리스트</div>
       </div>
       @foreach ($maincategory as $mains )
       <div class="mobile-menu-list">
-      <li class="mobile-menu-maincategory"><a href="#" style="font-weight: 700;">{{ $mains->maincategoryname }}</a></li>
+      <li class="mobile-menu-maincategory"><a href="#" style="font-size:16px; color:rgb(202, 202, 202)">{{ $mains->maincategoryname }}</a></li>
         @foreach ($subcategory as $subs )
           @if($subs->maincategory_id == $mains->id)
           <li class="mobile-menu-maincategory"><a href="/board/{{ $mains->id }}/{{ $subs->id }}">{{ $subs->subcategoryname }}</a></li>

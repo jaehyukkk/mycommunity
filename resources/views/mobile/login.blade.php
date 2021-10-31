@@ -10,24 +10,25 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/css.css') }}" >
 </head>
 <body>
-    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://kit.fontawesome.com/db98d81eec.js" 
     crossorigin="anonymous">
     </script>
 
 <div id="mobile-auth">
     
-  <center><h1 style="margin-top: 70px">LTL</h1></center>
 
   <div class="loginForm">
-    <div>
+    <center><a href="/"><img class="mobile-logo" src="{{URL::asset('/img/logowhite.png')}}" id=""alt="..."></a></center>
+
+    <div class="mobile-login">
         <form action="/login" method="post">
         @csrf
         <span class="box int_id" id="input-id">
         <input type="text" placeholder="아이디" name='userid' class="login-id"><br>
         </span>
         
-        <span class="box int_pw" id="input-pw">
+        <span class="box int_pw" id="input-pw" style="margin-bottom: 30px">
         <input type="password" placeholder="비밀번호" name="password"class="login-pw"><br>
         </span>
         

@@ -11,7 +11,7 @@
         
     </head>
     <body>
-        <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
         <script type="text/javascript" src="{{ URL::asset('js/fileinput.js') }}" defer></script>
 
         <script src="https://kit.fontawesome.com/db98d81eec.js" 
@@ -129,6 +129,6 @@
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="{{ URL::asset('js/chginfor.js') }}" defer></script>
-    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
     </body>
 </html>

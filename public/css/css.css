@@ -19,7 +19,8 @@ body {
   align-items: center;
   overflow-x: hidden;  
 
-  font-family: 'Nanum Gothic', sans-serif;}
+  font-family: 'Source Sans Pro', sans-serif;
+}
 
 #mainTop h1 {
   margin: 1.8em 0 1.2em 0;
@@ -420,13 +421,15 @@ section {
 }
 .main-free-board{
   width: 100%;
-  border-bottom: 1px solid rgb(212, 212, 212);
+  border-bottom: 1px solid rgb(243, 243, 243);
   margin:0;
-  padding:0;
+  padding-bottom: 5px;
 }
 .main-free-board-top{
-  border-bottom: 1px solid rgb(212, 212, 212);
-  background-color: rgb(245, 245, 245);
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgb(243, 243, 243);
+  background: linear-gradient( to bottom, rgb(255, 255, 255), rgb(233, 233, 233) );
+  
 }
 .main-free-board-top div, .main-free-board-title div{
   padding-left: 5px;
@@ -438,8 +441,8 @@ section {
   margin-bottom: 3px;
 }
 .main-free-board-top div a{
-  color: #616161;
-  font-weight: 500;
+  color: #292929;
+  font-weight: 600;
   font-size: 17px;
 }
 
@@ -457,7 +460,7 @@ section {
 
 .main-free-board-title div a{
   font-size: 16px;
-  color:rgb(85, 85, 85)
+  color:#292929;
 }
 
 
@@ -490,7 +493,7 @@ section {
     }
     
     .burger-icon .burger-sticks {
-      background:rgb(214, 214, 214);
+      background:rgb(233, 233, 233);
       display: block;
       height: 2px;
       position: relative;
@@ -503,7 +506,7 @@ section {
     
     .burger-icon .burger-sticks:before,
     .burger-icon .burger-sticks:after {
-      background: rgb(214, 214, 214);
+      background: rgb(233, 233, 233);
       content: '';
       display: block;
       height: 100%;
@@ -551,21 +554,26 @@ section {
     }
     .mobile-menu-title{
       
-      border-bottom:1px solid #dadada;
+      border-bottom:1px solid #f1f1f1;
       margin-bottom: 3px;
       color: rgb(85, 85, 85);
-      font-weight: 700;
+      font-weight: 500;
       font-size: 17px;
+      padding:5px;
 
     }
     .mobile-menu-maincategory a{
       margin-left: 5px;
       color:rgb(109, 109, 109);
       font-size: 17px;
+      
+    }
+    .mobile-menu-maincategory{
+      padding:5px
     }
     .mobile-menu-list{
-      border-bottom: 1px solid #dadada;
-      padding-bottom: 3px;
+      border-bottom: 1px solid #f1f1f1;
+      padding: 10px;
     }
 
     /* 네비게이션 메뉴 끝 */
@@ -577,21 +585,28 @@ section {
     /* login */
 
     .loginForm{    
-      width: 100%;
-      margin-top: 40px; 
+      width: 95%;
+
+    }
+    #mobile-auth{
+      display: flex;
+      justify-content: center;
     }
     .loginForm input{
       width: 100%;
       height: 55px;
-      border: 0;
+      border:0;
     }
     
+    .mobile-login{
+      width: 100%;
+    }
     .box {
       display: block;
       width: 100%;
       height: 80px;
-      border-top: solid 1px #dadada;
-      border-bottom: solid 1px #dadada;
+      border: solid 1px #dadada;
+      border-radius: 3px;
       padding: 10px 14px 10px 14px;
       box-sizing: border-box;
       background: #fff;
@@ -610,6 +625,8 @@ section {
       color: #ffffff;
       background: #31363d;
       border: 1px solid #31363d;
+      border-radius: 3px;
+
       
     }
     
@@ -625,11 +642,14 @@ section {
       background: #ff6c5e;
       border: 1px solid #ff7b6f;
       text-align: center;
+      border-radius: 3px;
     }
     .btnGoogle div{
       color: white;
       font-size: 20px;
       margin-top: 5px;
+      
+
     }
 
     .check-btn{
@@ -641,7 +661,9 @@ section {
       color:white;
     }
 
-
+    .mobile-logo{
+      width: 70%;
+    }
 
 
 }

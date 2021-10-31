@@ -35,7 +35,7 @@ $(document).on('click','.commentUpdateBtn',function(e){
     html += "<div class='filebox'>";
     html += "<a href='javascript:' onclick='";
     html += "updataFileUploadAction();'";
-    html += "class='my_button'><i class='fas fa-camera'></i> 사진첨부</a>";
+    html += "class='my_button'><i class='fas fa-camera'></i> 사진</a>";
     html += "<input type='file' id='input_img' name='comment_photo[]'multiple/>";
     html += "<input type='hidden' value='"+getId+"' name='commentid' class='commentid'>";
     html += "</div>";
@@ -80,14 +80,14 @@ $(document).on('click','.commentReplyBtn',function(e){
     html += "<div class='filebox'>";
     html += "<a href='javascript:' onclick='";
     html += "replyFileUploadAction();'";
-    html += "class='my_button'><i class='fas fa-camera'></i> 사진첨부</a>";
+    html += "class='my_button'><i class='fas fa-camera'></i> 사진</a>";
     html += "<input type='file' id='reply_input_img' name='reply_photo[]'multiple/>";
     html += "<input type='hidden' value='"+getId+"' name='commentid' class='commentid'>";
     html += "<input type='hidden' value='"+postId+"' name='post_id'>";
     html += "</div>";
     html += "<div class='updatedelBtn'>";
     html += "<button class='commentUpdateCancel'type='button'><i class='fas fa-times' id='cancelIcon'></i> 취소</button>";
-    html += "<button class='replyResult' type='submit'>수정</button>";
+    html += "<button class='replyResult' type='submit'>등록</button>";
     html += "</div>";
     html += "</div>";
     html += "<div class='reviewImgsWrap'>";                 
@@ -124,7 +124,7 @@ $(document).on('click','.replyUpdateBtn',function(e){
     html += "<div class='filebox'>";
     html += "<a href='javascript:' onclick='";
     html += "replyFileUploadAction();'";
-    html += "class='my_button'><i class='fas fa-camera'></i> 사진첨부</a>";
+    html += "class='my_button'><i class='fas fa-camera'></i> 사진</a>";
     html += "<input type='file' id='reply_input_img' name='replyupdate_photo[]'multiple/>";
     html += "<input type='hidden' value='"+getId+"' name='replyid'>";
     html += "</div>";
