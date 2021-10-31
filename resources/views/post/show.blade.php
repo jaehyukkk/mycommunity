@@ -1,9 +1,9 @@
 @extends('layouts.main')
 @section('css')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/css.css') }}" >
-<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/board/board.css') }}" >
-<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/board/comment.css') }}" >
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/css.css?v=').time() }}" >
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/board/board.css?v=').time() }}" >
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/board/comment.css?v=').time() }}" >
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/summernote/summernote-lite.css') }}" >
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/summernote/css.css') }}" >
 @endsection

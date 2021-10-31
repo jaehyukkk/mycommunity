@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <title>회원가입</title>
         
-        <link rel="stylesheet" type="text/css" href="<?php echo asset('css/join.css')?>" >
-        <link rel="stylesheet" type="text/css" href="<?php echo asset('css/mypage/find.css')?>" >
+        <link rel="stylesheet" type="text/css" href="<?php echo asset('css/join.css?v=').time()?>" >
+        <link rel="stylesheet" type="text/css" href="<?php echo asset('css/mypage/find.css?v=').time()?>" >
         
     </head>
     <body>
