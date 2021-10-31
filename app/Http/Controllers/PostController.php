@@ -47,7 +47,7 @@ class PostController extends Controller
         ->get();
 
         
-
+        
         return view('post.index',compact('board','maincategory','subcategory','notice','id','photocode'));
        
     }
@@ -107,10 +107,6 @@ class PostController extends Controller
     }
 
 
-    public function imageupload(){
-        return view('post.image');
-    }
-
     public function imageuploadProcess(Request $request){
 
         if($request->hasfile('photo')){
@@ -120,7 +116,7 @@ class PostController extends Controller
                 $photo->move(public_path('image'),$name);
            
         }
-        $url = 'http://127.0.0.1:8000/image/'.$name;
+        $url = env('APP_URL').'/image/'.$name;
 
         return $url;
     }
