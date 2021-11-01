@@ -250,10 +250,10 @@
         <div id="read-updataDeleteBtn-update">    
         <a href="/edit/{{ $post->id }}">수정</a>
         </div>      
-        <form action="/destroy/{{ $post->id }}" method="post">
+        <form action="/destroy/{{ 34343}}" method="post" id="postDeleteForm">
         @csrf
         <div id="read-updataDeleteBtn-delete">
-          <button type="submit">삭제</button>
+          <button onclick="postRemoveCheck()">삭제</button>
         </div>
         </form> 
         @endcan   

@@ -98,9 +98,13 @@ Route::middleware('auth')->group(function(){
     Route::post('/chginfor',[MypageController::class,'postChgInfor']);
     Route::get('/mypage',[MypageController::class,'index']);
 
+    Route::get('/mobile/chginfo/{user}',[MypageController::class,'mobileChgInfor']);
+
 
     Route::post('/chgCheckId',[MypageController::class,'chgInforCheckId']);
     Route::post('/chgCheckName',[MypageController::class,'chgInforCheckName']);
+    Route::post('/chgCheckEmail',[MypageController::class,'chgInforCheckEmail']);
+
 });
 
 

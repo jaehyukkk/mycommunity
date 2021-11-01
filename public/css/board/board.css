@@ -450,7 +450,7 @@ table .noticeText div{
     display: none;
 }
 
-@media screen and (max-width: 850px){
+@media screen and (max-width: 450px){
 
     
 
@@ -610,6 +610,7 @@ table .noticeText div{
       .mobile-read-profil-img img{
         width: 38px;
         height: 38px;
+        border-radius: 70%;
       }
       
       .mobile-read-top{
@@ -629,6 +630,10 @@ table .noticeText div{
     }
     .comment-title{
         margin-left: 10px;
+    }
+
+    .mypost-title{
+        display: none;
     }
 }
 

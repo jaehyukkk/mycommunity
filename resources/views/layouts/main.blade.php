@@ -70,6 +70,8 @@
       @endguest
       @auth
         <li class="mobile-menu-maincategory"><a href="/logout">로그아웃</a></li>
+        <li class="mobile-menu-maincategory"><a href="/mobile/chginfo/{{ Auth::user()->id }}">내정보변경</a></li>
+        <li class="mobile-menu-maincategory"><a href="/viewmypost/{{ Auth::user()->name }}">내가쓴글</a></li>
       @endauth
       
     </div>

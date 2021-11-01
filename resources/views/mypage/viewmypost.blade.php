@@ -11,7 +11,7 @@
 @section('content')
 <div class="table-div">
 
-<p style="margin-top: 75px; font-weight: 500;">{{ $name }}님의 작성 글 목록 
+<p style="margin-top: 75px; font-weight: 500;" class="mypost-title">{{ $name }}님의 작성 글 목록 
   <span style="color:rgb(82, 82, 82); font-weight: 400;">총 : {{ count($searchResult) }}건</span>
 </p>
 
@@ -46,6 +46,28 @@
     @endforeach
   </tfoot>
 </table>
+
+
+{{-- 모바일용--}}
+<div class="mobile-board-box">
+  <div class="main-free-board-top">
+    <div><a href="#">{{ $name }}님의 작성 글 목록</a></div>
+  </div>
+  
+  @foreach ($searchResult as $search  )
+    <div class="mobile-board">
+      <div class="mobile-board-item" id="mobile-board-sebindex-list">
+        <div class="mobile-board-title"><a href="/read/{{ $search->idx }}">{{ $search->title }}</a></div>
+        <div class="mobile-board-info"><span class="mobile-board-info-name">{{ $search->name }}</span><span class="time">{{ $search->time }}</span><span>조회{{ $search->hit }}</span></div>
+      </div>
+      <div>
+       <div class="mobile-board-commnet">{{ $search->commentnum }}</div>  
+      </div>
+    </div> 
+    @endforeach
+    
+  </div>
+
 
 
 @if(count($searchResult) == 0)

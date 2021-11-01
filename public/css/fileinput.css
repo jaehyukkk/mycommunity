@@ -67,4 +67,9 @@
        max-width: 100%; 
        width: 100% \9; 
        height: auto; }
-  
+       .mobile-filebox-label{
+    font-size: 17px;
+    font-weight: 600;
+    margin-left: 3px;
+  }
+

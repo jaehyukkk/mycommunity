@@ -111,4 +111,75 @@
   </form>
 
 </div>
+
+
+
+
+<div class="mobile-board-box">
+  <div class="main-free-board-top">
+    <div><a href="#">검색</a></div>
+  </div>
+  
+  @foreach ($searchResult as $search )
+  @if($photocode != 1)
+    <div class="mobile-board">
+      <div class="mobile-board-item" id="mobile-board-sebindex-list">
+        <div class="mobile-board-title"><a href="/read/{{ $search->idx }}">{{ $search->title }}</a></div>
+        <div class="mobile-board-info"><span class="mobile-board-info-name">{{ $search->name }}</span><span class="time">{{ $search->time }}</span><span>조회{{ $search->hit }}</span></div>
+      </div>
+      <div>
+       <div class="mobile-board-commnet">{{ $search->commentnum }}</div>  
+      </div>
+    </div> 
+    @else
+    <div class="mobile-board">
+      <div class="mobile-board-content">
+      <img class="img" src="{{$search->mainimg}}">
+      <div class="mobile-board-item" id="mobile-board-sebindex-list">
+          <div class="mobile-board-title"><a href="/read/{{ $search->idx }}">{{ $search->title }}</a></div>
+          <div class="mobile-board-info"><span class="mobile-board-info-name">{{ $search->name }}</span><span class="time">{{ $search->time }}</span><span>조회{{ $search->hit }}</span></div>
+      </div>
+    </div>
+      <div>
+       <div class="mobile-board-commnet">{{ $search->commentnum }}</div>  
+      </div>
+
+    </div> 
+    @endif
+    @endforeach
+    
+  </div>
+
+
+  <form action="/search">
+
+  <div id="mobile-searchBox">
+    <div>
+      <div class="mobile-serch-select">
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="subid" value="{{ $subid }}">
+        <select name="category" id="">
+          <option value="1">제목+내용</option>  
+          <option value="2">제목</option>  
+          <option value="3">내용</option>  
+          <option value="4">작성자</option>  
+          <option value="5">댓글</option>  
+        </select>
+      </div>
+      
+      <div class="mobile-serch-result">
+      <div class="searchInput">
+        <span class="inputbox input_search">
+          <input type="text" id="search" class="input" maxlength="20" name="search">
+        </span>
+      </div>
+      
+      <div class="searchSubmit">
+         <input type="submit" value="검색">
+      </div>
+    </div>
+
+  </div>
+  </div>
+  </form>
 @endsection

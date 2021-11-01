@@ -71,6 +71,21 @@ class MypageController extends Controller
         
     }
 
+    public function mobileChgInfor(User $user){
+    
+        if($user->id == Auth::user()->id){
+
+            if($user->social == 1){
+                return view('mobile.chginfor',compact('user'))->with('social','social'); 
+            }
+            return view('mobile.chginfor',compact('user'));
+        }
+        else{
+            return redirect('/')->with('alert','잘못된 접근입니다.');
+        }
+    
+}
+
     public function postChgInfor(Request $request){
 
         $userid = $request->userid;
@@ -172,6 +187,23 @@ class MypageController extends Controller
             return $e->getMessage();
         }
         
+    }
+
+    public function chgInforCheckEmail(Request $request){
+        try{
+            $email = $request->email;
+
+            if($email == Auth::user()->email){
+                return 0;
+            }
+
+            $count = User::where('email',$email)->count();
+            return $count;
+
+        }
+        catch(Exception $e){
+            return $e->getMessage();
+        }
     }
 
     public function index(){
