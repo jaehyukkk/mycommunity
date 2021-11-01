@@ -93,7 +93,7 @@ class UserController extends Controller
             'password'          => Hash::make($data['password']),
             // 'sex'               => $data['sex'],
             'email'             => $data['email'],
-            'img'               => 'img.JPG'
+            'img'               => 'img.jpg'
         ]);      
     }
 
@@ -145,7 +145,7 @@ class UserController extends Controller
                     'name'         => $name,
                     'password'     => Hash::make(uniqid()),
                     'social'       => 1,
-                    'img'          => 'img.JPG'
+                    'img'          => 'img.jpg'
                 ]);
     
                 $users = User::Where(['userid' => $userSocial->getId() ])->first();

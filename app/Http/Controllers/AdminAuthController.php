@@ -11,10 +11,13 @@ use Illuminate\Http\Request;
 class AdminAuthController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('levelcheck');
+    }
+
     public function viewJoin(){
-        if(Auth::user()->level >= 1){
-            return view('admin.join');
-        }
+        return view('admin.join'); 
     } 
 
     public function joinProcess(Request $request){

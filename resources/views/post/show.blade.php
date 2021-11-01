@@ -12,11 +12,11 @@
 <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('/summernote/summernote-lite.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('/summernote/js.js') }}" defer></script>
-<script type="text/javascript" src="{{ URL::asset('js/comment.js') }}" defer></script>
-<script type="text/javascript" src="{{ URL::asset('js/post.js') }}" defer></script>
+<script type="text/javascript" src="{{ URL::asset('js/comment.js?v=').time() }}" defer></script>
+<script type="text/javascript" src="{{ URL::asset('js/post.js?v=').time()}}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('/ckeditor_review/ckeditor/ckeditor.js') }}" defer></script>
 <script type="text/javascript" src="{{ URL::asset('/ckeditor_review/ckeditor/adapters/jquery.js') }}" defer></script>
-<script type="text/javascript" src="{{ URL::asset('js/time.js') }}" defer></script>
+<script type="text/javascript" src="{{ URL::asset('js/time.js?v=').time() }}" defer></script>
 @endsection
 @section('content')
 <article class="read-main">

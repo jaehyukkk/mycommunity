@@ -14,7 +14,7 @@
 
     
     <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/mobilejoin.js') }}" defer></script>
+    <script type="text/javascript" src="{{ URL::asset('js/mobilejoin.js?v=').time() }}" defer></script>
 
     <script src="https://kit.fontawesome.com/db98d81eec.js" 
     crossorigin="anonymous">
