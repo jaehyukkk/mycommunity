@@ -130,7 +130,9 @@
 <input type="hidden" value="{{ $subid }}" id="subcategoryId">
 
 <div class="mobile-board-box">
-  
+  <div class="main-free-board-top">
+    <div><a href="#">{{ $title->subcategoryname }}</a></div>
+  </div>
   
   @foreach ($board as $boards )
   @if($photocode != 1)

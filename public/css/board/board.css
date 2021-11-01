@@ -486,10 +486,10 @@ table .noticeText div{
         display: flex;
         justify-content: space-between;
         padding-left: 10px;
-        border-top: 1px solid rgb(240, 240, 240);
+        border-bottom: 1px solid rgb(240, 240, 240);
         width: 100%;
-        padding-top: 10px;
-        margin-bottom: 10px;
+        padding-top:5px;
+        padding-bottom: 5px;
       }
     
       .mobile-board-commnet{
@@ -514,7 +514,7 @@ table .noticeText div{
       }
 
      #board-foot .createbtn{
-          margin:0;
+          margin:10px
           
       }
       #searchBox{
@@ -626,6 +626,9 @@ table .noticeText div{
     
         margin-top: 0;
        
+    }
+    .comment-title{
+        margin-left: 10px;
     }
 }
 

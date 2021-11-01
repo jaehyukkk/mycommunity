@@ -65,7 +65,9 @@
 </table>
 
 <div class="mobile-board-box">
-  
+  <div class="main-free-board-top">
+    <div><a href="#">최신글보기</a></div>
+  </div>
   @foreach ($board as $boards )
   
     <div class="mobile-board">

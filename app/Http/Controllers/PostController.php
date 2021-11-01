@@ -57,6 +57,8 @@ class PostController extends Controller
         $maincategory = Maincategory::all();
         $subcategory = Subcategory::all();
 
+        $title = Subcategory::find($subid);
+
         $board = DB::table('posts')
         ->where('posts.maincategory_id',$id)
         ->where('posts.subcategory_id',$subid)
@@ -77,7 +79,7 @@ class PostController extends Controller
         $int = Subcategory::where('id',$subid)->first();
         $photocode = $int->photocode;
 
-        return view('post.subindex',compact('board','maincategory','subcategory','id','subid','notice','photocode'));
+        return view('post.subindex',compact('board','maincategory','subcategory','id','subid','notice','photocode','title'));
     }
 
 
@@ -345,13 +347,22 @@ class PostController extends Controller
         }
 
         else{
-
-            $post->update([
-                'title' => $data['title'],
-                'description' =>$data['description'],
-                'notice' =>$data['notice'],
-                'code' => $imgs->length
-            ]);
+            if(isset($data['notice'])){
+                $post->update([
+                    'title' => $data['title'],
+                    'description' =>$data['description'],
+                    'notice' =>$data['notice'],
+                    'code' => $imgs->length
+                ]);
+            }
+            else{
+                $post->update([
+                    'title' => $data['title'],
+                    'description' =>$data['description'],
+                    'code' => $imgs->length
+                ]);
+            }
+           
             
             return redirect('/board/'.$data['caid'].'/'.$data['subid']);
 

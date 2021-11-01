@@ -66,7 +66,7 @@
     <div class="mobile-menu-list">
       @guest
         <li class="mobile-menu-maincategory"><a href="/mobile/login">로그인</a></li> 
-        <li class="mobile-menu-maincategory"><a href="/mobile/login">회원가입</a></li>  
+        <li class="mobile-menu-maincategory"><a href="/mobile/join">회원가입</a></li>  
       @endguest
       @auth
         <li class="mobile-menu-maincategory"><a href="/logout">로그아웃</a></li>

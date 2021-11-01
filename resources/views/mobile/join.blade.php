@@ -20,7 +20,6 @@
     crossorigin="anonymous">
     </script>
 
-<div id="mobile-auth">
     @if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -30,9 +29,13 @@
         </ul>
     </div>
     @endif
-  <center><h1 style="margin-top: 70px">LTL</h1></center>
+    
+<div id="mobile-auth">
+
+  
 
   <div class="loginForm">
+    <center><a href="/"><img class="mobile-logo" src="{{URL::asset('/img/logowhite.png')}}" id=""alt="..."></a></center>
     <div>
         <form action="/join" method="post">
         @csrf
@@ -41,7 +44,9 @@
         </span>
 
         <button class="check-btn" id="id-check">아이디 중복검사</button>
-        
+    </br>
+</br>
+
         <span class="box int_pw" id="input-pw">
         <input type="password" placeholder="비밀번호" name="password"class="login-pw"><br>
         </span>
@@ -50,16 +55,23 @@
             <input type="password" placeholder="비밀번호확인" name="repassword"class="login-pw"><br>
         </span>
 
+    </br>
+</br>
+
         <span class="box int_name" id="input-pw">
             <input type="text" placeholder="닉네임" name="name"class="join-name"><br>
         </span>
         <button class="check-btn" id="name-check">닉네임 중복검사</button>
+    </br>
+</br>
 
         <span class="box int_email" id="input-pw">
             <input type="text" placeholder="이메일" name="email"class="join-email"><br>
         </span>
         <button class="check-btn" id="email-check">이메일 중복검사</button>
 
+    </br>
+    </br>
         
 
 
