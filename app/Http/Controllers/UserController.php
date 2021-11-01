@@ -123,13 +123,13 @@ class UserController extends Controller
     
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
 
     public function handleGoogleCallback()
     {
-        $userSocial = Socialite::driver('google')->user();
+        $userSocial = Socialite::driver('google')->stateless()->user();
         $users = User::Where(['userid' => $userSocial->getId() ])->first();
         $name = rand(0,999).$userSocial->getName(); //구글 이름으로 회원가입 될 시에 중복방지
         try{
