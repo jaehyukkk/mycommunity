@@ -48,7 +48,7 @@
 </table>
 
 
-{{-- 모바일용--}}
+{{-- 모바일용 --}}
 <div class="mobile-board-box">
   <div class="main-free-board-top">
     <div><a href="#">{{ $name }}님의 작성 글 목록</a></div>
@@ -67,13 +67,83 @@
     @endforeach
     
   </div>
-
-
+{{-- 모바일용 --}}
 
 @if(count($searchResult) == 0)
 <center class="searchNull"><b>작성한 글이 없습니다.</b>
   </center>
 @endif
+
+<div id="board-foot">
+  <div>
+  </div>
+  <div class="paginateBtn"> 
+    {{ $searchResult->links('pagination::custom')}}
+  </div>
+  <div>
+  </div>
+</div>
+
+
+<form action="/viewmypost/{{ $name }}/search">
+  <div id="searchBox">
+    
+      <div class="searchSelect">
+        <select name="category" id="">
+          <option value="1">제목+내용</option>  
+          <option value="2">제목</option>  
+          <option value="3">내용</option>  
+          <option value="4">작성자</option>  
+          <option value="5">댓글</option>  
+        </select>
+      </div>
+
+      <div class="searchInput">
+        <span class="inputbox input_search">
+          <input type="text" id="search" class="input" maxlength="20" name="search">
+        </span>
+      </div>
+      
+      <div class="searchSubmit">
+         <input type="submit" value="검색">
+      </div>
+    </div>
+  </form>
+
+
+{{-- 모바일 검색 --}}
+  <form action="/viewmypost/{{ $name }}/search">
+
+    <div id="mobile-searchBox">
+      <div>
+        <div class="mobile-serch-select">
+          <select name="category" id="">
+            <option value="1">제목+내용</option>  
+            <option value="2">제목</option>  
+            <option value="3">내용</option>  
+            <option value="4">작성자</option>  
+            <option value="5">댓글</option>  
+          </select>
+        </div>
+        
+        <div class="mobile-serch-result">
+        <div class="searchInput">
+          <span class="inputbox input_search">
+            <input type="text" id="search" class="input" maxlength="20" name="search">
+          </span>
+        </div>
+        
+        <div class="searchSubmit">
+           <input type="submit" value="검색">
+        </div>
+      </div>
+  
+    </div>
+    </div>
+    </form>
+{{-- 모바일 검색 --}}
+
+
 
 </div>
 @endsection

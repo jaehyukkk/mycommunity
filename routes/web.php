@@ -70,6 +70,7 @@ Route::get('/viewall',[PostController::class,'viewAll']);
 
 //검색
 Route::get('/search',[SearchController::class,'getSearchResult']);
+Route::get('/viewmypost/{name}/search',[SearchController::class,'userPostSearchResult']);
 Route::get('/viewmypost/{name}',[MypageController::class,'viewMyPost']);
 
 

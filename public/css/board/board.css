@@ -513,10 +513,7 @@ table .noticeText div{
         width: 100%;
       }
 
-     #board-foot .createbtn{
-          margin:10px
-          
-      }
+   
       #searchBox{
           display: none;
       }
@@ -635,6 +632,17 @@ table .noticeText div{
     .mypost-title{
         display: none;
     }
+
+    #board-foot{
+        display: block;
+        margin-top: 5px;
+    }
+
+    .createbtn-div{
+        display: flex;
+        justify-content: right;
+    }
+    
 }
 
 

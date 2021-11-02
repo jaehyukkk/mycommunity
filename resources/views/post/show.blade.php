@@ -225,7 +225,7 @@
                           <div class="filebox"> 
             
                             <a href="javascript:" onclick="fileUploadAction();" class="my_button"><i class="fas fa-camera"></i> 사진</a>
-                        <input type="file" id="input_imgs" name="comment_photo[]"multiple/>
+                        <input type="file" id="input_imgs" name="comment_photo[]" accept="image/*" multiple/>
                           </div>
                           <div>
             
@@ -250,7 +250,7 @@
         <div id="read-updataDeleteBtn-update">    
         <a href="/edit/{{ $post->id }}">수정</a>
         </div>      
-        <form action="/destroy/{{ 34343}}" method="post" id="postDeleteForm">
+        <form action="/destroy/{{$post->id}}" method="post" id="postDeleteForm">
         @csrf
         <div id="read-updataDeleteBtn-delete">
           <button onclick="postRemoveCheck()">삭제</button>

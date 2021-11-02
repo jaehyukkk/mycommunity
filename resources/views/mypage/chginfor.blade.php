@@ -59,7 +59,7 @@
 
             <!-- content-->
             <div id="content">
-                <form action="/chginfor" method="post" enctype="multipart/form-data">
+                <form action="/chginfor" method="post" enctype="multipart/form-data" >
                     @csrf
                 <!-- ID -->
                 <div>
@@ -108,7 +108,7 @@
                     <div class="filebox preview-image"> 
                         <input class="upload-name" value="사진선택" disabled="disabled" > 
                         <label for="input-file">업로드</label> 
-                        <input type="file" id="input-file" class="upload-hidden" name="profileimg"> 
+                        <input type="file" id="input-file" class="upload-hidden" name="profileimg" accept="image/*"> 
                     </div>
 
                 </div>  

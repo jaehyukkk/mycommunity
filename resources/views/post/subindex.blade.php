@@ -170,8 +170,10 @@
   <div class="paginateBtn"> 
     {{ $board->links('pagination::custom')}}
   </div>
-  <div class="createbtn">
-    <a href="/board/create/{{ $id }}/{{ $subid }}">글쓰기</a>
+  <div class="createbtn-div">
+    <div class="createbtn">
+      <a href="/board/create/{{ $id }}/{{ $subid }}">글쓰기</a>
+    </div>
   </div>
 </div>
 
