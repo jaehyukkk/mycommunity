@@ -38,16 +38,16 @@ var setting = {
         this);
             }
 
-        }
-    },
-    callbacks :{
-          onPaste: function (e) {
+        },
+
+        onPaste: function (e) {
             var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
             e.preventDefault();
-            document.execCommand('insertText', false, bufferText);
-        }
-       
+            bufferText = bufferText.replace(/\r?\n/g, '<br>');
+            document.execCommand('insertHtml', false, bufferText);
+          }
     }
+
  };
 $('#summernote').summernote(setting);
 
