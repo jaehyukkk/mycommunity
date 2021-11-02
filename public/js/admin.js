@@ -86,7 +86,7 @@
         }else{  
             return false;
         }   
-       }
+    }
     
 
     $('#addSubmit').on('click',function(){

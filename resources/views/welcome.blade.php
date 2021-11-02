@@ -29,8 +29,8 @@
 
   <div class="main-free-board">
     <div class="main-free-board-top">
-      <div><a href="/board/1/1">자유게시판</a></div>
-      <span><a href="/board/1/1">더보기</a></span>
+      <div><a href="/board/1/12">자유게시판</a></div>
+      <span><a href="/board/1/12">더보기</a></span>
     </div>
     
       <?php $cnt1 = 0?>

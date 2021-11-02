@@ -145,7 +145,7 @@ input:focus {
 }
 .main-free-board{
   width: 50%;
-  margin-top: 75px;
+  margin-top: 33px;
 }
 
 .main-free-board:not(:last-child){
