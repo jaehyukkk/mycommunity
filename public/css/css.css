@@ -383,6 +383,7 @@ section {
 }
 .lb-minipage-search{
   display: flex;
+  width: 100%;
 }
 .lb-minipage-search button{
   border:0;
@@ -394,6 +395,8 @@ section {
 .lb-minipage-search input{
   border:1px solid #dadada;
   color: #484e58;
+  
+
 }
 
 
