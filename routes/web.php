@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\MainController;
 
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminAuthController;
@@ -31,19 +32,28 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+// Route::get('/', function () {
 
-    $maincategory = Maincategory::all();
-    $subcategory = Subcategory::all();
+//     $maincategory = Maincategory::all();
+//     $subcategory = Subcategory::all();
 
-    $board = DB::table('posts')
-    ->leftJoin('users', 'posts.user_id', '=', 'users.id')
-    ->select('*','posts.created_at as time','posts.id as idx')
-    ->orderBy('posts.id','desc')
-    ->get();
+//     $board = DB::table('posts')
+//     ->leftJoin('users', 'posts.user_id', '=', 'users.id')
+//     ->select('*','posts.created_at as time','posts.id as idx')
+//     ->orderBy('posts.id','desc')
+//     ->get();
 
-    return view('welcome', compact('maincategory','subcategory','board'));
-})->name('main');
+//         $url = 'https://lovebeat.plaync.com/';
+//         $rank = file_get_contents($url);
+
+//         if($url != false){
+//             $rank = str_get_html($rank);
+//         }
+
+//     return view('welcome', compact('maincategory','subcategory','board','rank'));
+// })->name('main');
+
+Route::get('/',[MainController::class,'index'])->name('main');
 
 Route::get('/mailSend',[MailSendController::class,'mailSend'])->name('mailSend');
 Route::post('/mailSendSubmit',[MailSendController::class,'mailSendSubmit'])->name('mailSendSubmit');
@@ -159,3 +169,4 @@ Route::get('/admin/logout',[AdminAuthController::class,'logout']);
 //test
 
 Route::get('/testss',[UserController::class,'randName']);
+Route::get('/test',[PostController::class,'testFunction']);

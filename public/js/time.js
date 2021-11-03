@@ -47,3 +47,15 @@ $(function(){
         }
     })
 })
+
+$(function(){
+    $('.nick a').on('click',function(e){
+        e.preventDefault();
+
+        var href = $(this).attr('href');
+        var id = href.replace(/[^0-9]/g,'');
+        var popup = window.open("https://lovebeat.plaync.com/mylb/who?userId="+id+"","new","width=980,height=580");
+        
+        return popup;
+    })
+})

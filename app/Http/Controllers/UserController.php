@@ -64,7 +64,7 @@ class UserController extends Controller
             'userid'            => 'required|unique:users',
             'password'          => 'min:8|required_with:repassword|same:repassword',
             'repassword'        => 'min:8',
-            'email'             => 'required',
+            'email'             => 'required|unique:users',
         ]);
 
 

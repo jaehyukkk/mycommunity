@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\Gate;
 
+
+
 class PostController extends Controller
 {
     /**
@@ -406,5 +408,24 @@ class PostController extends Controller
         $main = Maincategory::all();
         $sub = Subcategory::all();
         return view('post.mobile.board',compact('main','sub'));
+    }
+
+
+    public function testFunction(){
+
+        $rank = array();
+
+        $url = 'https://lovebeat.plaync.com/';
+        $html = file_get_contents($url);
+
+        if($url != false){
+            $html = str_get_html($html);
+        }
+
+        // foreach($html->find('.recent_list') as $element){
+        //     array_push($rank,$element);
+        // }
+
+        return view('tests',compact('html'));
     }
 }

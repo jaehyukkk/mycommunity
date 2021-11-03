@@ -8,6 +8,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/time.js?v=').time()}}" defer></script>
 @endsection
 @section('content')
+<div class="main-content">
 <div class="board">
   <div class="main-free-board">
     <div class="main-free-board-top">
@@ -35,7 +36,7 @@
     
       <?php $cnt1 = 0?>
       @foreach ($board as $boards )
-      @if($boards->maincategory_id == 1 && $boards->subcategory_id == 1)
+      @if($boards->maincategory_id == 1 && $boards->subcategory_id == 12)
       <?php $cnt1++?>
       @if($cnt1 == 11)
       <?php break;?>
@@ -48,12 +49,29 @@
       @endforeach    
   </div>
 </div>
+<div class="lb-rank">
+  <div class="lb-rank-title">
+    <div>금일 신의손가락 TOP 5</div>
+  </div>
+  <div class="rank-box">
+    @foreach ($rank->find('#recent1') as $ranks)
+      {!! $ranks !!}
+    @endforeach
+    </div>
+    <div class="lb-rank-foot">
+      <div><a href="https://lovebeat.plaync.com">출처 : https://lovebeat.plaync.com</a></div>
+    </div>
+  </div>
+</div>
+
 @endsection
-
-
 @section('loginbox')
 @component('layouts.loginbox')
 @endcomponent
+@endsection
+
+@section('subContent')
+
 @endsection
 
 

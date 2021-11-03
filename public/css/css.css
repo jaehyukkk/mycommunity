@@ -139,9 +139,12 @@ input:focus {
 
 
 .board{
-  width: 70%;
   display: flex;
   justify-content: center;
+}
+.main-content{
+  width: 70%;
+  
 }
 .main-free-board{
   width: 50%;
@@ -345,7 +348,7 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
 #foot{
   width: 100%;
   height: 90px;
-  margin-top:200px;
+  
   background-color: #484e58;
   color: rgb(209, 209, 209);
   font-size: 14px;
@@ -370,7 +373,7 @@ a:hover{color:rgb(85, 85, 85); text-decoration: none;}
 }
 
 section {
-	padding-bottom: 150px; 
+	padding-bottom: 250px; 
 }
 .lb-minipage{
   margin-top: 10px;
@@ -390,13 +393,72 @@ section {
   font-size: 14px;
   width: 60px;
   color: #f5f5f5;
-  background-color: #316B83;;
+  background-color: #316B83;
 }
 .lb-minipage-search input{
   border:1px solid #dadada;
   color: #484e58;
-  
+}
+.rank-box{
+  display: flex;
+  justify-content: center;
 
+}
+.thumb img{
+  width:50px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+#recent1{
+  width: 98%;
+  
+  /* margin-right: 200px; */
+}
+.recent_list li{
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+
+}
+.song{
+width: 100%;
+  text-align: right;
+}
+.song span{
+  display: block
+}
+.nick{
+  width: 30%;
+}
+.nick a{
+  font-weight: 600;
+}
+.lb-rank{
+  margin-left: 4%;
+}
+.lb-rank .lb-rank-title{
+  margin-left: 13px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #272727;
+  padding-top: 30px;
+  border-bottom: 1px solid gray;
+  padding-bottom: 5px;
+  margin-bottom: 30px;
+}
+.wowtoday{
+  display: none;
+}
+.lb-rank-foot{
+  display: flex;
+  justify-content: right;
+  margin-right: 13px;
+  margin-top:10px
+}
+.lb-rank-foot a{
+  color: rgb(255, 136, 136);
+  font-size: 13px;
 }
 
 
@@ -419,7 +481,7 @@ section {
     padding:0;
     
   }
-  .lb-minipage{
+  .lb-minipage, .lb-rank{
     display: none;
   }
   #mainTop img{
@@ -443,12 +505,14 @@ section {
     display: none;
   }
 
-
+.main-content{
+  width: 100%;
+}
   .board{
     display: block;
     width: 100%;
-  
 }
+
 .main-free-board{
   width: 100%;
   border-bottom: 1px solid rgb(243, 243, 243);
