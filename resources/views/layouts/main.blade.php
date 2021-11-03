@@ -51,6 +51,7 @@
     </li>
     @endforeach
     <li><a href="#">건의사항</a></li>
+    <li><a href="https://lovebeat.plaync.com/" target="_black">러브비트</a></li>
   </ul>
 
 </nav>

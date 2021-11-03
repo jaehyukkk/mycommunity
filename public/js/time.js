@@ -22,22 +22,28 @@ $(function(){
   
  })
 
-//  $(document).ready(function(){
- 
-//     $('.menu_btn>a').on('click', function(){
-//         $('.menu_bg').show(); 
-//         $('.sidebar_menu').show().animate({
-//             right:0
-//         });  
-//     });
-//     $('.close_btn>a').on('click', function(){
-//         $('.menu_bg').hide(); 
-//         $('.sidebar_menu').animate({
-//             right: '-' + 70 + '%'
-//                    },function(){
-// $('.sidebar_menu').hide(); 
-// }); 
-//     });
 
-// });
+$(function(){
+    $('.lb-minipage-result').on('click',function(){
+        var value = $('.lb-minipage-input').val();
 
+        if(value.length < 2){
+            alert('닉네임을 2글자 이상 입력해주세요.');
+            return false;
+        }
+
+        var popup = window.open("https://lovebeat.plaync.com/board/character/characterlist?nickname="+value+"&page=1","new","width=500,height=800");
+
+        return popup;
+
+    });
+});
+
+
+$(function(){
+    $('.lb-minipage-input').keydown(function(key){
+        if(key.keyCode == 13){
+            $('.lb-minipage-result').click();
+        }
+    })
+})
