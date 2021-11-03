@@ -412,8 +412,9 @@ section {
 }
 #recent1{
   width: 98%;
-  
-  /* margin-right: 200px; */
+  background-color:#eeeeee;
+  border-radius: 3px;
+  padding:15px;
 }
 .recent_list li{
   display: flex;
@@ -443,9 +444,9 @@ width: 100%;
   font-weight: 600;
   color: #272727;
   padding-top: 30px;
-  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
   padding-bottom: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 .wowtoday{
   display: none;
