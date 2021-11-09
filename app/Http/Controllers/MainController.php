@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Maincategory;
-use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
-include(app_path().'/includes/simple_html_dom.php');
+include(app_path().'/Includes/simple_html_dom.php');
 
 
 class MainController extends Controller
