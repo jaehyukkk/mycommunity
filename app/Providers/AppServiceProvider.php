@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Maincategory;
+use App\Models\Subcategory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,7 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        
+        view()->composer(
+            'layouts.main', function ($view){
+                $view->with('maincategory',Maincategory::all())->with('subcategory',Subcategory::all());
+            }
+        );
+       
     }
 }

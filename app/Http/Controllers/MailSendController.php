@@ -40,9 +40,8 @@ class MailSendController extends Controller
 
             //아이디 찾기 페이지
             public function findId(){
-                $maincategory = Maincategory::all();
-                $subcategory = Subcategory::all();
-                return view('mypage.findid', compact('maincategory','subcategory'));    
+            
+                return view('mypage.findid');    
             }
 
             //비밀번호 찾기 페이지

@@ -13,9 +13,6 @@ class SearchController extends Controller
 {
     public function getSearchResult(Request $request){
 
-        $maincategory = Maincategory::all();
-        $subcategory = Subcategory::all();
-
         $value = $request->category;
         $search = $request->search;
         $id = $request->id;
@@ -35,13 +32,10 @@ class SearchController extends Controller
         $searchClass->chgTheValue();
         $searchResult = $searchClass->searchResult();
 
-        return view('post.search.index',compact('maincategory','subcategory','searchResult','id','subid','photocode'));
+        return view('post.search.index',compact('searchResult','id','subid','photocode'));
     }
 
     public function userPostSearchResult($name, Request $request){
-
-        $maincategory = Maincategory::all();
-        $subcategory = Subcategory::all();
 
         $val = $request->category;
         $search = $request->search;
@@ -51,7 +45,7 @@ class SearchController extends Controller
         $userPostSearch->chgTheValue();
         $searchResult = $userPostSearch->searchResult();
 
-        return view('mypage.viewmypost',compact('maincategory','subcategory','searchResult','name'));
+        return view('mypage.viewmypost',compact('searchResult','name'));
     }
 
   

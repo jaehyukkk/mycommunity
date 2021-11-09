@@ -60,7 +60,18 @@
       </tr>
     @endforeach
   </tbody>
-  @if($photocode != 1)
+
+  <?php $photoboard = true ?>
+
+  @foreach ($maincategory as $mains )
+  @if($mains->id == $id)
+  @if($mains->photocode == 0)
+  <?php $photoboard = false ?>
+  @endif  
+  @endif  
+  @endforeach
+  
+  @if($photoboard == false)
   <tfoot>
     @foreach ($board as $boards )
  

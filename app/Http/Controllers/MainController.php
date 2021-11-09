@@ -12,8 +12,6 @@ include(app_path().'/includes/simple_html_dom.php');
 class MainController extends Controller
 {
     public function index(){
-    $maincategory = Maincategory::all();
-    $subcategory = Subcategory::all();
 
     $board = DB::table('posts')
     ->leftJoin('users', 'posts.user_id', '=', 'users.id')
@@ -28,6 +26,6 @@ class MainController extends Controller
             $rank = str_get_html($rank);
         }
 
-    return view('welcome', compact('maincategory','subcategory','board','rank'));
+    return view('welcome', compact('board','rank'));
     }
 }

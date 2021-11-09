@@ -207,16 +207,11 @@ class MypageController extends Controller
     }
 
     public function index(){
-        $maincategory = Maincategory::all();
-        $subcategory = Subcategory::all();
 
-        return view('mypage.index',compact('maincategory','subcategory'));
+        return view('mypage.index');
     }
 
     public function viewMyPost($name){
-
-        $maincategory = Maincategory::all();
-        $subcategory = Subcategory::all();
 
 
         $searchResult = Post::join('users', 'posts.user_id', '=', 'users.id')
@@ -226,7 +221,7 @@ class MypageController extends Controller
         ->orderBy('posts.id','desc')
         ->paginate(16);
         
-        return view('mypage.viewmypost',compact('maincategory','subcategory','searchResult','name'));
+        return view('mypage.viewmypost',compact('searchResult','name'));
     }
 
 }

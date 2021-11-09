@@ -64,7 +64,7 @@ class UserController extends Controller
             'userid'            => 'required|unique:users',
             'password'          => 'min:8|required_with:repassword|same:repassword',
             'repassword'        => 'min:8',
-            'email'             => 'required|unique:users',
+            'email'             => 'required|email|unique:users',
         ]);
 
 
@@ -91,7 +91,6 @@ class UserController extends Controller
             'name'              => $data['name'], 
             'userid'            => $data['userid'],
             'password'          => Hash::make($data['password']),
-            // 'sex'               => $data['sex'],
             'email'             => $data['email'],
             'img'               => 'img.jpg'
         ]);      

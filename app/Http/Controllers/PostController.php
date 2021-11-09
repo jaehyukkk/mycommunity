@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Gate;
 
 
 
+
+
 class PostController extends Controller
 {
     /**
@@ -38,19 +40,14 @@ class PostController extends Controller
         ->orderBy('posts.id','desc')
         ->paginate(16);
 
-        $int = Maincategory::where('id',$id)->first();
-        $photocode = $int->photocode;
-           
-
         $notice = Post::
         join('users', 'posts.user_id', '=', 'users.id')
         ->where('notice',1)
         ->select('*','posts.id as idx','posts.created_at as time')
         ->get();
-
         
         
-        return view('post.index',compact('board','maincategory','subcategory','notice','id','photocode'));
+        return view('post.index',compact('board','maincategory','subcategory','notice','id'));
        
     }
 
@@ -59,7 +56,7 @@ class PostController extends Controller
         $maincategory = Maincategory::all();
         $subcategory = Subcategory::all();
 
-        $title = Subcategory::find($subid);
+
 
         $board = DB::table('posts')
         ->where('posts.maincategory_id',$id)
@@ -78,20 +75,14 @@ class PostController extends Controller
         ->orderBy('posts.id','desc')
         ->get();
 
-        $int = Subcategory::where('id',$subid)->first();
-        $photocode = $int->photocode;
-
-        return view('post.subindex',compact('board','maincategory','subcategory','id','subid','notice','photocode','title'));
+        return view('post.subindex',compact('board','maincategory','subcategory','id','subid','notice'));
     }
 
 
 
     public function viewAll()
     {  
-        $maincategory = Maincategory::all();
-        $subcategory = Subcategory::all();
    
-       
         $board = DB::table('posts')
         ->leftJoin('users', 'posts.user_id', '=', 'users.id')
         ->leftJoin('subcategories', 'posts.subcategory_id', '=', 'subcategories.id')
@@ -106,7 +97,7 @@ class PostController extends Controller
         ->orderBy('posts.id','desc')
         ->get();
 
-        return view('post.viewall',compact('board','maincategory','subcategory','notice'));
+        return view('post.viewall',compact('board','notice'));
        
     }
 
@@ -144,9 +135,8 @@ class PostController extends Controller
      */
     public function create($id, $subid)
     {   
-        $maincategory = Maincategory::all();
-        $subcategory = Subcategory::all();
-        return view('post.create',compact('maincategory','subcategory','id','subid'));
+        
+        return view('post.create',compact('id','subid'));
     }
 
     /**
@@ -247,7 +237,37 @@ class PostController extends Controller
         
         try{
         
-           
+        $this->hitSessions($id);
+       
+        $commentId = Comment::where('post_id',$id)->get('id');
+        $comment = Post::find($id)->getComment;
+
+        $read = DB::table('posts')
+        ->where('posts.id',$id)
+        ->leftJoin('users', 'posts.user_id', '=', 'users.id')
+        ->leftJoin('subcategories', 'posts.subcategory_id', '=', 'subcategories.id')
+        ->select('*','posts.created_at as time','posts.id as id')
+        ->orderBy('posts.id','desc')
+        ->get();
+        
+        $comment = Comment::where('post_id',$id)->
+        join('users', 'comments.user_id', 'users.id')
+        ->select('*','comments.created_at as created_at','comments.id as id')
+        ->get();
+
+        $reply = Reply::whereIn('comment_id',$commentId)->
+        join('users', 'replies.user_id', 'users.id')
+        ->select('*','replies.created_at as created_at','replies.id as id')
+        ->get();
+        
+        return view('post.show', compact('read','comment','reply'));  
+        }
+        catch(Exception $e){
+            return redirect()->back()->with('alert','존재하지 않는 게시글입니다.');
+        }
+    }
+
+    public function hitSessions($id){
         $bool = true;
         if(session()->has('hit')){
 
@@ -270,35 +290,6 @@ class PostController extends Controller
                 'hit' => DB::raw('hit+1')
             ]);
         }
-
-        $maincategory = Maincategory::all();
-        $subcategory = Subcategory::all();
-        $commentId = Comment::where('post_id',$id)->get('id');
-        $comment = Post::find($id)->getComment;
-
-        $read = DB::table('posts')
-        ->where('posts.id',$id)
-        ->leftJoin('users', 'posts.user_id', '=', 'users.id')
-        ->leftJoin('subcategories', 'posts.subcategory_id', '=', 'subcategories.id')
-        ->select('*','posts.created_at as time','posts.id as id')
-        ->orderBy('posts.id','desc')
-        ->get();
-        
-        $comment = Comment::where('post_id',$id)->
-        join('users', 'comments.user_id', 'users.id')
-        ->select('*','comments.created_at as created_at','comments.id as id')
-        ->get();
-
-        $reply = Reply::whereIn('comment_id',$commentId)->
-        join('users', 'replies.user_id', 'users.id')
-        ->select('*','replies.created_at as created_at','replies.id as id')
-        ->get();
-        
-        return view('post.show', compact('maincategory','subcategory','read','comment','reply'));  
-        }
-        catch(Exception $e){
-            return redirect()->back()->with('alert','존재하지 않는 게시글입니다.');
-        }
     }
 
     /**
@@ -313,12 +304,10 @@ class PostController extends Controller
 
         if(!Gate::allows('edit-post', $post) ){
             return redirect()->back();
-        } else {
-        $maincategory = Maincategory::all();
-        $subcategory = Subcategory::all();
+        } 
 
-        return view('post.edit',compact('post','maincategory','subcategory'));
-        }
+        return view('post.edit',compact('post'));
+        
     }
 
     /**
@@ -403,29 +392,5 @@ class PostController extends Controller
 
     }
 
-    
-    public function mobileBoard(){
-        $main = Maincategory::all();
-        $sub = Subcategory::all();
-        return view('post.mobile.board',compact('main','sub'));
-    }
 
-
-    public function testFunction(){
-
-        $rank = array();
-
-        $url = 'https://lovebeat.plaync.com/';
-        $html = file_get_contents($url);
-
-        if($url != false){
-            $html = str_get_html($html);
-        }
-
-        // foreach($html->find('.recent_list') as $element){
-        //     array_push($rank,$element);
-        // }
-
-        return view('tests',compact('html'));
-    }
 }

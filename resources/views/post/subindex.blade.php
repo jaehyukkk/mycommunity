@@ -81,7 +81,20 @@
       @endif
     @endforeach
   </tbody>
-  @if($photocode != 1)
+
+  <?php $photoboard = true ?>
+  <?php $title = '';?>
+
+  @foreach ($subcategory as $subs )
+  @if($subs->id == $subid)
+  <?php $title = $subs->subcategoryname ?>
+  @if($subs->photocode == 0)
+  <?php $photoboard = false ?>
+  @endif  
+  @endif  
+  @endforeach
+  
+  @if($photoboard == false)
   <tfoot id="board-content">
     @foreach ($board as $boards )
     <tr>
@@ -131,11 +144,11 @@
 
 <div class="mobile-board-box">
   <div class="main-free-board-top">
-    <div><a href="#">{{ $title->subcategoryname }}</a></div>
+    <div><a href="#">{{ $title }}</a></div>
   </div>
   
   @foreach ($board as $boards )
-  @if($photocode != 1)
+  @if($photoboard == false)
     <div class="mobile-board">
       <div class="mobile-board-item" id="mobile-board-sebindex-list">
         <div class="mobile-board-title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
