@@ -49,7 +49,7 @@
       @endforeach    
   </div>
 </div>
-<div class="lb-rank">
+{{-- <div class="lb-rank">
   <div class="lb-rank-title">
     <div>금일 신의손가락 TOP 5</div>
   </div>
@@ -61,7 +61,7 @@
     <div class="lb-rank-foot">
       <div><a href="https://lovebeat.plaync.com">출처 : https://lovebeat.plaync.com</a></div>
     </div>
-  </div>
+  </div> --}}
 </div>
 
 @endsection
@@ -70,41 +70,6 @@
 @endcomponent
 @endsection
 
-@section('subContent')
 
-@endsection
-
-
-
-{{-- 
-@section('subContent')
-<div id="mobile">
-  @component('layouts.mobilenav')
-  @endcomponent
-  <div class="mobile-board-box">
-  
-  @foreach ($board as $boards )
-  
-    <div class="mobile-board">
-      <div class="mobile-board-item">
-        <div class="mobile-board-title"><a href="/read/{{ $boards->idx }}">{{ $boards->title }}</a></div>
-        <div class="mobile-board-info"><span class="mobile-board-info-name">{{ $boards->name }}</span><span class="time">{{ $boards->time }}</span><span>조회{{ $boards->hit }}</span></div>
-        <div class="mobile-board-category">자유게시판</div>
-      </div>
-      <div>
-       <div class="mobile-board-commnet">{{ $boards->commentnum }}</div>  
-      </div>
-    </div> 
-  
-    @endforeach
-  
-  </div>
-  
-  
-  @component('layouts.mobilefooter')
-  @endcomponent
-  
-  </div>
-@endsection --}}
 
 

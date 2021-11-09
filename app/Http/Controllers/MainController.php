@@ -19,13 +19,13 @@ class MainController extends Controller
     ->orderBy('posts.id','desc')
     ->get();
 
-        $url = 'https://lovebeat.plaync.com/';
-        $rank = file_get_contents($url);
+        // $url = 'https://lovebeat.plaync.com/';
+        // $rank = file_get_contents($url);
 
-        if($url != false){
-            $rank = str_get_html($rank);
-        }
+        // if($url != false){
+        //     $rank = str_get_html($rank);
+        // }
 
-    return view('welcome', compact('board','rank'));
+    return view('welcome', compact('board'));
     }
 }
