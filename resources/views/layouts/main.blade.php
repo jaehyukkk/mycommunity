@@ -52,7 +52,7 @@
     </li>
     @endforeach
     <li><a href="#">건의사항</a></li>
-    <li><a href="https://lovebeat.plaync.com/" target="_black">러브비트</a></li>
+    <li><a href="https://r2beat-ko.valofe.com/main" target="_black">알투비트</a></li>
   </ul>
 
 </nav>

@@ -54,12 +54,12 @@
   </div>
   @endif
 </br>
-<div class="lb-minipage">
+{{-- <div class="lb-minipage">
   <div class="lb-minipage-title">미니페이지</div>
   <div class="lb-minipage-search">
     <input type="text" class="lb-minipage-input" style="width: 100%">
     <button class="lb-minipage-result">검색</button>
   </div>
-</div>
+</div> --}}
 </div>
 
