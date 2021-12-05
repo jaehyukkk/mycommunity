@@ -32,7 +32,7 @@
 
 <div id="main-logo">
   <div id ="mainTop">
-    <a href="/"><img src="{{URL::asset('/img/logo.png')}}" id=""alt="..."></a>
+    <a href="/"><img src="{{URL::asset('/img/logo1.png')}}" id=""alt="..."></a>
   </div>
 </div>
 
