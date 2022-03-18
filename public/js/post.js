@@ -17,9 +17,9 @@ $(function(){
     });
  });
 
- function postRemoveCheck() {
+ function postRemoveCheck(e) {
 
-     if (confirm("해당 게시글을 정말 삭제하시겠습니까 ?") == true){ 
+     if (confirm("해당 게시글을 정말 삭제하시겠습니까 ?") === true){ 
          $('#postDeleteForm').submit();
      }else{  
          return false;

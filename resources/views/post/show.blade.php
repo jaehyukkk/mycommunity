@@ -252,10 +252,10 @@
         </div>      
         <form action="/destroy/{{$post->id}}" method="post" id="postDeleteForm">
         @csrf
+        </form>
         <div id="read-updataDeleteBtn-delete">
           <button onclick="postRemoveCheck()">삭제</button>
-        </div>
-        </form> 
+        </div> 
         @endcan   
       </div>
       <div id="read-return">
