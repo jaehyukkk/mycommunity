@@ -34,6 +34,8 @@ class AdminController extends Controller
         return view('admin.post',compact('board'));
     }
 
+    
+
     public function users(){
         $user = User::get();
         return view('admin.users',compact('user'));
